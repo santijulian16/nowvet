@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
+        <meta name="description" content="Gestión de servcios veterinarios"></meta>
+        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clinica, Peluquria, Baño"></meta>
+        <meta name="author" content="Julian Bermudez, Leonardo Fandiño"></meta>
+        <title>Now Vet | Auditoria</title>
+        <link rel="stylesheet" type="text/css" href="../../css/estilos.css"></link>
+        <link rel="icon" href="../../imagenes/favicon.ico" type="image/x-icon"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/font-awesome.css"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"></link>
+        <script src="../../js/jquery-1.11.3.min.js"></script>
+        <script src="../../js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-table.css"></link>
+        <script type="text/javascript" src="../../js/bootstrap-table.js"></script>
+        <f:event listener="#{controladorUsuario.miraSession('admin')}" type="preRenderView"></f:event>
+    </h:head>
+    <h:body>
+        <img id="back" src="../../imagenes/fondo.jpg" height="751px" width="765px"></img>
+        <h:form>
+            <nav class="navbar navbar-default navbar-fixed-top" id="navAdmin">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">
+                            <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><h:link value="Inicio" outcome="/administrador/indexAdministrador" /></li>
+                            <li><a href="citas/misCitas.xhtml">Citas</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Perfiles <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><h:link value="Gestión De Perfiles" outcome="/administrador/perfiles/gestionPerfiles" /></li>
+                                    <li><h:link value="Mi Perfil" outcome="/administrador/perfiles/miPerfil" /></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <!--<li><a href="reportes/reporteClientes.html">Reporte de clientes</a></li>-->
+                                    <li><a href="reportesCitas.xhtml">Reporte de citas</a></li>
+                                    <li><h:link value="Auditoria" outcome="/administrador/reportes/auditoria" /></li>
+                                </ul>
+                            </li>
+                            <li><h:commandLink action="#{controladorUsuario.cerrarSesion()}" >Salir&nbsp;<i class=" fa fa-sign-out"></i></h:commandLink></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </h:form>
+        <section>
+            <!-- InstanceBeginEditable name="section" -->
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="rolAdmin">
+                        Rol: Administrador
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="colorbase">
+                        <div class="row" id="exportar">
+                            <h4>Exportar:</h4>
+                            <h:form>
+                                <h:commandButton image="../../imagenes/pdf.png" action="#{controladorUsuario.PDFaud()}" style="width: 35px; height: 35px;" title="Exportar a PDF"></h:commandButton>&nbsp;
+                                <h:commandButton image="../../imagenes/excel.png" action="#{controladorUsuario.XLSXaud()}" style="width: 35px; height: 35px;" title="Exportar a Excel"></h:commandButton>&nbsp;
+                                <h:commandButton image="../../imagenes/word.png" action="#{controladorUsuario.DOCXaud()}" style="width: 35px; height: 35px;" title="Exportar a Word"></h:commandButton>&nbsp;
+                            </h:form>
+                        </div>
+                        <table 
+           data-toolbar="#toolbar"
+                            data-toggle="table"
+                            data-url="../json/data1.json" 
+                            data-show-columns="true"
+                            data-minimum-count-columns="2"
+                            data-id-field="id"
+                            data-search="true"
+                            data-show-refresh="true" 
+                            data-show-toggle="true"
+                            data-sort-name="numero"
+                            data-sort-order="asc"
+                            data-pagination="true"
+                            data-page-size="10"
+                            data-page-list="[10,25,40,50,100,1000]">
+                            <thead>
+                                <tr>
+                                    <th data-field="numero" data-sortable="true">Numero</th>
+                                    <th data-field="descripcion" data-sortable="true">Descripción</th>
+                                    <th data-field="fecha" data-sortable="true">Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="listaAud" items="#{controladorUsuario.listarAud()}">
+                                    <tr>
+                                        <td>#{listaAud.id}</td>
+                                        <td>#{listaAud.descipcion}</td>
+                                        <td>#{listaAud.fecha.toLocaleString()}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- InstanceEndEditable -->
+        </section>
+        <footer>
+            <div id="footer-contenedor" class="row">
+                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>SERVICIOS</h3>
+                    <a href="../NowVet%20English/clinica.html">&#187; Clínica</a><br />
+                    <a href="../NowVet%20English/peluqueria.html">&#187; Peluquería</a><br />
+                    <a href="../NowVet%20English/odontologia.html">&#187; Odontología</a><br />
+                    <a href="../NowVet%20English/vacunacion.html">&#187; Vacunación</a><br />
+                    <a href="../NowVet%20English/ambulancia.html">&#187; Ambulancia</a>
+                </div>
+                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>PRODUCTOS</h3>
+                    <a href="../NowVet%20English/concentrados.html">&#187; Concentrados</a><br />
+                    <a href="../NowVet%20English/petshop.html">&#187; Pet Shop</a><br />
+                    <a href="../NowVet%20English/guarderia.html">&#187; Guardería</a><br />
+                    <a href="#rayosx">&#187; Rayos c</a><br />
+                </div>
+                <div id="panel3Footer" class="col-md-3 col-sm-6 col-xs-12">
+                    <h3>¿QUIENES SOMOS?</h3>
+                    <a href="../NowVet%20English/mision.html">&#187; Misión</a><br />
+                    <a href="../NowVet%20English/vision.html">&#187; Visión</a>
+                </div>
+                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
+                        <br />
+                        <br />
+                        <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                    </div>
+                    <div class="row">
+                        <div id="redesSociales">
+                            <a href="#"><span class=" fa fa-facebook-square"></span></a>
+                            <a href="#"><span class=" fa fa-twitter-square"></span></a>
+                            <a href="#"><span class=" fa fa-google-plus-square"></span></a>
+                            <a href="#"><span class=" fa fa-envelope-o"></span></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        Now Vet | Todos los derechos reservados
+                        <br /> &#169; Copyright 2015
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </h:body>
+</html>
+

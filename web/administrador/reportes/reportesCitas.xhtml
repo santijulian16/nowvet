@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
+        <meta name="description" content="Gestión de servcios veterinarios"></meta>
+        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clinica, Peluquria, Baño"></meta>
+        <meta name="author" content="Julian Bermudez, Leonardo Fandiño"></meta>
+        <title>Now Vet | Reporte de Citas</title>
+        <link rel="stylesheet" type="text/css" href="../../css/estilos.css"></link>
+        <link rel="icon" href="../../imagenes/favicon.ico" type="image/x-icon"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/font-awesome.css"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"></link>
+        <script src="../../js/jquery-1.11.3.min.js"></script>
+        <script src="../../js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-table.css"></link>
+        <script type="text/javascript" src="../../js/bootstrap-table.js"></script>
+        <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+        <script src="https://www.amcharts.com/lib/3/serial.js"></script>
+        <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+	<style type="text/css">#chartdiv{width:100%;height:500px;font-size:11px;}.amcharts-export-menu-top-right{top:10px;right:0;}</style>
+	<link rel='stylesheet' id='amexport-css' href='https://www.amcharts.com/lib/3/plugins/export/export.css?ver=20160308-01' type='text/css' media='all'/>
+	<script type='text/javascript' src='https://www.amcharts.com/lib/3/plugins/export/export.min.js?ver=20160308-01'></script>
+
+        <f:event listener="#{controladorUsuario.miraSession('admin')}" type="preRenderView"></f:event>
+    </h:head>
+    <h:body>
+        <img id="back" src="../../imagenes/fondo.jpg" height="751px" width="765px"></img>
+        <h:form>
+            <nav class="navbar navbar-default navbar-fixed-top" id="navAdmin">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">
+                            <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><h:link value="Inicio" outcome="/administrador/indexAdministrador" /></li>
+                            <li><a href="citas/misCitas.xhtml">Citas</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Perfiles <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><h:link value="Gestión De Perfiles" outcome="/administrador/perfiles/gestionPerfiles" /></li>
+                                    <li><h:link value="Mi Perfil" outcome="/administrador/perfiles/miPerfil" /></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <!--<li><a href="reportes/reporteClientes.html">Reporte de clientes</a></li>-->
+                                    <li><a href="reportesCitas.xhtml">Reporte de citas</a></li>
+                                    <li><h:link value="Auditoria" outcome="/administrador/reportes/auditoria" /></li>
+                                </ul>
+                            </li>
+                            <li><h:commandLink action="#{controladorUsuario.cerrarSesion()}" >Salir&nbsp;<i class=" fa fa-sign-out"></i></h:commandLink></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </h:form>
+        <section>
+            <!-- InstanceBeginEditable name="section" -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="migasAdmin">
+                        <h:link value="Inicio" outcome="/administrador/indexAdministrador" />\<h:link value="Reporte De Citas" outcome="/administrador/reportes/reportesCitas" />
+                    </div>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="rolAdmin">
+                        Rol: Administrador
+                        <br></br>
+	</div>
+                    </div>
+                <div class="row" id="rolAdmin">
+                    <h2>Reporte Citas</h2>
+                    <hr></hr>
+                    <div class="col-md-2 col-sm-3 col-xs-12">
+                        <h:form>
+                            <div class="form-group">
+                                <h:outputLabel for="vet">Veterinario</h:outputLabel>
+                            <h:selectOneMenu class="form-control" id="vet" value="#{controladorUsuario.veterinario}">
+                                <f:selectItem itemValue="0" itemLabel="Seleccionar veterinario"></f:selectItem>
+                                <c:forEach var="veter" items="#{controladorUsuario.listarPersonal()}">
+                                    <f:selectItem itemValue="#{veter.dniPersonal}" itemLabel="#{veter.usuarios.nombres} &nbsp;#{veter.usuarios.apellidos}"></f:selectItem>
+                                </c:forEach>
+                                <f:ajax render="grafica" execute="@this"></f:ajax>
+                            </h:selectOneMenu>
+                            </div>
+                        </h:form>
+                        </div>
+                    <h:form id="grafica">
+                    <div class="col-md-10 col-sm-9 col-xs-12">
+                        <c:if test="#{controladorUsuario.veterinario != 0}">
+                <div id="chartdiv"></div>
+                <script>
+				var chart = AmCharts.makeChart( "chartdiv", {
+  "type": "serial",
+  "theme": "light",
+  "dataProvider": [ {
+    "country": "ENE",
+    "visits": #{controladorUsuario.cantidadDeCitas(0)}
+  }, {
+    "country": "FEB",
+    "visits": #{controladorUsuario.cantidadDeCitas(1)}
+  }, {
+    "country": "MAR",
+    "visits": #{controladorUsuario.cantidadDeCitas(2)}
+  }, {
+    "country": "ABR",
+    "visits": #{controladorUsuario.cantidadDeCitas(3)}
+  }, {
+    "country": "MAY",
+    "visits": #{controladorUsuario.cantidadDeCitas(4)}
+  },{
+    "country": "JUN",
+    "visits": #{controladorUsuario.cantidadDeCitas(5)}
+  },{
+    "country": "JUL",
+    "visits": #{controladorUsuario.cantidadDeCitas(6)}
+  },{
+    "country": "AGO",
+    "visits": #{controladorUsuario.cantidadDeCitas(7)}
+  },{
+    "country": "SEP",
+    "visits": #{controladorUsuario.cantidadDeCitas(8)}
+  }, {
+    "country": "OCT",
+    "visits": #{controladorUsuario.cantidadDeCitas(9)}
+  }, {
+    "country": "NOV",
+    "visits": #{controladorUsuario.cantidadDeCitas(10)}
+  }, {
+    "country": "DIC",
+    "visits": #{controladorUsuario.cantidadDeCitas(11)}
+  } ],
+  "valueAxes": [ {
+    "gridColor": "#FFFFFF",
+    "gridAlpha": 0.2,
+    "title": "Citas",
+    "dashLength": 0
+  } ],
+  "gridAboveGraphs": true,
+  "startDuration": 1,
+  "graphs": [ {
+    "balloonText": "[[category]]: <b>[[value]]</b>",
+    "fillAlphas": 0.8,
+    "lineAlpha": 0.2,
+    "type": "column",
+    "valueField": "visits"
+  } ],
+  "chartCursor": {
+    "categoryBalloonEnabled": false,
+    "cursorAlpha": 0,
+    "zoomable": false
+  },
+  "categoryField": "country",
+  "categoryAxis": {
+    "gridPosition": "start",
+    "gridAlpha": 0,
+    "tickPosition": "start",
+    "tickLength": 20
+  },
+  "export": {
+    "enabled": true
+  }
+
+} );
+                </script>
+                        </c:if>
+                </div>
+                    </h:form>
+                    </div>
+                </div>
+        </section>
+        <footer>
+            <div id="footer-contenedor" class="row">
+                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>SERVICIOS</h3>
+                    <a href="../NowVet%20English/clinica.html">&#187; Clínica</a><br />
+                    <a href="../NowVet%20English/peluqueria.html">&#187; Peluquería</a><br />
+                    <a href="../NowVet%20English/odontologia.html">&#187; Odontología</a><br />
+                    <a href="../NowVet%20English/vacunacion.html">&#187; Vacunación</a><br />
+                    <a href="../NowVet%20English/ambulancia.html">&#187; Ambulancia</a>
+                </div>
+                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>PRODUCTOS</h3>
+                    <a href="../NowVet%20English/concentrados.html">&#187; Concentrados</a><br />
+                    <a href="../NowVet%20English/petshop.html">&#187; Pet Shop</a><br />
+                    <a href="../NowVet%20English/guarderia.html">&#187; Guardería</a><br />
+                    <a href="#rayosx">&#187; Rayos c</a><br />
+                </div>
+                <div id="panel3Footer" class="col-md-3 col-sm-6 col-xs-12">
+                    <h3>¿QUIENES SOMOS?</h3>
+                    <a href="../NowVet%20English/mision.html">&#187; Misión</a><br />
+                    <a href="../NowVet%20English/vision.html">&#187; Visión</a>
+                </div>
+                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
+                        <br />
+                        <br />
+                        <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                    </div>
+                    <div class="row">
+                        <div id="redesSociales">
+                            <a href="#"><span class=" fa fa-facebook-square"></span></a>
+                            <a href="#"><span class=" fa fa-twitter-square"></span></a>
+                            <a href="#"><span class=" fa fa-google-plus-square"></span></a>
+                            <a href="#"><span class=" fa fa-envelope-o"></span></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        Now Vet | Todos los derechos reservados
+                        <br /> &#169; Copyright 2015
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </h:body>
+</html>
+

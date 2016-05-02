@@ -1,0 +1,266 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
+        <meta name="description" content="Gestión de servcios veterinarios"></meta>
+        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clinica, Peluquria, Baño"></meta>
+        <meta name="author" content="Julian Bermudez, Leonardo Fandiño"></meta>
+
+        <!-- InstanceBeginEditable name="doctitle" -->
+        <title>Now Vet | Perfil</title>
+        <!-- InstanceEndEditable -->
+        <link rel="stylesheet" type="text/css" href="../../css/estilos.css"></link>
+        <link rel="icon" href="../../imagenes/favicon.ico" type="image/x-icon"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"></link>
+        <link href="../../css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="../../css/bootstrap-table.css" rel="stylesheet" type="text/css"/>
+        <script src="../../js/jquery-1.11.3.min.js" type="text/javascript"></script>
+        <script src="../../js/bootstrap.js"></script>
+        <script src="../../js/bootstrap-table.js" type="text/javascript"></script>
+        <script>
+            function eliminarMas(idmasco) {
+                $('#eliminarMascota').modal('show');
+                document.getElementById('idmas').value = idmasco;
+            }
+        </script>
+        <f:event listener="#{controladorUsuario.miraSession('admin')}" type="preRenderView"></f:event>
+    </h:head>
+    <h:body>
+        <img id="back" src="../../imagenes/fondo.jpg" height="751px" width="765px"></img>
+        <h:form>
+            <nav class="navbar navbar-default navbar-fixed-top" id="navAdmin">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">
+                            <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><h:link value="Inicio" outcome="/administrador/indexAdministrador" /></li>
+                            <li><a href="citas/misCitas.xhtml">Citas</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Perfiles <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><h:link value="Gestión De Perfiles" outcome="/administrador/perfiles/gestionPerfiles" /></li>
+                                    <li><h:link value="Mi Perfil" outcome="/administrador/perfiles/miPerfil" /></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reportes
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <!--<li><a href="reportes/reporteClientes.html">Reporte de clientes</a></li>-->
+                                    <li><a href="../reportes/reportesCitas.xhtml">Reporte de citas</a></li>
+                                    <li><h:link value="Auditoria" outcome="/administrador/reportes/auditoria" /></li>
+                                </ul>
+                            </li>
+                            <li><h:commandLink action="#{controladorUsuario.cerrarSesion()}" >Salir&nbsp;<i class=" fa fa-sign-out"></i></h:commandLink></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </h:form>
+        <section>
+
+            <c:if test="#{controladorUsuario.estado eq '7'}">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>¡Alerta!</strong> Usuario modifica con exito
+                </div>
+            </c:if>
+            <!-- InstanceBeginEditable name="section" -->
+            <div class="container" id="colorbase">
+                <h:form id="mostrarPerfil">	
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12" id="migasAdmin">
+                            <h:link value="Inicio" outcome="/administrador/indexAdministrador" />\<h:link value="Gestión De Perfiles" outcome="/administrador/perfiles/gestionPerfiles" />\
+                            <h:link value="Perfil" outcome="/administrador/perfiles/perfil" />
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" id="rolAdmin">
+                            Rol: Administrador
+                        </div>
+
+                        <div class="col-md-1 col-sm-2 col-xs-3" style="padding-top:20px;">
+                            <img src="../../imagenes/usuarioDesconocido.jpg" alt="Mi Nombre" class="img-circle img-responsive"></img>
+                        </div>
+                        <div class="col-md-11 col-sm-9 col-xs-9">
+                            <h3><h:outputText value="#{controladorUsuario.usuTemp.nombres}&nbsp;#{controladorUsuario.usuTemp.apellidos}"/></h3>
+                            <h5>Rol(es):<ul><c:forEach var="roles" items="#{controladorUsuario.usuTemp.rolesCollection}">
+                                        <li>#{roles.nombre}</li>
+                                    </c:forEach>
+                                </ul></h5>
+                            <h5><h:outputText value="CC:&nbsp;#{controladorUsuario.usuTemp.cedula}"/></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="subtitulo" class="col-md-12 col-sm-12 col-xs-12">
+                            <h3>Datos Personales</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10" id="datosPersonales">
+                            <h4><h:outputText value="Correo Electronico:&nbsp;#{controladorUsuario.usuTemp.correo}"></h:outputText></h4>
+                            <h4>Contraseña: ******</h4>
+                            <h4><h:outputText value="Dirección:&nbsp;#{controladorUsuario.usuTemp.direccion}" /></h4>
+                            <h4><h:outputText value="Estado:&nbsp;#{controladorUsuario.usuTemp.estado}" /></h4>
+                        </div>
+                        <div class="col-md-2" id="editarDatosPersonales">
+                            <h:link class="btn btn-success"  style="margin-top: 10px;" outcome="modificarUsuario"><i class="fa fa-pencil"></i>&nbsp;Editar</h:link>
+                        </div>
+                    </div>
+                </h:form>
+                <c:if test="#{controladorUsuario.validarCliente()==true}">
+                    <div class="row" id="subtitulo">
+                        <div  class="col-md-9 col-sm-8 col-xs-12">
+                            <h3>Mascotas</h3>
+
+                        </div>
+                        <div class="pull-right col-md-3 col-sm-4 col-xs-12" id="editarDatosPersonales" style="margin-top: 25px !important;">
+                            <h:link outcome="registrarMascota"><i class="fa fa-plus"></i> Agregar Mascota</h:link>
+                        </div>
+                    </div>
+                    <br></br>
+                    <h:form>
+                        <table
+                            data-toggle="table"
+                            data-url="../json/data1.json" 
+                            data-show-columns="true"
+                            data-minimum-count-columns="2"
+                            data-id-field="id"
+                            data-search="true"
+                            data-show-refresh="true" 
+                            data-show-toggle="true"
+                            data-sort-name="nombre"
+                            data-sort-order="asc"
+                            data-pagination="true"
+                            data-page-size="10"
+                            data-page-list="[10,25,40,50,100,1000]">
+                            <thead>
+                                <tr>
+                                    <th data-field="nombre" data-sortable="true">Nombre</th>
+                                    <th data-field="especie" data-sortable="true">Especie</th>
+                                    <th data-field="raza" data-sortable="true">Raza</th>
+                                    <th data-field="sexo" data-sortable="true">Sexo</th>
+                                    <th data-field="estado" data-sortable="true">Estado</th>
+                                    <th>Inhabilitar</th>
+                                    <th>Mas Detalles</th>
+                                    <!--<th>Más Detalles</th>-->
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="listaMas" items="#{controladorMascotas.mostrarTemp()}">
+                                    <c:if test="#{listaMas.estado eq 'Inactiva'}">
+                                        <tr class="danger">
+                                            <td>#{listaMas.nombre}</td> 
+                                            <td>#{listaMas.especie}</td> 
+                                            <td>#{listaMas.raza}</td> 
+                                            <td>#{listaMas.sexo}</td> 
+                                            <td>#{listaMas.estado}</td>
+                                            <td><button type="button" onclick="eliminarMas(#{listaMas.codigoMascota})" class="btn btn-danger"><i class="fa fa-ban"></i></button></td> 
+                                            <td><h:commandLink action="#{controladorMascotas.mostrarMas(listaMas)}" class="btn btn-default"><i class="fa fa-eye"></i></h:commandLink></td>
+                                        </tr>
+                                    </c:if>
+                                    <c:if test="#{listaMas.estado eq 'Activa'}">
+                                        <tr>
+                                            <td>#{listaMas.nombre}</td> 
+                                            <td>#{listaMas.especie}</td> 
+                                            <td>#{listaMas.raza}</td> 
+                                            <td>#{listaMas.sexo}</td> 
+                                            <td>#{listaMas.estado}</td>
+                                            <td><button type="button" onclick="eliminarMas(#{listaMas.codigoMascota})" class="btn btn-danger"><i class="fa fa-ban"></i></button></td> 
+                                            <td><h:commandLink action="#{controladorMascotas.mostrarMas(listaMas)}" class="btn btn-default"><i class="fa fa-eye"></i></h:commandLink></td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </h:form>
+            </c:if>
+            </div>
+            <div class="modal fade" id="eliminarMascota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Alerta</h4>
+                        </div>
+                        <h:form id="eliminar">
+                            <div class="modal-body">
+                                <input style="display: none;" id="idmas" name="idmas"></input>
+                                ¿Desea inhabilitar esta mascota?
+                            </div>
+                            <div class="modal-footer">
+                                <h:commandButton action="#{controladorMascotas.eliminarMascota()}" class="btn btn-danger" value="Inhabilitar"></h:commandButton>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- InstanceEndEditable -->
+        </section>
+        <footer>
+            <div id="footer-contenedor" class="row">
+                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>SERVICIOS</h3>
+                    <a href="../../NowVet%20English/clinica.html">&#187; Clínica</a><br />
+                    <a href="../../NowVet%20English/peluqueria.html">&#187; Peluquería</a><br />
+                    <a href="../../NowVet%20English/odontologia.html">&#187; Odontología</a><br />
+                    <a href="../../NowVet%20English/vacunacion.html">&#187; Vacunación</a><br />
+                    <a href="../../NowVet%20English/ambulancia.html">&#187; Ambulancia</a>
+                </div>
+                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>PRODUCTOS</h3>
+                    <a href="../../NowVet%20English/concentrados.html">&#187; Concentrados</a><br />
+                    <a href="../../NowVet%20English/petshop.html">&#187; Pet Shop</a><br />
+                    <a href="../../NowVet%20English/guarderia.html">&#187; Guardería</a><br />
+                    <a href="#rayosx">&#187; Rayos c</a><br />
+                </div>
+                <div id="panel3Footer" class="col-md-3 col-sm-6 col-xs-12">
+                    <h3>¿QUIENES SOMOS?</h3>
+                    <a href="../../NowVet%20English/mision.html">&#187; Misión</a><br />
+                    <a href="../../NowVet%20English/vision.html">&#187; Visión</a>
+                </div>
+                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
+                        <br />
+                        <br />
+                        <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                    </div>
+                    <div class="row">
+                        <div id="redesSociales">
+                            <a href="#"><span class=" fa fa-facebook-square"></span></a>
+                            <a href="#"><span class=" fa fa-twitter-square"></span></a>
+                            <a href="#"><span class=" fa fa-google-plus-square"></span></a>
+                            <a href="#"><span class=" fa fa-envelope-o"></span></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        Now Vet | Todos los derechos reservados
+                        <br /> &#169; Copyright 2015
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </h:body>
+</html>
+

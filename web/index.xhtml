@@ -1,0 +1,338 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
+        <meta name="description" content="Gestión de servcios veterinarios"></meta>
+        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clinica, Peluqueria, Baño"></meta>
+        <meta name="author" content="Julian Bermudez, Leonardo Fandiño"></meta>
+        <title>Now Vet | Bienvenidos</title>
+        <link rel="stylesheet" type="text/css" href="css/estilos.css"></link>
+        <link rel="icon" href="imagenes/favicon.ico" type="image/x-icon"></link>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
+        <link href="css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <link rel="stylesheet" href="css/roboto.min.css"></link>
+        <link rel="stylesheet" href="css/material.css"></link>
+        <link rel="stylesheet" href="css/ripples.min.css"></link>
+        <script src="js/ripples.js"></script>
+        <script src="js/material.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                // This command is used to initialize some elemens and make them work properly
+                $.material.init();
+            });
+        </script>
+        <!-- InstanceBeginEditable name="head" -->
+
+        <link rel="stylesheet" type="text/css" href="css/formValidation.css"></link>
+        <script src="js/formValidation.min.js"></script>
+        <script src="js/bootstrapValidator.js"></script>
+        <script src="js/es_ES.js"></script>
+        <script>
+            $().ready(function () {
+                $('#iniciarSesion').formValidation({
+                    err: {container: 'tooltip'},
+                    icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
+                    locale: 'es_ES',
+                    fields: {
+                        correo: {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                emailAddress: {
+                                    message: 'Ingrese un correo electronico valido'
+                                },
+                                regexp: {
+                                    regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
+                                    message: 'Ingrese un correo electronico valido'
+                                }
+                            }
+                        },
+                        contrasena: {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                stringLength: {
+                                    min: 6,
+                                    message: 'Por favo digitar una contraseña de mas de 6 caracteres'
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+        <script>
+            $().ready(function () {
+                $('#restaurarContrasena').formValidation({
+                    err: {container: 'tooltip'},
+                    icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
+                    locale: 'es_ES',
+                    fields: {
+                        campoCorreoElectronico: {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                emailAddress: {
+                                    message: 'Ingrese un correo electronico valido'
+                                },
+                                regexp: {
+                                    regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
+                                    message: 'Ingrese un correo electronico valido'
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+        <script>
+            alert("Rol Administrador:\nCorreo: bamincdlm@gmail.com\nContraseña: julian\nRol Cliente: \nCorreo:\njlfandino8@misena.edu.co\nContrseña: \n123456");
+        </script>
+    </h:head>
+    <h:body>
+        <img id="back" src="imagenes/fondo.jpg" height="751px" width="765px" />
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                        <img alt="Brand" src="imagenes/logo.png" width="132px" height="90px" />
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><h:link outcome="index">Inicio</h:link></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">¿Quiénes Somos? <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="mision">Misión</h:link></li>
+                                <li><h:link outcome="vision">Visión</h:link></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="clinica">Clínica</h:link></li>
+                                <li><h:link outcome="peluqueria">Peluquería</h:link></li>
+                                <li><h:link outcome="guarderia">Guardería</h:link></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><h:link outcome="concentrados">Concentrados</h:link></li>
+                                <li><h:link outcome="petshop">Pet Shop</h:link></li>
+                            </ul>
+                        </li>
+                        <li><a href="contactenos.xhtml">Contáctenos</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <section>
+            <!-- InstanceBeginEditable name="section" -->
+
+            <c:if test="#{controladorUsuario.estado eq '11'}">
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>¡Alerta!</strong> Contraseña recuperada con exíto
+                </div>
+            </c:if>
+            <c:if test="#{controladorUsuario.estado eq '12'}">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Error: </strong> No se encontro un usuario con el correo ingresado
+                </div>
+            </c:if>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-sm-12 hidden-xs" id="slader">
+                        <iframe src="wowslider.html" style="width: 100%; height:450px;max-width:100%;overflow:hidden;border:none;padding:0;margin:0 auto;display:block;" marginheight="0" marginwidth="0"></iframe>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12" id="loginContenedor">
+                        <h:form id="iniciarSesion">
+                            <legend><h2 class="text-center">Iniciar Sesión</h2></legend>
+                            <div class="form-group">
+                                <label for="correoElectronico" >Correo Electrónico</label><br />
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                    <input type="text" id="correo" name="correo" required="true" class="form-control"
+                                           placeholder="example@example.com" autofocus="true" tabindex="1" title="Ingrese un correo electronico"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="contrasena" >Contraseña</label><br />
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    <input id="contrasena" name="contrasena" required="true" class="form-control"
+                                           type="password" placeholder="******" tabindex="2" title="Ingrese su contraseña"/>
+                                </div>
+                            </div>
+                            <c:if test="#{controladorUsuario.estado eq '3'}">
+                                <div class="form-group">
+                                    <div class="alert alert-danger" role="alert">Error correo o contraseña no coinciden</div>
+                                </div>
+                            </c:if>
+                            <h:commandButton styleClass="btn btn-success botonesLogin" value="Iniciar Sesion" action="#{controladorUsuario.login()}" tabindex='3'></h:commandButton>  
+
+
+
+                        </h:form>
+
+
+                        <h:link outcome="/registroUsuarios" class="btn btn-success botonesLogin" id="registrar">Registrarse</h:link>
+                        <!-- Botón de apertura -->
+                        <button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                            ¿Olvido su contraseña?
+                        </button>
+
+                        <!-- Ventana Modal -->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Restaurar Contraseña</h4>
+                                    </div>
+                                    <h:form id="restaurarContrasena">
+                                        <div class="modal-body" id="ventanaRestaurarContraseña">
+                                            <p>Digite el correo electrónico asociado para recuperar la contraseña</p>
+
+                                            <div class="form-group">
+                                                <label for="correoElectronico">Contraseña</label>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                    <input type="email" name="campoCorreoElectronico" id="correoElectronico" class="form-control" placeholder="ejemplo@ejemplo.com" tabindex="1"></input>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+
+                                            <h:commandButton class="btn btn-success pull-right" action="#{controladorUsuario.recuperarClave()}" value="Restaurar Contraseña"></h:commandButton>
+                                        </div>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="servicios">
+                    <div id="PanelServicios" class="col-md-4 col-sm-12 col-xs-12">
+                        <h3>HORARIOS DE ATENCIÓN</h3>
+                        <p>Las 24 horas del día y los 7 días de la semana </p>
+                        <a href="horariosDeAtencion.html">&#43; Leer Mas</a>
+                    </div>
+                    <div id="PanelServicios" class="col-md-4 col-sm-12 col-xs-12">
+                        <h3>VACUNACIÓN</h3>
+                        <p>¿Qué estas esperando para vacunar tu mascota?</p>
+                        <h:link outcome="vacunacion">&#43; Leer Mas</h:link>
+                    </div>
+                    <div id="PanelServicios" class="col-md-4 col-sm-12 col-xs-12">
+                        <h3>AMBULANCIA</h3>
+                        <p>Estaremos en el lugar y el momento que su mascota lo necesite</p>
+                        <a href="ambulancia.html">&#43; Leer Mas</a></div>
+                </div>
+                <div class="row">
+                    <div id="subtitulo" class="col-md-12 col-sm-12 col-xs-12" style="background-color:#fafafa;">
+                        <h2>NUESTROS SERVICIOS</h2>
+                    </div>
+                </div>
+                <div class="row" id="contenedor2">
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="min-height: 450px;">
+                        <center><img id="imagenesSena" src="imagenes/odontologia.jpg" title="Fuente: http://buscador.comprarentuciudad. com/filesupload/10/productos/15995_odontologia_en_animales_y_mascotas_producto_1_normal.jpg"  alt="odontologia"/></center>
+                        <h3>ODONTOLOGÍA</h3>
+                        <h4>La limpieza dental es importante para tu mascota, por eso nosotros hemos pensado en ti poniendo a disposición todo nuestro personal especializado.</h4>
+                        <h:link outcome="odontologia">&#43; Leer Mas</h:link><br /><br />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="min-height: 450px;">
+                        <center><img id="imagenesSena" src="imagenes/rayosX.jpg" title="Fuente: http://www.cvm.es/radiologia/clarox-dr-pequenos-animales/galeria-de-radiografias/Abdomen-LM,columna-Perro-DR-ClaroX_G.jpg"/></center>
+                        <h3>RAYOS X</h3>
+                        <h4>Si tu mascota se fractura nuestra clínica tiene todos sus equipos de rayos X para atender a tu mascota.</h4>
+                        <a href="rayosx.html">&#43; Leer Mas</a><br /><br />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="min-height: 450px;">
+                        <center><img id="imagenesSena" src="imagenes/guarderia.jpg" title="Fuente: http://www.seadmitenmascotas.com/contenidos/wp-content/uploads/guarderia-perros.jpg"/></center>
+                        <h3>GUARDERÍA</h3>
+                        <h4>¿No tienes tiempo de cuidar a tu mascota? <br /> Tranquilo nuestra clínica dispone de un amplio personal encargado de los cuidados de tu mascota mientras usted no esta.</h4>
+                        <h:link outcome="guarderia">&#43; Leer Mas</h:link><br /><br />
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12" style="min-height: 450px;">
+                        <center><img id="imagenesSena" src="imagenes/petShop.jpg" title="Fuente: http://www.veterinaria-santaisabel.com/photos/petshop5.jpg"/></center>
+                        <h3>PET SHOP</h3>
+                        <h4>Aquí podrás encontrar concentrados y los mejores accesorios para tu mascota</h4>
+                        <h:link outcome="petshop">&#43; Leer Mas</h:link><br /><br />
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- InstanceEndEditable -->
+        </section>
+        <footer>
+            <div id="footer-contenedor" class="row">
+                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>SERVICIOS</h3>
+                    <a href="clinica.xhtml">&#187; Clínica</a><br />
+                    <a href="peluqueria.xhtml">&#187; Peluquería</a><br />
+                    <a href="odontologia.xhtml">&#187; Odontología</a><br />
+                    <a href="vacunacion.xhtml">&#187; Vacunación</a><br />
+                    <a href="ambulancia.xhtml">&#187; Ambulancia</a>
+                </div>
+                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>PRODUCTOS</h3>
+                    <a href="concentrados.xhtml">&#187; Concentrados</a><br />
+                    <a href="petshop.xhtml">&#187; Pet Shop</a><br />
+                    <a href="guarderia.xhtml">&#187; Guardería</a><br />
+                    <a href="#rayosx">&#187; Rayos-X</a><br />
+                </div>
+                <div id="panel3Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>¿QUIENES SOMOS?</h3>
+                    <a href="mision.xhtml">&#187; Misión</a><br />
+                    <a href="vision.xhtml">&#187; Visión</a>
+                </div>
+                <div id="panel3Footer" class="col-md-1 col-sm-6 col-xs-12">
+                    <h3>IDIOMA</h3>
+                    <a href="ingles/index.html">&#187; English</a> </div>
+                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <spam class=" fa fa-home"></spam>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
+                        <br />
+                        <br />
+                        <spam class=" fa fa-phone"></spam>&nbsp;&nbsp;Teléfono: 6826731
+                    </div>
+                    <div class="row">
+                        <div id="redesSociales">
+                            <a href="#"><spam class=" fa fa-facebook-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-twitter-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-google-plus-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-envelope-o"></spam></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        Now Vet | Todos los derechos reservados
+                        <br /> &#169; Copyright 2015
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </h:body>
+</html>
+

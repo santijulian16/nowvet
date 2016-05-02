@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
+        <meta name="description" content="Gestión de servcios veterinarios"></meta>
+        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clinica, Peluqueria, Baño"></meta>
+        <meta name="author" content="Julian Bermudez, Leonardo Fandiño"></meta>
+        <!-- InstanceBeginEditable name="doctitle" -->
+        <title>Now Vet | Mis citas realizadas</title>
+        <!-- InstanceEndEditable -->
+        <link rel="stylesheet" type="text/css" href="../../css/estilos.css"></link>
+        <link rel="icon" href="../../imagenes/favicon.ico" type="image/x-icon"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/font-awesome.css"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"></link>
+        <script src="../../js/jquery-1.11.3.min.js"></script>
+        <script src="../../js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap-table.css"></link>
+        <script type="text/javascript" src="../../js/bootstrap-table.js"></script>
+        <script type="text/javascript" src="../../js/bootstrap-table-export.js"></script>
+        <script>
+            function mostrarConsultaClinica(antecedentes, peso, nombrePropietario, apellidoPropietario, correo, motivo, sintomas) {
+                $('#modalMostrarConsultaClinica').modal('show');
+                document.getElementById("antecedentes").innerHTML = antecedentes,
+                document.getElementById("peso").innerHTML = peso;
+                document.getElementById("nombreP").innerHTML = nombrePropietario;
+                document.getElementById("apellidoP").innerHTML = apellidoPropietario;
+                document.getElementById("correo").innerHTML = correo;
+                document.getElementById("motivo").innerHTML = motivo;
+                document.getElementById("sintomas").innerHTML = sintomas;
+            }
+        </script>
+        <script>
+            function mostrarPeluqueria(antecedentesP, pesoP, nombrePropietarioP, apellidoPropietarioP, correoP, serviciosAplicadosP) {
+                $('#modalMostrarPeluqueria').modal('show');
+                document.getElementById("antecedentesP").innerHTML = antecedentesP,
+                document.getElementById("pesoP").innerHTML = pesoP;
+                document.getElementById("nombrePP").innerHTML = nombrePropietarioP;
+                document.getElementById("apellidoPP").innerHTML = apellidoPropietarioP;
+                document.getElementById("correoP").innerHTML = correoP;
+                document.getElementById("serviciosAplicados").innerHTML = serviciosAplicadosP;
+            }
+        </script>
+        <f:event listener="#{controladorUsuario.miraSession('cliente')}" type="preRenderView"></f:event>
+    </h:head>
+    <h:body>
+        <img id="back" src="../../imagenes/fondo.jpg" height="751px" width="765px"></img>
+        <h:form>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="index.html">
+        <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="../indexCliente.xhtml">Inicio</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li><a href="../servicios/formularioCitasClinicas.xhtml">Agendar Cita Clinica</a></li>
+              <li><a href="../servicios/formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluqueria</a></li>
+          </ul>
+        </li>
+        <li><a href="../citas/misCitas.xhtml">Citas</a></li>
+        <li><a href="../perfil/miperfil.xhtml">Mi Perfil</a></li>
+        <li><h:commandLink action="#{controladorUsuario.cerrarSesion()}">Salir&nbsp;<span class=" fa fa-sign-out"></span></h:commandLink></li>
+      </ul>
+    </div><!-- /.navbar-collapsee -->
+  </div><!-- /.container-fluid -->
+</nav>
+</h:form>
+        <section>
+            <!-- InstanceBeginEditable name="section" -->
+
+            <div class="col-md-2">
+                <nav class="navbar navbar-default">
+                    <ul class="nav navbar"><br></br>
+                        <li><a href="misCitas.xhtml"><i class="fa fa-home fa-2x"></i> Inicio</a></li><br></br>
+                        <li><a href="misCitasRecientes.xhtml"><i class="fa fa-calendar-plus-o fa-2x"></i> Citas Recientes
+                            </a></li><br></br>
+                        <li><a href="misCitasEjecutadas.xhtml"><i class="fa fa-calendar-check-o fa-2x"></i> 
+                                Citas Ejecutadas</a></li><br></br>        
+                    </ul>  
+                </nav>
+            </div>
+            <div class="col-md-10" id="colorbase">
+                <div class="row"></div>
+                <div class="col-md-12 col-sm-12 col-xs-12" id="migas"><a href="../index.html">Inicio</a>\<a href="misCitas.html">Mis Citas</a>\<a href="misCitasEjecutadas.html">Citas Ejecutadas</a>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12" id="rol">
+                    Rol: Cliente
+                </div>
+                <h3>Citas Realizadas</h3>
+                <hr></hr>
+                <div class="panel panel-primary filterable clienteTablas">
+                    <table data-toggle="table"
+                           data-show-columns="false" 
+                           data-search="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true" 
+                           data-pagination="true"
+                           data-id-field="id"
+                           data-sort-name="fecha"
+                           data-sort-order="desc"
+                           data-page-size="10"
+                           data-page-list="[10,25,50,100,200]">
+                        <thead>
+                            <tr>
+                                <th data-field="numero" data-sortable="true">Número Cita</th>
+                                <th data-field="fecha" data-sortable="true">Fecha</th>
+                                <th data-field="mascota" data-sortable="true">Mascota</th>
+                                <th data-field="tipoServicio" data-sortable="true">Tipo Servicio</th>
+                                <th data-field="personal" data-sortable="true">Estado</th>
+                                <th data-field="crud" data-sortable="true"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach var="listaCitas" items="#{controladorCitas.listarMisCitasEjecutadas()}">                          
+                                <c:if test="#{listaCitas.idMascota.codigoPropietario.usuarios.cedula == controladorUsuario.usuLogin.cedula}">
+                                    <tr>
+                                        <td>#{listaCitas.idCita}</td>
+                                        <td>#{listaCitas.fechaAsignada.toLocaleString()}</td>
+                                        <td>#{listaCitas.idMascota.nombre}</td>
+                                        <td>#{listaCitas.idServicio.tipo}</td>
+                                        <td>#{listaCitas.estado}</td>
+                                        <c:if test="#{listaCitas.idServicio.tipo == 'Consulta Clinica'}">
+
+                                            <td><button type="button" class="btn btn-success">
+                                                    <i class="fa fa-eye" onclick="mostrarConsultaClinica('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idVeterinario.usuarios.nombres}', '#{listaCitas.idVeterinario.usuarios.apellidos}', '#{listaCitas.idVeterinario.usuarios.correo}', '#{listaCitas.citasclinicas.motivo}', '#{listaCitas.citasclinicas.sintomas}')" width="16px"></i>
+                                                </button></td>
+
+                                            <!--Modal para mostrar datos de una cita clínica en estado ejecutada-->
+                                            <div class="modal fade" id="modalMostrarConsultaClinica" role="dialog" 
+                                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel"><strong>Detalles del servicio consulta clínica</strong></h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <strong>Nombre Veterinario: </strong><i id="nombreP"></i>&nbsp;<i id="apellidoP"></i><br></br>
+                                                            <strong>Correo Veterinario: </strong><i id="correoP"></i><br></br>
+                                                            <strong>Antecedentes: </strong><i id="antecedentes"></i><br></br>
+                                                            <strong>Peso: </strong><i id="peso"></i><br></br>
+                                                            <strong>Motivo: </strong><i id="motivo"></i><br></br>
+                                                            <strong>Sintomas: </strong><i id="sintomas"></i>
+                                                        </div>
+                                                        <div class="modal-footer">      
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>   
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:if>
+
+                                        <c:if test="#{listaCitas.idServicio.tipo == 'Peluqueria'}">
+
+                                            <td><button type="button" class="btn btn-success">
+                                                    <i class="fa fa-eye" onclick="mostrarPeluqueria('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idVeterinario.usuarios.nombres}', '#{listaCitas.idVeterinario.usuarios.apellidos}', '#{listaCitas.idVeterinario.usuarios.correo}', '#{listaCitas.citaspeluqueria.serviciosAplicados}')" width="16px"></i>
+                                                </button></td>
+
+                                            <!--Modal para mostrar datos de una cita de peluquería en estado ejecutada-->
+                                            <div class="modal fade" id="modalMostrarPeluqueria" role="dialog" 
+                                                 aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel"><strong>Detalles del servicio de peluquería</strong></h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <strong>Nombre Veterinario: </strong><i id="nombrePP"></i>&nbsp;<i id="apellidoPP"></i><br></br>
+                                                            <strong>Correo Veterinario: </strong><i id="correoP"></i><br></br>
+                                                            <strong>Antecedentes: </strong><i id="antecedentesP"></i><br></br>
+                                                            <strong>Peso: </strong><i id="pesoP"></i><br></br>
+                                                            <strong>Servicios Aplicados: </strong><i id="serviciosAplicados"></i><br></br>
+                                                        </div>
+                                                        <div class="modal-footer">      
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>   
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:if>
+                                    </tr>
+                                </c:if>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>		
+                <div class="clearfix"></div>
+            </div>
+
+            <!-- InstanceEndEditable -->
+        </section>
+        <footer>
+            <div id="footer-contenedor" class="row">
+                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>SERVICIOS</h3>
+                    <a href="../../clinica.html">&#187; Clínica</a><br />
+                    <a href="../../peluqueria.html">&#187; Peluquería</a><br />
+                    <a href="../../odontologia.html">&#187; Odontología</a><br />
+                    <a href="../../vacunacion.html">&#187; Vacunación</a><br />
+                    <a href="../../ambulancia.html">&#187; Ambulancia</a>
+                </div>
+                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>PRODUCTOS</h3>
+                    <a href="../../concentrados.html">&#187; Concentrados</a><br />
+                    <a href="../../petshop.html">&#187; Pet Shop</a><br />
+                    <a href="../../guarderia.html">&#187; Guardería</a><br />
+                    <a href="#rayosx">&#187; Rayos c</a><br />
+                </div>
+                <div id="panel3Footer" class="col-md-1 col-sm-6 col-xs-12">
+                    <h3>¿QUIENES SOMOS?</h3>
+                    <a href="../../mision.html">&#187; Misión</a><br />
+                    <a href="../../vision.html">&#187; Visión</a>
+                </div>
+                <div id="panel3Footer" class="col-md-2 col-sm-6 col-xs-12">
+
+                    <h3>GESTIÓN CORPORATIVA</h3>
+                    <a href="../../iniciarSesionAdministrador.html">&#187; Administrador</a>
+                </div>
+                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <spam class=" fa fa-home"></spam>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
+                        <br />
+                        <br />
+                        <spam class=" fa fa-phone"></spam>&nbsp;&nbsp;Teléfono: 6826731
+                    </div>
+                    <div class="row">
+                        <div id="redesSociales">
+                            <a href="#"><spam class=" fa fa-facebook-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-twitter-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-google-plus-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-envelope-o"></spam></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        Now Vet | Todos los derechos reservados
+                        <br /> &#169; Copyright 2015
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </h:body>
+</html>
+

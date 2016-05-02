@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="UTF-8"></meta>
+        <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
+        <meta name="description" content="Gestión de servcios veterinarios"></meta>
+        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clinica, Peluquria, Baño"></meta>
+        <meta name="author" content="Julian Bermudez, Leonardo Fandiño"></meta>
+        <!-- InstanceBeginEditable name="doctitle" -->
+        <title>Now Vet | Agendar Cita Clínica</title>
+        <!-- InstanceEndEditable -->
+        <link rel="stylesheet" type="text/css" href="../../css/estilos.css"></link>
+        <link rel="icon" href="../../imagenes/favicon.ico" type="image/x-icon"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/font-awesome.css"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"></link>
+        <link rel="stylesheet" type="text/css" href="../../css/jquery.datetimepicker.css"></link>
+	<script src="../../js/jquery-1.11.3.min.js"></script>
+	<script src="../../js/bootstrap.js"></script>
+	<!-- InstanceBeginEditable name="head" -->
+        <link rel="stylesheet" type="text/css" href="css/formValidation.css"></link>
+        <script src="../../js/jquery.datetimepicker.full.js"></script>
+        <script src="../../js/formValidation.min.js"></script>
+        <script src="../../js/bootstrapValidator.js"></script>
+        <script src="../../js/es_ES.js"></script>
+
+        <script>
+            $().ready(function () {
+                
+                $('#formularioDeSolicitudDeCitasClinicas').formValidation({
+                    err: {container: 'tooltip'},
+                    icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
+                    locale: 'es_ES',
+                    fields: {
+                        nombre: {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: /[A-ZÑ Á,É,Í,Ó,Ú a-zñ á,é,í,ó,ú]+$/,
+                                    message: 'De 3 a 30 letras sin carácteres especiales'
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 30
+                                }
+                            }
+                        },
+                        mascota: {
+                            row: '.form-group',
+                            message: 'Debe seleccionar una mascota'
+                        },
+                        fecha: {
+                            row: '.form-group',
+                            message: 'Debe seleccionar una fecha'
+                        },
+                        hora: {
+                            row: '.form-group',
+                            message: 'Debe seleccionar una hora'
+                        },
+                        motivo: {
+                            row: '.form-group',
+                            message: 'Debe digitar un motivo',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: /[A-ZÑ Á,É,Í,Ó,Ú a-zñ á,é,í,ó,ú]+$/,
+                                    message: 'De 2 a 50 letras sin carácteres especiales'
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 50
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+    </h:head>
+    <h:body>
+        <img id="back" src="../../imagenes/fondo.jpg" height="751px" width="765px"></img>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="../index.html">
+                        <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
+                    </a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="../index.html">Inicio</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="formularioCitasClinicas.xhtml">Agendar Cita Clinica</a></li>
+                                <li><a href="formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluqueria</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="../citas/misCitas.xhtml">Citas</a></li>
+                        <li><a href="../miPerfil.html">Mi Perfil</a></li>
+                        <li><a href="../../index.xhtml">Salir <spam class=" fa fa-sign-out"></spam></a></li>
+                    </ul>
+                </div><!-- /.navbar-collapsee -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <section>
+            <!-- InstanceBeginEditable name="section" -->
+            <div class="container" id="colorbase">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="migas"><a href="../index.html">Inicio</a>\<a href="formularioCitasClinicas.html">Agendar Cita Clinica</a>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="rol">
+                        Rol: Cliente
+                    </div>
+                </div>
+
+                <div class="container col-md-8 col-md-offset-2" id="containerFormularios">
+                    <div class="row" id="rowFormularios"> 
+                        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">   
+                            <h:form id="formularioDeSolicitudDeCitasClinicas">
+
+                                <h2>Programe la cita clínica para su mascota</h2><hr></hr>
+
+
+                                <div class="form-group" id="fechaD">
+                                    <label for="fecha" class="lfecha">Fecha de la cita</label>
+                                    <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        <input type="text" onfocus="this.blur()" id="datetimepicker" name="fecha" required="true" class="form-control" tabindex="3" 
+                                               title="Debe seleccionar una fecha" ></input>
+                                        <!--min="2013-01-01T00:00Z" max="2013-12-31T12:00Z"-->
+                                    </div>
+
+                                    <div class="row">
+                                        <h:commandButton onclick="ocultar()" class="btn btn-link" id="verificarDisponibilidad" tabindex="7" value="Verificar Disponibilidad" action="#{controladorCitas.verificarDisponibilidad()}" ><i id="verificarDisponibilidad" class="fa fa-chevron-circle-down"></i>
+
+                                        </h:commandButton>
+                                    </div> 
+                                </div>
+                                <script>
+                                    $.datetimepicker.setLocale('es');
+
+                                    $('#datetimepicker').datetimepicker({
+                                        
+                                        onGenerate:function( ct ){
+                                    $(this).find('.xdsoft_date')
+                                    .toggleClass('xdsoft_disabled');
+                                    }, 
+                                   
+                                        
+                                        maxDate:'+1970/01/01',
+                                        defaultTime:'08:00',
+                                        formatTime: 'H:i',
+                                        formatDate: 'Y.m.d',
+                                        todayHighlight: true,
+                                        
+                                        //language: 'es',
+                                        multidateSeparator: '/',
+                                        startView: 0, //si inicia mostrando el dia (0), mes (1), año (2)
+                                        //endDate: '+1m', //fecha final habilitada: 1 mes adelante
+                                        daysOfWeekDisabled: '7', //deshabilitar días 0-sabado, 1-lunes... etc
+                                        showMonthAfterYear: false,
+                                        yearStart: 2016,
+                                        yearEnd: 2020,
+                                        //disabledDates: ['03.04.2016','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'], formatDate:'d.m.Y',
+
+                                        autoclose: true, //autocerrar al perder el foco en el input
+                                        
+                                    });
+                                    $('#datetimepicker').datetimepicker({value: '', step: 30});
+                                </script>
+
+                                <c:if test="#{controladorCitas.estados eq '3'}">
+                                    <div class="alert alert-danger">
+                                        <button type="button" class="close" data-dismiss="alert" >&times;</button>
+                                        <strong>El espacio no esta disponible!! </strong> Escoga otra hora o fecha.
+                                    </div>
+                                </c:if>
+                                <c:if test="#{controladorCitas.estados eq '4'}">
+                                    <script>
+                                        document.getElementById('fechaD').style.display = "none";
+                                    </script>
+                                    <div class="alert alert-success">
+                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>Espacio Disponible!! </strong>
+                                    </div>
+                                    <p>A continuación llene el formulario para solicitar una consulta clínica general para su mascota. Los campos con * son obligatorios.</p><br></br>
+                                    <div class="form-group">
+                                        <label for="mascota" class="lmascota">Mascota</label>
+                                        <div class="input-group margin-bottom-sm">
+                                            <span class="input-group-addon"><i class="fa fa-paw"></i></span>
+                                            <select id="mascota" name="mascota" class="form-control" required="true" tabindex="2" title="Debe seleccionar una mascota">
+                                                <option selected="true" disabled="true">Seleccione su mascota</option>
+                                                <c:forEach var="listaMascotas" items="#{controladorUsuario.usuLogin.propietarios.mascotasCollection}">
+                                                    <c:if test="#{listaMascotas.estado == 'Activa'}">
+                                                    <option value="#{listaMascotas.codigoMascota}">#{listaMascotas.nombre}</option>
+                                                    </c:if>
+                                                    <c:if test="#{listaMascotas.estado == 'Inactiva'}">
+                                                        <option disabled="true" value="#{listaMascotas.codigoMascota}">#{listaMascotas.nombre}</option>
+                                                    </c:if>
+                                                </c:forEach>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="veterinario" class="lveterinario">Veterinario</label>
+                                        <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+                                        <select id="veterinario" name="veterinario" class="form-control" required="true" tabindex="4" title="Debe seleccionar un veterinario">
+                                            <option selected="true" disabled="true">Seleccione su veterinario</option>
+                                            <c:forEach var="listaVeterinarios" items="#{controladorCitas.listaCargaVeterinarios}">
+                                                <option value="#{listaVeterinarios.cedula}">#{listaVeterinarios.nombres}&nbsp;#{listaVeterinarios.apellidos}</option>
+                                            </c:forEach>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="datetimepicker" name="fechaVerdadera" required="true" class="form-control" tabindex="3" 
+                                               title="Debe seleccionar una fecha"  value="#{controladorCitas.fechaVerdadera.toLocaleString()}" style="display: none;"></input>
+                                        <!--min="2013-01-01T00:00Z" max="2013-12-31T12:00Z"-->
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="motivo" class="lmotivo">¿Cuál es el motivo de la cita?</label>
+                                        <div class="input-group margin-bottom-sm">
+                                            <span class="input-group-addon"><i class="fa fa-stethoscope"></i></span>
+                                            <h:inputText id="motivo" p:name="motivo" required="true" class="form-control" tabindex="5"
+                                                         p:placeholder="Ej: Consulta clínica" title="Debe digitar un motivo válido" value="#{controladorCitas.motivo}"></h:inputText>	
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sintomas" class="lsintomas">Síntomas de la mascota</label>
+                                        <h:inputTextarea class="form-control" rows="7" id="sintomas" p:name="sintomas" tabindex="6" 
+                                                         p:pattern="[A-Z Á,É,Í,Ó,Ú a-z á,é,í,ó,ú]{2,200}" title="Debe digitar los síntomas de su mascota" value="#{controladorCitas.sintomas}"></h:inputTextarea>
+                                    </div>
+                                    <div id="botonEnviar">
+                                        <h:commandButton class="btn btn-success pull-right" tabindex="7" value="Agendar Cita" action="#{controladorCitas.agendarCitaClinica()}"></h:commandButton>           
+                                    </div>
+                                </c:if>
+                            </h:form>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </section>
+        <footer>
+            <div id="footer-contenedor" class="row">
+                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>SERVICIOS</h3>
+                    <a href="../../clinica.html">&#187; Clínica</a><br />
+                    <a href="../../peluqueria.html">&#187; Peluquería</a><br />
+                    <a href="../../odontologia.html">&#187; Odontología</a><br />
+                    <a href="../../vacunacion.html">&#187; Vacunación</a><br />
+                    <a href="../../ambulancia.html">&#187; Ambulancia</a>
+                </div>
+                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>PRODUCTOS</h3>
+                    <a href="../../concentrados.html">&#187; Concentrados</a><br />
+                    <a href="../../petshop.html">&#187; Pet Shop</a><br />
+                    <a href="../../guarderia.html">&#187; Guardería</a><br />
+                    <a href="#rayosx">&#187; Rayos c</a><br />
+                </div>
+                <div id="panel3Footer" class="col-md-1 col-sm-6 col-xs-12">
+                    <h3>¿QUIENES SOMOS?</h3>
+                    <a href="../../mision.html">&#187; Misión</a><br />
+                    <a href="../../vision.html">&#187; Visión</a>
+                </div>
+                <div id="panel3Footer" class="col-md-2 col-sm-6 col-xs-12">
+
+                    <h3>GESTIÓN CORPORATIVA</h3>
+                    <a href="../../iniciarSesionAdministrador.html">&#187; Administrador</a>
+                </div>
+                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <spam class=" fa fa-home"></spam>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
+                        <br />
+                        <br />
+                        <spam class=" fa fa-phone"></spam>&nbsp;&nbsp;Teléfono: 6826731
+                    </div>
+                    <div class="row">
+                        <div id="redesSociales">
+                            <a href="#"><spam class=" fa fa-facebook-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-twitter-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-google-plus-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-envelope-o"></spam></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        Now Vet | Todos los derechos reservados
+                        <br /> &#169; Copyright 2015
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </h:body>
+</html>
+
+
+
