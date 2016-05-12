@@ -12,10 +12,10 @@ import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author Julian
+ * @author Movimiento Rastafari
  */
 @Stateless
-public class PropietariosFacade extends AbstractFacade<Propietarios> implements PropietariosFacadeLocal {
+public class PropietariosFacade extends AbstractFacade<Propietarios> {
 
     @PersistenceContext(unitName = "NowVetPU")
     private EntityManager em;

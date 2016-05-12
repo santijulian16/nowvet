@@ -6,16 +6,18 @@
 package edu.nowvet.Facade;
 
 import edu.nowvet.Entitys.Mascotas;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
- * @author Julian
+ * @author Movimiento Rastafari
  */
 @Stateless
-public class MascotasFacade extends AbstractFacade<Mascotas> implements MascotasFacadeLocal {
+public class MascotasFacade extends AbstractFacade<Mascotas> {
 
     @PersistenceContext(unitName = "NowVetPU")
     private EntityManager em;
@@ -27,6 +29,14 @@ public class MascotasFacade extends AbstractFacade<Mascotas> implements Mascotas
 
     public MascotasFacade() {
         super(Mascotas.class);
+    }
+    
+    public List mostarMascotas(int idper){
+        Query q;
+        q=this.em.createQuery("select m from Mascotas m where m.codigoPropietario.dniPropietario=:id");
+        q.setParameter("id", idper);
+        List<Mascotas> mas=q.getResultList();
+        return mas;
     }
     
 }
