@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author Movimiento Rastafari
+ * @author Julian
  */
 public abstract class AbstractFacade<T> {
 

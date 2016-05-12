@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Movimiento Rastafari
+ * @author Julian
  */
 @Entity
 @Table(name = "citasclinicas")

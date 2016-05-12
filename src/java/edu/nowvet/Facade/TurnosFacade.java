@@ -6,18 +6,16 @@
 package edu.nowvet.Facade;
 
 import edu.nowvet.Entitys.Turnos;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
- * @author Movimiento Rastafari
+ * @author Julian
  */
 @Stateless
-public class TurnosFacade extends AbstractFacade<Turnos> {
+public class TurnosFacade extends AbstractFacade<Turnos> implements TurnosFacadeLocal {
 
     @PersistenceContext(unitName = "NowVetPU")
     private EntityManager em;
@@ -31,8 +29,4 @@ public class TurnosFacade extends AbstractFacade<Turnos> {
         super(Turnos.class);
     }
     
-    public List<Turnos> consultarTurnosCreados(){
-        Query q = em.createQuery("Select t from Turnos t where t.fechaInicio = '2016-11-03 09:00:00'");
-        return q.getResultList();
-    }   
 }

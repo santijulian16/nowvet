@@ -6,19 +6,16 @@
 package edu.nowvet.Facade;
 
 import edu.nowvet.Entitys.Citas;
-import java.util.Date;
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
- * @author Movimiento Rastafari
+ * @author Julian
  */
 @Stateless
-public class CitasFacade extends AbstractFacade<Citas> {
+public class CitasFacade extends AbstractFacade<Citas> implements CitasFacadeLocal {
 
     @PersistenceContext(unitName = "NowVetPU")
     private EntityManager em;
@@ -32,21 +29,4 @@ public class CitasFacade extends AbstractFacade<Citas> {
         super(Citas.class);
     }
     
-    public List<Citas> consultarCitasRecientes(){
-        Query q = em.createQuery("Select c from Citas c where c.estado='Creada'");
-        return q.getResultList();
-    }
-    
-    public List<Citas> consultarCitasEjecutadas(){
-        Query q = em.createQuery("Select c from Citas c where c.estado='Ejecutada'");
-        return q.getResultList();
-    }
-    
-    public List<Citas> verificarDisponibilidad(Date fecha) {
-        Query q;
-        q = em.createQuery("select c from Citas c where c.fechaAsignada  =:fecha");
-        q.setParameter("fecha", fecha);
-        return q.getResultList();
-    }
-
 }
