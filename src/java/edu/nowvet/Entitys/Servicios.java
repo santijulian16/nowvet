@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Movimiento Rastafari
+ * @author Julian
  */
 @Entity
 @Table(name = "servicios")
