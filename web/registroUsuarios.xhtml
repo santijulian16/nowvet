@@ -16,8 +16,8 @@
         <link rel="icon" href="imagenes/favicon.ico" type="image/x-icon"></link>
         <link rel="stylesheet" type="text/css" href="css/font-awesome.css"></link>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
-	<script src="js/jquery-1.11.3.min.js"></script>
-	<script src="js/bootstrap.js"></script>
+        <script src="js/jquery-1.11.3.min.js"></script>
+        <script src="js/bootstrap.js"></script>
         <link rel="stylesheet" href="css/roboto.min.css"></link>
         <link rel="stylesheet" href="css/material.css"></link>
         <link rel="stylesheet" href="css/ripples.min.css"></link>
@@ -28,169 +28,169 @@
         <script src="js/es_ES.js" type="text/javascript"></script>
         <link href="css/formValidation.css" rel="stylesheet" type="text/css"/>
         <script>
-        	$().ready(function () {
-            	$('#registroUsuarios').formValidation({
-                	err: {container: 'tooltip'},
-                    	icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
-                        locale: 'es_ES',
-                        fields: {
-                        	'registroUsuarios:campoNombre': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    regexp: {
-                                    	regexp: '^[A-Za-z ñÑáéíúó]+$',
-                                        message: 'Solo letra, sin números o caracteres especiales'
-                                    },
-                                    stringLength: {
-                                    	min: 3,
-                                        max: 25
-                                    }
-                               	}
-                           },
-				'registroUsuarios:campoApellido': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    regexp: {
-                                    	regexp: '^[A-Za-z ñÑáéíúó]+$',
-                                        message: 'Solo letras, sin números o caracteres especiales'
-                                    },
-                                    stringLength: {
-                                    	min: 3,
-                                        max: 30
-                                    }
-                               	}
-                           },
-				'registroUsuarios:campoCedula': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    regexp: {
-                                    	regexp: /^[0-9]+$/,
-                                        message: 'Solo numeros, sin números o caracteres especiales'
-                                    },
-                                    stringLength: {
-                                    	min: 2,
-                                        max: 11
-                                    }
-                               	}
-                           },
-				'registroUsuarios:campoCorreo': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},                            
-                           			emailAddress: {
-                            			message: 'Ingrese un correo electronico valido'
-                        			},
-							 		regexp: {
-                            			regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
-                            			message: 'Ingrese un correo electronico valido'
-                        			}
-                               	}
-                           },
-				'registroUsuarios:campoContrasena': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    stringLength: {
-                                    	min: 6,
-                                        max: 25
-                                    }
-                               	}
-                           },
-				'registroUsuarios:campoContrasenaCon': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    identical: {
-                        				field: 'registroUsuarios:campoContrasena',
-                        				message: 'Las contraseñan no coinciden'
-                    				}
-                               	}
-                           },
-				'registroUsuarios:campoBarrio': {
-                            	row: '.form-group',
-                                validators: {
-                                    regexp: {
-                            			regexp: '^[A-Za-z ñÑáéíúó]+$',
-                            			message: 'Solo letras sin caracteres especiales'
-                                            }
-                        		}
-                               	
-                           },
-				'registroUsuarios:campoDireccion': {
-                            	row: '.form-group',
-                                validators: {
-                                    regexp: {
-                            			regexp: '^[A-Za-z0-9# ,-]+$',
-                            			message: 'Solo letras minusculas sin caracteres especiales'
-                        			}
-                               	}
-                           }
-						   
-                       }
-        		});
-    		});
-    	</script>
+            $().ready(function () {
+                $('#registroUsuarios').formValidation({
+                    err: {container: 'tooltip'},
+                    icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
+                    locale: 'es_ES',
+                    fields: {
+                        'registroUsuarios:campoNombre': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: '^[A-Za-z ñÑáéíúó]+$',
+                                    message: 'Solo letra, sin números o caracteres especiales'
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 25
+                                }
+                            }
+                        },
+                        'registroUsuarios:campoApellido': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: '^[A-Za-z ñÑáéíúó]+$',
+                                    message: 'Solo letras, sin números o caracteres especiales'
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 30
+                                }
+                            }
+                        },
+                        'registroUsuarios:campoCedula': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: /^[0-9]+$/,
+                                    message: 'Solo numeros, sin números o caracteres especiales'
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 11
+                                }
+                            }
+                        },
+                        'registroUsuarios:campoCorreo': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                emailAddress: {
+                                    message: 'Ingrese un correo electronico valido'
+                                },
+                                regexp: {
+                                    regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
+                                    message: 'Ingrese un correo electronico valido'
+                                }
+                            }
+                        },
+                        'registroUsuarios:campoContrasena': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                stringLength: {
+                                    min: 6,
+                                    max: 25
+                                }
+                            }
+                        },
+                        'registroUsuarios:campoContrasenaCon': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                identical: {
+                                    field: 'registroUsuarios:campoContrasena',
+                                    message: 'Las contraseñan no coinciden'
+                                }
+                            }
+                        },
+                        'registroUsuarios:campoBarrio': {
+                            row: '.form-group',
+                            validators: {
+                                regexp: {
+                                    regexp: '^[A-Za-z ñÑáéíúó]+$',
+                                    message: 'Solo letras sin caracteres especiales'
+                                }
+                            }
+
+                        },
+                        'registroUsuarios:campoDireccion': {
+                            row: '.form-group',
+                            validators: {
+                                regexp: {
+                                    regexp: '^[A-Za-z0-9# ,-]+$',
+                                    message: 'Solo letras minusculas sin caracteres especiales'
+                                }
+                            }
+                        }
+
+                    }
+                });
+            });
+        </script>
         <f:event listener="#{controladorUsuario.setearRegistro()}" type="preRenderView"></f:event>
     </h:head>
     <h:body>
         <img id="back" src="imagenes/fondo.jpg" height="751px" width="765px"></img>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-       <a class="navbar-brand" href="index.html">
-        <img alt="Brand" src="imagenes/logo.png" width="132px" height="90px" />
-      </a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><h:link value="Inicio" outcome="/index" /></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">¿Quiénes Somos? <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="mision.html">Misión</a></li>
-            <li><a href="vision.html">Visión</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="clinica.html">Clínica</a></li>
-			<li><a href="peluqueria.html">Peluquería</a></li>
-			<li><a href="guarderia.html">Guardería</a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            	<li><a href="concentrados.html">Concentrados</a></li>
-				<li><a href="petshop.html">Pet Shop</a></li>
-          </ul>
-        </li>
-        <li><a href="contactenos.xhtml">Contáctenos</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-        
-            <c:if test="#{controladorUsuario.estado eq '9'}">
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>¡Alerta!</strong> Usuario ya existente por favor revisar correo o cedula
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                        <img alt="Brand" src="imagenes/logo.png" width="132px" height="90px" />
+                    </a>
                 </div>
-            </c:if>
-<section>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><h:link value="Inicio" outcome="/index" /></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">¿Quiénes Somos? <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="mision.html">Misión</a></li>
+                                <li><a href="vision.html">Visión</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="clinica.html">Clínica</a></li>
+                                <li><a href="peluqueria.html">Peluquería</a></li>
+                                <li><a href="guarderia.html">Guardería</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Productos <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="concentrados.html">Concentrados</a></li>
+                                <li><a href="petshop.html">Pet Shop</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="contactenos.xhtml">Contáctenos</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <c:if test="#{controladorUsuario.estado eq '9'}">
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>¡Alerta!</strong> Usuario ya existente por favor revisar correo o cedula
+            </div>
+        </c:if>
+        <section>
             <div class="container" id="containerFormularios">
                 <div class="row" id="rowFormularios">
                     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="Formularios">
@@ -206,112 +206,111 @@
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="campoApellido">Apellidos</h:outputLabel>
-                                    <div class="input-group margin-bottom-sm">
-                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-user"></i></span>
-                                        <h:inputText id="campoApellido" value="#{controladorUsuario.usuTemp.apellidos}"   pt:class="form-control" pt:placeholder="Apellido" pt:tabindex="2" required="true" title="De 3 a 25 caracteres, sin caracteres especiales"></h:inputText>
-                                    </div>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-user"></i></span>
+                                    <h:inputText id="campoApellido" value="#{controladorUsuario.usuTemp.apellidos}"   pt:class="form-control" pt:placeholder="Apellido" pt:tabindex="2" required="true" title="De 3 a 25 caracteres, sin caracteres especiales"></h:inputText>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="campoCedula">Cedula</h:outputLabel>
-                                    <div class="input-group margin-bottom-sm">
-                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-credit-card"></i></span>
-                                        <h:inputText id="campoCedula" value="#{controladorUsuario.usuTemp.cedula}" class="form-control"  pt:placeholder="Cedula" pt:tabindex="3" required="true" title="De 2 a 25 caracteres, solo numeros"></h:inputText>
-                                    </div>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-credit-card"></i></span>
+                                    <h:inputText id="campoCedula" value="#{controladorUsuario.usuTemp.cedula}" class="form-control"  pt:placeholder="Cedula" pt:tabindex="3" required="true" title="De 2 a 25 caracteres, solo numeros"></h:inputText>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="campoCorreo">Correo Electronico</h:outputLabel>
-                                    <div class="input-group margin-bottom-sm">
-                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-envelope"></i></span>
-                                        <h:inputText id="campoCorreo" value="#{controladorUsuario.usuTemp.correo}" class="form-control" pt:placeholder="ejemplo@ejemplo.com" pt:tabindex="4" required="true" title="De 3 a 25 caracteres"></h:inputText>
-                                    </div>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-envelope"></i></span>
+                                    <h:inputText id="campoCorreo" value="#{controladorUsuario.usuTemp.correo}" class="form-control" pt:placeholder="ejemplo@ejemplo.com" pt:tabindex="4" required="true" title="De 3 a 25 caracteres"></h:inputText>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="campoContrasena">Contraseña</h:outputLabel>
-                                    <div class="input-group margin-bottom-sm">
-                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-unlock-alt"></i></span>
-                                        <h:inputSecret id="campoContrasena" value="#{controladorUsuario.usuTemp.contrasena}" class="form-control"  pt:placeholder="*******" pt:tabindex="5" required="true" title="De 3 a 25 caracteres"></h:inputSecret>
-                                    </div>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-unlock-alt"></i></span>
+                                    <h:inputSecret id="campoContrasena" value="#{controladorUsuario.usuTemp.contrasena}" class="form-control"  pt:placeholder="*******" pt:tabindex="5" required="true" title="De 3 a 25 caracteres"></h:inputSecret>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="campoContrasenaCon">Confirme Contraseña</h:outputLabel>
-                                    <div class="input-group margin-bottom-sm">
-                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-unlock-alt"></i></span>
-                                        <h:inputSecret id="campoContrasenaCon" class="form-control" pt:placeholder="*******" pt:tabindex="6" required="true" title="De 3 a 25 caracteres"></h:inputSecret>
-                                    </div>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-unlock-alt"></i></span>
+                                    <h:inputSecret id="campoContrasenaCon" class="form-control" pt:placeholder="*******" pt:tabindex="6" required="true" title="De 3 a 25 caracteres"></h:inputSecret>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="campoBarrio">Barrio</h:outputLabel>
-                                    <div class="input-group margin-bottom-sm">
-                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-arrows-alt"></i></span>
-                                        <h:inputText id="campoBarrio"  class="form-control" value="#{controladorUsuario.prop.barrio}" pt:placeholder="Barrio" pt:tabindex="7" required="true" title="De 3 a 25 caracteres"></h:inputText>
-                                    </div>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-arrows-alt"></i></span>
+                                    <h:inputText id="campoBarrio"  class="form-control" value="#{controladorUsuario.prop.barrio}" pt:placeholder="Barrio" pt:tabindex="7" required="true" title="De 3 a 25 caracteres"></h:inputText>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="campoDireccion">Dirección</h:outputLabel>
-                                    <div class="input-group margin-bottom-sm">
-                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-home"></i></span>
-                                        <h:inputText id="campoDireccion" class="form-control" value="#{controladorUsuario.usuTemp.direccion}" pt:placeholder="cra 4 # 9 75" pt:tabindex="8" required="true" title="De 3 a 25 caracteres"></h:inputText>
-                                    </div>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-home"></i></span>
+                                    <h:inputText id="campoDireccion" class="form-control" value="#{controladorUsuario.usuTemp.direccion}" pt:placeholder="cra 4 # 9 75" pt:tabindex="8" required="true" title="De 3 a 25 caracteres"></h:inputText>
+                                </div>
                             </div>
                             <h:commandButton tabindex="9" class="btn btn-success pull-right" value="Registrar" action="#{controladorUsuario.registrarUsuario()}"></h:commandButton>
-                            
-                            </h:form>
-                        
-                            <br></br>
-                            <br></br>
-                            <br></br>
+
+                        </h:form>
+                        <br></br>
+                        <br></br>
+                        <br></br>
                     </div>
                 </div>
             </div>
-</section>
-<footer>
-<div id="footer-contenedor" class="row">
-	<div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
-		<h3>SERVICIOS</h3>
-		<a href="clinica.html">&#187; Clínica</a><br />
-		<a href="peluqueria.html">&#187; Peluquería</a><br />
-		<a href="odontologia.html">&#187; Odontología</a><br />
-		<a href="vacunacion.html">&#187; Vacunación</a><br />
-		<a href="ambulancia.html">&#187; Ambulancia</a>
-	</div>
-	<div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
-		<h3>PRODUCTOS</h3>
-			<a href="concentrados.html">&#187; Concentrados</a><br />
-			<a href="petshop.html">&#187; Pet Shop</a><br />
-			<a href="guarderia.html">&#187; Guardería</a><br />
-			<a href="#rayosx">&#187; Rayos-X</a><br />
-	</div>
-	<div id="panel3Footer" class="col-md-2 col-sm-6 col-xs-12">
-		<h3>¿QUIENES SOMOS?</h3>
-			<a href="mision.html">&#187; Misión</a><br />
-			<a href="vision.html">&#187; Visión</a>
-	</div>
-    <div id="panel3Footer" class="col-md-1 col-sm-6 col-xs-12">
-              <h3>IDIOMA</h3>
-              <a href="ingles/index.html">&#187; English</a> </div>
-	<div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
-		<div class="row">
-        <spam class=" fa fa-home"></spam>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
-		<br />
-		<br />
-		<spam class=" fa fa-phone"></spam>&nbsp;&nbsp;Teléfono: 6826731
-        </div>
-        <div class="row">
-		<div id="redesSociales">
-			<a href="#"><spam class=" fa fa-facebook-square"></spam></a>
-			<a href="#"><spam class=" fa fa-twitter-square"></spam></a>
-			<a href="#"><spam class=" fa fa-google-plus-square"></spam></a>
-			<a href="#"><spam class=" fa fa-envelope-o"></spam></a>
-		</div>
-        </div>
-        	<div class="row">
-			<br />
-			Now Vet | Todos los derechos reservados
-            <br /> &#169; Copyright 2015
+        </section>
+        <footer>
+            <div id="footer-contenedor" class="row">
+                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>SERVICIOS</h3>
+                    <a href="clinica.html">&#187; Clínica</a><br />
+                    <a href="peluqueria.html">&#187; Peluquería</a><br />
+                    <a href="odontologia.html">&#187; Odontología</a><br />
+                    <a href="vacunacion.html">&#187; Vacunación</a><br />
+                    <a href="ambulancia.html">&#187; Ambulancia</a>
+                </div>
+                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>PRODUCTOS</h3>
+                    <a href="concentrados.html">&#187; Concentrados</a><br />
+                    <a href="petshop.html">&#187; Pet Shop</a><br />
+                    <a href="guarderia.html">&#187; Guardería</a><br />
+                    <a href="#rayosx">&#187; Rayos-X</a><br />
+                </div>
+                <div id="panel3Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>¿QUIENES SOMOS?</h3>
+                    <a href="mision.html">&#187; Misión</a><br />
+                    <a href="vision.html">&#187; Visión</a>
+                </div>
+                <div id="panel3Footer" class="col-md-1 col-sm-6 col-xs-12">
+                    <h3>IDIOMA</h3>
+                    <a href="ingles/index.html">&#187; English</a> </div>
+                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <spam class=" fa fa-home"></spam>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
+                        <br />
+                        <br />
+                        <spam class=" fa fa-phone"></spam>&nbsp;&nbsp;Teléfono: 6826731
+                    </div>
+                    <div class="row">
+                        <div id="redesSociales">
+                            <a href="#"><spam class=" fa fa-facebook-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-twitter-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-google-plus-square"></spam></a>
+                            <a href="#"><spam class=" fa fa-envelope-o"></spam></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        Now Vet | Todos los derechos reservados
+                        <br /> &#169; Copyright 2015
+                    </div>
+                </div>
             </div>
-	</div>
-    </div>
-</footer>
+        </footer>
     </h:body>
 </html>
 
