@@ -262,17 +262,19 @@
                                     <script>
                                         $('#horaEntrada').datetimepicker({
                                             datepicker: false,
+                                            defaultTime:'00:00',
                                             format: 'H:i',
                                             step: 60
                                         });
                                     </script>
                                     <div class="form-group">
                                         <label for="horaSalida">Hora De Salida</label>
-                                        <input type="text" id="horaSalida" name="horaSalida" class="form-control" />
+                                        <input onfocus="this.blur()" type="text" id="horaSalida" name="horaSalida" class="form-control" />
                                     </div>
                                     <script>
                                         $('#horaSalida').datetimepicker({
                                             datepicker: false,
+                                            defaultTime:'23:00',
                                             format: 'H:i',
                                             step: 60
                                         });

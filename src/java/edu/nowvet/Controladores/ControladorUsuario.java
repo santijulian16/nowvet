@@ -22,6 +22,8 @@ import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -141,7 +143,7 @@ public class ControladorUsuario implements Serializable {
         }
     }
 
-    public void modificarDatos() {
+    public void modificarDatos() throws ParseException {
         HttpServletRequest miSesion = (HttpServletRequest) FacesContext.getCurrentInstance()
                 .getExternalContext()
                 .getRequest();
@@ -155,6 +157,14 @@ public class ControladorUsuario implements Serializable {
         String rolSesion=(String) miSesion.getSession().getAttribute("rol");
         if (rolSesion.equals("Administrador-Veterinario")) {
             this.usuLogin.getPersonalveterinario().setCargo((String) params.get("cargo"));
+            SimpleDateFormat formatoHE = new SimpleDateFormat("HH:mm");
+            String horarioEntradaModificar = ((String) params.get("horarioEntrada"));
+            Date horarioE = formatoHE.parse(horarioEntradaModificar);
+            SimpleDateFormat formatoHS = new SimpleDateFormat("HH:mm");
+            String horarioSalidaModificar = ((String) params.get("horarioSalida"));
+            Date horarioS = formatoHS.parse(horarioSalidaModificar);
+            this.usuLogin.getPersonalveterinario().setHorarioEntrada(horarioE);
+            this.usuLogin.getPersonalveterinario().setHorarioSalida(horarioS);
         }
         this.usuFacade.edit(usuLogin);
         miSesion.getSession().setAttribute("usuario", this.usuLogin);
@@ -286,7 +296,7 @@ public class ControladorUsuario implements Serializable {
         this.estado = "8";
     }
     
-    public void agregarRol(){
+    public void agregarRol() throws ParseException{
         FacesContext faces = FacesContext.getCurrentInstance();
         ExternalContext externalContext = faces.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
@@ -311,12 +321,21 @@ public class ControladorUsuario implements Serializable {
             if (personalVet==null) {
                 personalVet=new Personalveterinario();
                 personalVet.setCargo((String) params.get("cargo"));
+                SimpleDateFormat formatoHE = new SimpleDateFormat("HH:mm");
+                String horarioEntrada = ((String) params.get("horaEntrada"));
+                Date horarioE = formatoHE.parse(horarioEntrada);
+                personalVet.setHorarioEntrada(horarioE);
+                SimpleDateFormat formatoHS = new SimpleDateFormat("HH:mm");
+                String horarioSalida = ((String) params.get("horaSalida"));
+                Date horarioS = formatoHS.parse(horarioSalida);
+                personalVet.setHorarioSalida(horarioS);
                 personalVet.setDniPersonal(this.usuTemp.getCedula());
                 personalVet.setUsuarios(this.usuTemp);
                 this.pvf.create(personalVet);
                 this.usuTemp.setPersonalveterinario(personalVet);
             }else{
                 personalVet.setCargo((String) params.get("cargo"));
+                
                 this.pvf.edit(personalVet);
             }
         }

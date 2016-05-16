@@ -286,11 +286,11 @@
                                 <tbody>
                                     <c:forEach var="listaHistorial" items="#{controladorMascotas.listarHistorialClinico()}">
                                             <tr>
-                                                <td>#{listaHistorial.citas.fechaAsignada}</td> 
+                                                <td>#{listaHistorial.citas.fechaAsignada.toLocaleString()}</td> 
                                                 <td>#{listaHistorial.citas.vacunas}</td> 
                                                 <td>#{listaHistorial.citas.peso}</td> 
                                                 <td>#{listaHistorial.alimento}</td> 
-                                                <td><button type="button" onclick="mostraHis('#{listaHistorial.citas.fechaAsignada}', 
+                                                <td><button type="button" onclick="mostraHis('#{listaHistorial.citas.fechaAsignada.toLocaleString()}', 
                                                                                             '#{listaHistorial.citas.vacunas}', 
                                                                                             '#{listaHistorial.citas.peso}', 
                                                                                             '#{listaHistorial.citas.antecedentes}', 
