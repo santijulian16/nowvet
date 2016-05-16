@@ -131,7 +131,7 @@ public class ControladorUsuario implements Serializable {
         Map params = externalContext.getRequestParameterMap();
         String claveAct = DigestUtils.md5Hex((String) params.get("contraActual"));
         if (claveAct.equals(this.usuLogin.getContrasena())) {
-            this.usuLogin.setContrasena(DigestUtils.md5Hex((String) params.get("contraNueva")));
+            this.usuLogin.setContrasena((String) params.get("contraNueva"));
             this.usuFacade.edit(usuLogin);
             HttpServletRequest miSesion = (HttpServletRequest) FacesContext.getCurrentInstance()
                     .getExternalContext()
