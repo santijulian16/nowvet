@@ -458,6 +458,18 @@ public class ControladorUsuario implements Serializable {
         this.estado="13";
     }
     
+    public void enviarCorreoContactenos(){
+        FacesContext faces = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = faces.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+        String nombre = (String) params.get("nombre");
+        String email = (String) params.get("correo");
+        String asunto = (String) params.get("asunto");
+        String mensaje = (String) params.get("mensaje");
+        Mailer.send("jsbermudez381@misena.edu.co", asunto, "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><p style='font-size: 1.5em; color: #797979;'>Nombre Contacto: "+nombre+"<br/>Correo Contacto: "+email+"<br/>Mensaje: "+mensaje+"<br/></p></div>");
+        this.estado="14";
+    }
+    
     public void initAud() throws JRException {
         this.lista1=this.auFacade.findAll();
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(this.lista1);

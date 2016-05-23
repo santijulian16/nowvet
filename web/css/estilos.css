@@ -38,8 +38,7 @@ body{
 
 
 #enviarContacto>.btn{
-	background-color: #25A2DC !important;
-	border: 1px solid gray !important;
+	
 	margin-bottom: 10px;
 }
 .dropdown-menu a{
@@ -237,11 +236,11 @@ section{
     color: #333;
 }
 #formularioDeContacto{
-	padding: 10px;
+	
 }
 #divFormularioContacto{
+        padding-top: 50px;
 	background-color: #fff;
-	border: 8px solid #25A2DC;
 }
 /*campos obligatorios del formulario de contacto*/
 form label.nombre::after, form label.correo::after, form label.asunto::after{
@@ -865,7 +864,7 @@ footer{
 #textoBienvenidaAdmin{
 	color: #4d9ba1;
 	background-color: rgba(255, 255, 255, 0.93);
-	font-size: 70px;
+	font-size: 50px;
 	font-family: arial;
 	padding-top: 35px;
 	padding-left: 35px;
@@ -882,7 +881,7 @@ footer{
 	min-height: 380px;
 	color: #2aac7d;
 	background-color: rgba(255, 255, 255, 0.93);
-	font-size: 70px;
+	font-size: 50px;
 	font-family: arial;
 	padding-top: 35px;
 	padding-left: 35px;

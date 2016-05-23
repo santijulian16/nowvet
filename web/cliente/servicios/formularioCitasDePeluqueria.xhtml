@@ -8,7 +8,7 @@
         <meta charset="UTF-8"></meta>
         <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
         <meta name="description" content="Gestión de servcios veterinarios"></meta>
-        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clinica, Peluquria, Baño"></meta>
+        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clínica, Peluquería, Baño"></meta>
         <meta name="author" content="Julian Bermudez, Leonardo Fandiño"></meta>
 	<!-- InstanceBeginEditable name="doctitle" -->
 	<title>Now Vet | Agendar cita de peluquería</title>
@@ -28,6 +28,12 @@
         <script src="../../js/es_ES.js"></script>
         <script>
     	$().ready(function () {
+                $('#fecha').change(function(){
+			$('#formularioDeSolicitudDeCitasDePeluqueria').formValidation('revalidateField', 'fecha');
+		});
+		$('#fecha').blur(function(){
+			$('#formularioDeSolicitudDeCitasDePeluqueria').formValidation('revalidateField', 'fecha');
+		});
         	$('#formularioDeSolicitudDeCitasDePeluqueria').formValidation({
             	err: {container: 'tooltip'},
                 icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
@@ -88,8 +94,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li><a href="formularioCitasClinicas.xhtml">Agendar Cita Clinica</a></li>
-              <li><a href="formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluqueria</a></li>
+              <li><a href="formularioCitasClinicas.xhtml">Agendar Cita Clínica</a></li>
+              <li><a href="formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluquería</a></li>
           </ul>
         </li>
         <li><a href="../citas/misCitas.xhtml">Citas</a></li>
@@ -119,7 +125,7 @@
                                 <label for="fecha" class="lfecha">Fecha de la cita</label>
                                 <div class="input-group margin-bottom-sm">
                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text" onfocus="this.blur()" id="datetimepicker" name="fecha" required="true" class="form-control" tabindex="3" 
+                                    <input type="text" onfocus="this.blur()" id="fecha" name="fecha" required="true" class="form-control" tabindex="3" 
                                            title="Debe seleccionar una fecha" ></input>
                                     <!--min="2013-01-01T00:00Z" max="2013-12-31T12:00Z"-->
                                 </div>
@@ -131,7 +137,7 @@
                             <script>
                                 $.datetimepicker.setLocale('es');
                                 
-                                $('#datetimepicker').datetimepicker({
+                                $('#fecha').datetimepicker({
                                     defaultTime:'00:00',
                                     formatTime: 'H:i',
                                     formatDate: 'Y.m.d',
@@ -252,7 +258,7 @@
 			<a href="#rayosx">&#187; Rayos c</a><br />
 	</div>
 	<div id="panel3Footer" class="col-md-1 col-sm-6 col-xs-12">
-		<h3>¿QUIENES SOMOS?</h3>
+		<h3>¿QUIÉNES SOMOS?</h3>
 			<a href="../../mision.html">&#187; Misión</a><br />
 			<a href="../../vision.html">&#187; Visión</a>
 	</div>

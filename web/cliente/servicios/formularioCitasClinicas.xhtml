@@ -9,8 +9,9 @@
         <meta charset="UTF-8"></meta>
         <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
         <meta name="description" content="Gestión de servcios veterinarios"></meta>
-        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clinica, Peluquria, Baño"></meta>
+        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clínica, Peluquería, Baño"></meta>
         <meta name="author" content="Julian Bermudez, Leonardo Fandiño"></meta>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
         <!-- InstanceBeginEditable name="doctitle" -->
         <title>Now Vet | Agendar Cita Clínica</title>
         <!-- InstanceEndEditable -->
@@ -30,7 +31,12 @@
 
         <script>
             $().ready(function () {
-                
+                $('#fecha').change(function(){
+			$('#formularioDeSolicitudDeCitasClinicas').formValidation('revalidateField', 'fecha');
+		});
+		$('#fecha').blur(function(){
+			$('#formularioDeSolicitudDeCitasClinicas').formValidation('revalidateField', 'fecha');
+		});
                 $('#formularioDeSolicitudDeCitasClinicas').formValidation({
                     err: {container: 'tooltip'},
                     icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
@@ -94,7 +100,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="../index.html">
+                    <a class="navbar-brand" href="../indexCliente.xhtml">
                         <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
                     </a>
                 </div>
@@ -102,12 +108,12 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../index.html">Inicio</a></li>
+                        <li><a href="../indexCliente.xhtml">Inicio</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="formularioCitasClinicas.xhtml">Agendar Cita Clinica</a></li>
-                                <li><a href="formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluqueria</a></li>
+                                <li><a href="formularioCitasClinicas.xhtml">Agendar Cita Clínica</a></li>
+                                <li><a href="formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluquería</a></li>
                             </ul>
                         </li>
                         <li><a href="../citas/misCitas.xhtml">Citas</a></li>
@@ -140,48 +146,41 @@
                                     <label for="fecha" class="lfecha">Fecha de la cita</label>
                                     <div class="input-group margin-bottom-sm">
                                         <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                        <input type="text" onfocus="this.blur()" id="datetimepicker" name="fecha" required="true" class="form-control" tabindex="3" 
+                                        <input type="text" id="fecha" onfocus="this.blur()" name="fecha" required="true" class="form-control" tabindex="3" 
                                                title="Debe seleccionar una fecha" ></input>
                                         <!--min="2013-01-01T00:00Z" max="2013-12-31T12:00Z"-->
                                     </div>
 
                                     <div class="row">
                                         <h:commandButton onclick="ocultar()" class="btn btn-link" id="verificarDisponibilidad" tabindex="7" value="Verificar Disponibilidad" action="#{controladorCitas.verificarDisponibilidad()}" ><i id="verificarDisponibilidad" class="fa fa-chevron-circle-down"></i>
-
                                         </h:commandButton>
                                     </div> 
                                 </div>
                                 <script>
                                     $.datetimepicker.setLocale('es');
-
-                                    $('#datetimepicker').datetimepicker({
-                                        
-                                        onGenerate:function( ct ){
-                                    $(this).find('.xdsoft_date')
-                                    .toggleClass('xdsoft_disabled');
-                                    }, 
-                                        maxDate:'+1970/01/01',
-                                        defaultTime:'08:00',
-                                        formatTime: 'H:i',
-                                        formatDate: 'Y.m.d',
-                                        todayHighlight: true,
-                                        
-                                        //language: 'es',
-                                        multidateSeparator: '/',
-                                        startView: 0, //si inicia mostrando el dia (0), mes (1), año (2)
-                                        //endDate: '+1m', //fecha final habilitada: 1 mes adelante
-                                        daysOfWeekDisabled: '7', //deshabilitar días 0-sabado, 1-lunes... etc
-                                        showMonthAfterYear: false,
-                                        yearStart: 2016,
-                                        yearEnd: 2020,
-                                        //disabledDates: ['03.04.2016','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'], formatDate:'d.m.Y',
-
-                                        autoclose: true, //autocerrar al perder el foco en el input
-                                        
-                                    });
-                                    $('#datetimepicker').datetimepicker({value: '', step: 30});
+                                
+                                $('#fecha').datetimepicker({
+                                    defaultTime:'00:00',
+                                    formatTime: 'H:i',
+                                    formatDate: 'Y.m.d',
+                                    todayHighlight: true,                                  
+                                    //language: 'es',
+                                    multidateSeparator: '/',
+                                    startView: 0, //si inicia mostrando el dia (0), mes (1), año (2)
+                                    //endDate: '+1m', //fecha final habilitada: 1 mes adelante
+                                    daysOfWeekDisabled: '7', //deshabilitar días 0-sabado, 1-lunes... etc
+                                    showMonthAfterYear: false,
+                                    yearStart: 2016,
+                                    yearEnd: 2020,
+                                    
+                                    //disabledDates: ['03.04.2016','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'], formatDate:'d.m.Y',
+                                    
+                                    autoclose: true, //autocerrar al perder el foco en el input
+                                    minDate: '1+d' // yesterday is minimum date
+                                });
+                                $('#datetimepicker').datetimepicker({value: '', step: 30});
                                 </script>
-
+                         
                                 <c:if test="#{controladorCitas.estados eq '3'}">
                                     <div class="alert alert-danger">
                                         <button type="button" class="close" data-dismiss="alert" >&times;</button>
@@ -272,7 +271,7 @@
                     <a href="#rayosx">&#187; Rayos c</a><br />
                 </div>
                 <div id="panel3Footer" class="col-md-1 col-sm-6 col-xs-12">
-                    <h3>¿QUIENES SOMOS?</h3>
+                    <h3>¿QUIÉNES SOMOS?</h3>
                     <a href="../../mision.html">&#187; Misión</a><br />
                     <a href="../../vision.html">&#187; Visión</a>
                 </div>

@@ -8,12 +8,12 @@
         <meta charset="UTF-8"></meta>
         <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
         <meta name="description" content="Gestión de servcios veterinarios"></meta>
-        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clinica, Peluquria, Baño"></meta>
+        <meta name="keywords" content="Mascota, Veterinario, PetShop, Clínica, Peluquería, Baño"></meta>
         <meta name="author" content="Julian Bermudez, Leonardo Fandiño"></meta>
-    
-	<!-- InstanceBeginEditable name="doctitle" -->
-	<title>Now Vet | Registar Mascota</title>
-	<!-- InstanceEndEditable -->
+
+        <!-- InstanceBeginEditable name="doctitle" -->
+        <title>Now Vet | Registar Mascota</title>
+        <!-- InstanceEndEditable -->
         <link rel="stylesheet" type="text/css" href="../../css/estilos.css"></link>
         <link rel="icon" href="../../imagenes/favicon.ico" type="image/x-icon"></link>
         <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"></link>
@@ -25,128 +25,128 @@
         <script src="../../js/bootstrapValidator.js" type="text/javascript"></script>
         <script src="../../js/es_ES.js" type="text/javascript"></script>
         <script>
-        	$().ready(function () {
-            	$('#registroMascota').formValidation({
-                	err: {container: 'tooltip'},
-                    	icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
-                        locale: 'es_ES',
-                        fields: {
-                        	'registroMascota:campoNombre': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    regexp: {
-                                    	regexp: '^[A-Za-z ñÑáéíúó]+$',
-                                        message: 'Solo letra, sin números o caracteres especiales'
-                                    },
-                                    stringLength: {
-                                    	min: 3,
-                                        max: 15
-                                    }
-                               	}
-                           },
-				'registroMascota:campoColor': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    regexp: {
-                                    	regexp: '^[A-Za-z ñÑáéíúó]+$',
-                                        message: 'Solo letras, sin números o caracteres especiales'
-                                    },
-                                    stringLength: {
-                                    	min: 3,
-                                        max: 30
-                                    }
-                               	}
-                           },
-				'registroMascota:campoRaza': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    regexp: {
-                                    	regexp: '^[A-Za-z ñÑáéíúó]+$',
-                                        message: 'Solo letras, sin números o caracteres especiales'
-                                    },
-                                    stringLength: {
-                                    	min: 3,
-                                        max: 30
-                                    }
-                               	}
-                           },
-				'registroMascota:sexo': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {}
-                               	}
-                           },
-				'registroMascota:especie': {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {}
-                               	}
-                           }
-						   
-                       }
-        		});
-    		});
-    	</script>
-	<f:event listener="#{controladorUsuario.miraSession('cliente')}" type="preRenderView"></f:event>
+            $().ready(function () {
+                $('#registroMascota').formValidation({
+                    err: {container: 'tooltip'},
+                    icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
+                    locale: 'es_ES',
+                    fields: {
+                        'registroMascota:campoNombre': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: '^[A-Za-z ñÑáéíúó]+$',
+                                    message: 'Solo letra, sin números o caracteres especiales'
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 15
+                                }
+                            }
+                        },
+                        'registroMascota:campoColor': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: '^[A-Za-z ñÑáéíúó]+$',
+                                    message: 'Solo letras, sin números o caracteres especiales'
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 30
+                                }
+                            }
+                        },
+                        'registroMascota:campoRaza': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: '^[A-Za-z ñÑáéíúó]+$',
+                                    message: 'Solo letras, sin números o caracteres especiales'
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 30
+                                }
+                            }
+                        },
+                        'registroMascota:sexo': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {}
+                            }
+                        },
+                        'registroMascota:especie': {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {}
+                            }
+                        }
+
+                    }
+                });
+            });
+        </script>
+        <f:event listener="#{controladorUsuario.miraSession('cliente')}" type="preRenderView"></f:event>
     </h:head>
     <h:body>
         <img id="back" src="../../imagenes/fondo.jpg" height="751px" width="765px"></img>
-<h:form>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-       <a class="navbar-brand" href="index.html">
-        <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
-      </a>
-    </div>
+        <h:form>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index.html">
+                            <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
+                        </a>
+                    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="../indexCliente.xhtml">Inicio</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-              <li><a href="../servicios/formularioCitasClinicas.xhtml">Agendar Cita Clinica</a></li>
-              <li><a href="../servicios/formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluqueria</a></li>
-          </ul>
-        </li>
-        <li><a href="../citas/misCitas.xhtml">Citas</a></li>
-        <li><a href="../perfil/miperfil.xhtml">Mi Perfil</a></li>
-        <li><h:commandLink action="#{controladorUsuario.cerrarSesion()}">Salir&nbsp;<span class=" fa fa-sign-out"></span></h:commandLink></li>
-      </ul>
-    </div><!-- /.navbar-collapsee -->
-  </div><!-- /.container-fluid -->
-</nav>
-</h:form>
-<section>
-	<!-- InstanceBeginEditable name="section" -->
-    <div class="container" style="background-color: #fff;">
-	<div class="row">
-    	<div class="col-md-12 col-sm-12 col-xs-12" id="migas">
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../indexCliente.xhtml">Inicio</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../servicios/formularioCitasClinicas.xhtml">Agendar Cita Clínica</a></li>
+                                    <li><a href="../servicios/formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluquería</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="../citas/misCitas.xhtml">Citas</a></li>
+                            <li><a href="../perfil/miperfil.xhtml">Mi Perfil</a></li>
+                            <li><h:commandLink action="#{controladorUsuario.cerrarSesion()}">Salir&nbsp;<span class=" fa fa-sign-out"></span></h:commandLink></li>
+                        </ul>
+                    </div><!-- /.navbar-collapsee -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </h:form>
+        <section>
+            <!-- InstanceBeginEditable name="section" -->
+            <div class="container" style="background-color: #fff;">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="migas">
                         <h:link value="Inicio" outcome="/cliente/indexCliente" />\
-            <h:link value="Mi Perfil" outcome="/cliente/perfil/miperfil" />
-            \<h:link value="Registrar Mascota" outcome="/cliente/perfil/registrarMascota" />
-        </div>
-		<div class="col-md-12 col-sm-12 col-xs-12" id="rol">
-			Rol: Cliente
-		</div>
-        </div>
-        </div>
-	<div class="container" id="containerFormularios">
-<div class="row" id="rowFormularios">
-<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="Formularios">
-        <h:form id="registroMascota">
+                        <h:link value="Mi Perfil" outcome="/cliente/perfil/miperfil" />
+                        \<h:link value="Registrar Mascota" outcome="/cliente/perfil/registrarMascota" />
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="rol">
+                        Rol: Cliente
+                    </div>
+                </div>
+            </div>
+            <div class="container" id="containerFormularios">
+                <div class="row" id="rowFormularios">
+                    <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="Formularios">
+                        <h:form id="registroMascota">
                             <h2 class="text-center">Registro de Mascotas</h2>
                             <p>Por favor completar los campos obligatorios marcados con *.</p>
                             <div class="form-group">
@@ -162,9 +162,9 @@
                                     <span class="input-group-addon"><i class="fa fa-paw"></i></span>
                                     <h:inputText id="especie" pt:list="especies" value="#{controladorMascotas.mascotaReg.especie}"  class="form-control" tabindex="3" pt:placeholder="Especie"></h:inputText>
                                     <datalist id="especies">
-                                    <option value="Perro"></option>
-                                    <option value="Gato"></option>
-                                </datalist>
+                                        <option value="Perro"></option>
+                                        <option value="Gato"></option>
+                                    </datalist>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -173,80 +173,81 @@
                                     <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
                                     <h:inputText id="sexo" pt:list="sexo" value="#{controladorMascotas.mascotaReg.sexo}" class="form-control" tabindex="4" pt:placeholder="Sexo"></h:inputText>
                                     <datalist id="sexo">
-                                    <option value="Macho"></option>
-                                    <option value="Hembra"></option>
-                                </datalist>
+                                        <option value="Macho"></option>
+                                        <option value="Hembra"></option>
+                                    </datalist>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="campoColor">Color</h:outputLabel>
-                                    <div class="input-group margin-bottom-sm">
-                                        <span class="input-group-addon"><i class="fa fa-paint-brush"></i></span>
-                                        <h:inputText id="campoColor" value="#{controladorMascotas.mascotaReg.color}"   pt:class="form-control" pt:placeholder="Color" pt:tabindex="5" required="true" title="De 3 a 25 caracteres, sin caracteres especiales"></h:inputText>
-                                    </div>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-paint-brush"></i></span>
+                                    <h:inputText id="campoColor" value="#{controladorMascotas.mascotaReg.color}"   pt:class="form-control" pt:placeholder="Color" pt:tabindex="5" required="true" title="De 3 a 25 caracteres, sin caracteres especiales"></h:inputText>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel for="campoRaza">Raza</h:outputLabel>
-                                    <div class="input-group margin-bottom-sm">
-                                        <span class="input-group-addon"><i class="fa fa-paw"></i></span>
-                                        <h:inputText id="campoRaza" value="#{controladorMascotas.mascotaReg.raza}" class="form-control"  pt:placeholder="Raza" pt:tabindex="6" required="true" title="De 3 a 25 caracteres"></h:inputText>
-                                    </div>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-paw"></i></span>
+                                    <h:inputText id="campoRaza" value="#{controladorMascotas.mascotaReg.raza}" class="form-control"  pt:placeholder="Raza" pt:tabindex="6" required="true" title="De 3 a 25 caracteres"></h:inputText>
+                                </div>
                             </div>
-                            <h:commandButton class="btn btn-success pull-right" value="Registrar" action="#{controladorMascotas.registrarMascota(controladorUsuario.usuLogin.propietarios)}" tabindex="7">
-                            </h:commandButton>
-                            
+                            <div id="botonEnviar">
+                                <h:commandButton class="btn btn-success pull-right" value="Registrar" action="#{controladorMascotas.registrarMascota(controladorUsuario.usuLogin.propietarios)}" tabindex="7">
+                                </h:commandButton>
+                            </div>
                         </h:form>
 
-	</div>
-    </div>
-    </div>
-	<!-- InstanceEndEditable -->
-</section>
-<footer>
-<div id="footer-contenedor" class="row">
-	<div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
-		<h3>SERVICIOS</h3>
-		<a href="../../NowVet%20English/clinica.html">&#187; Clínica</a><br />
-		<a href="../../NowVet%20English/peluqueria.html">&#187; Peluquería</a><br />
-		<a href="../../NowVet%20English/odontologia.html">&#187; Odontología</a><br />
-		<a href="../../NowVet%20English/vacunacion.html">&#187; Vacunación</a><br />
-		<a href="../../NowVet%20English/ambulancia.html">&#187; Ambulancia</a>
-	</div>
-	<div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
-		<h3>PRODUCTOS</h3>
-			<a href="../../NowVet%20English/concentrados.html">&#187; Concentrados</a><br />
-			<a href="../../NowVet%20English/petshop.html">&#187; Pet Shop</a><br />
-			<a href="../../NowVet%20English/guarderia.html">&#187; Guardería</a><br />
-			<a href="#rayosx">&#187; Rayos c</a><br />
-	</div>
-	<div id="panel3Footer" class="col-md-3 col-sm-6 col-xs-12">
-		<h3>¿QUIENES SOMOS?</h3>
-			<a href="../../NowVet%20English/mision.html">&#187; Misión</a><br />
-			<a href="../../NowVet%20English/vision.html">&#187; Visión</a>
-	</div>
-	<div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
-		<div class="row">
-        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
-		<br />
-		<br />
-		<span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
-        </div>
-        <div class="row">
-		<div id="redesSociales">
-			<a href="#"><span class=" fa fa-facebook-square"></span></a>
-			<a href="#"><span class=" fa fa-twitter-square"></span></a>
-			<a href="#"><span class=" fa fa-google-plus-square"></span></a>
-			<a href="#"><span class=" fa fa-envelope-o"></span></a>
-		</div>
-        </div>
-        	<div class="row">
-			<br />
-			Now Vet | Todos los derechos reservados
-            <br /> &#169; Copyright 2015
+                    </div>
+                </div>
             </div>
-	</div>
-    </div>
-</footer>
+            <!-- InstanceEndEditable -->
+        </section>
+        <footer>
+            <div id="footer-contenedor" class="row">
+                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>SERVICIOS</h3>
+                    <a href="../../NowVet%20English/clinica.html">&#187; Clínica</a><br />
+                    <a href="../../NowVet%20English/peluqueria.html">&#187; Peluquería</a><br />
+                    <a href="../../NowVet%20English/odontologia.html">&#187; Odontología</a><br />
+                    <a href="../../NowVet%20English/vacunacion.html">&#187; Vacunación</a><br />
+                    <a href="../../NowVet%20English/ambulancia.html">&#187; Ambulancia</a>
+                </div>
+                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <h3>PRODUCTOS</h3>
+                    <a href="../../NowVet%20English/concentrados.html">&#187; Concentrados</a><br />
+                    <a href="../../NowVet%20English/petshop.html">&#187; Pet Shop</a><br />
+                    <a href="../../NowVet%20English/guarderia.html">&#187; Guardería</a><br />
+                    <a href="#rayosx">&#187; Rayos c</a><br />
+                </div>
+                <div id="panel3Footer" class="col-md-3 col-sm-6 col-xs-12">
+                    <h3>¿QUIÉNES SOMOS?</h3>
+                    <a href="../../NowVet%20English/mision.html">&#187; Misión</a><br />
+                    <a href="../../NowVet%20English/vision.html">&#187; Visión</a>
+                </div>
+                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
+                        <br />
+                        <br />
+                        <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                    </div>
+                    <div class="row">
+                        <div id="redesSociales">
+                            <a href="#"><span class=" fa fa-facebook-square"></span></a>
+                            <a href="#"><span class=" fa fa-twitter-square"></span></a>
+                            <a href="#"><span class=" fa fa-google-plus-square"></span></a>
+                            <a href="#"><span class=" fa fa-envelope-o"></span></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <br />
+                        Now Vet | Todos los derechos reservados
+                        <br /> &#169; Copyright 2015
+                    </div>
+                </div>
+            </div>
+        </footer>
     </h:body>
 </html>
 
