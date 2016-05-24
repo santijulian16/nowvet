@@ -69,7 +69,7 @@ public class precargaControlador extends HttpServlet {
                 }
             } else {
                 
-            request.setAttribute("message", "Este servlet solo maneja petición de carga de archivos");            }
+            request.setAttribute("message", "Este  solo maneja petición de carga de archivos");            }
             request.getRequestDispatcher("/faces/administrador/perfiles/mensajeCarga.xhtml").forward(request, response);
         }
     }
