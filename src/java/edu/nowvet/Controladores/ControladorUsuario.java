@@ -11,11 +11,13 @@ import edu.nowvet.Entitys.Mailer;
 import edu.nowvet.Entitys.Personalveterinario;
 import edu.nowvet.Entitys.Propietarios;
 import edu.nowvet.Entitys.Roles;
+import edu.nowvet.Entitys.Servicios;
 import edu.nowvet.Entitys.Usuarios;
 import edu.nowvet.Facade.AuditoriaFacade;
 import edu.nowvet.Facade.PersonalveterinarioFacade;
 import edu.nowvet.Facade.PropietariosFacade;
 import edu.nowvet.Facade.RolesFacade;
+import edu.nowvet.Facade.ServiciosFacade;
 import edu.nowvet.Facade.UsuariosFacade;
 import java.io.File;
 import java.io.IOException;
@@ -74,6 +76,7 @@ public class ControladorUsuario implements Serializable {
     Workbook archivoExcel;
     Sheet mihoja;
     private int veterinario;
+    private List<Servicios> listaServicios;
     /**
      * Creates a new instance of ControladorUsuario
      */
@@ -87,13 +90,15 @@ public class ControladorUsuario implements Serializable {
     PropietariosFacade prf;
     @Inject
     PersonalveterinarioFacade pvf;
+    @Inject
+    ServiciosFacade sf;
 
     public ControladorUsuario() {
         this.estado = "";
         this.contrasena = "";
         this.correo = "";
         this.usuTemp = new Usuarios();
-        this.prop=new Propietarios();
+        this.prop = new Propietarios();
     }
 
     public String login() throws IOException {
@@ -154,7 +159,7 @@ public class ControladorUsuario implements Serializable {
         this.usuLogin.setApellidos((String) params.get("apellidomod"));
         this.usuLogin.setDireccion((String) params.get("direccionmod"));
         this.usuLogin.setCorreo((String) params.get("correomod"));
-        String rolSesion=(String) miSesion.getSession().getAttribute("rol");
+        String rolSesion = (String) miSesion.getSession().getAttribute("rol");
         if (rolSesion.equals("Administrador-Veterinario")) {
             this.usuLogin.getPersonalveterinario().setCargo((String) params.get("cargo"));
             SimpleDateFormat formatoHE = new SimpleDateFormat("HH:mm");
@@ -175,7 +180,7 @@ public class ControladorUsuario implements Serializable {
 
         HttpServletRequest miSesion = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         this.usuLogin = (Usuarios) miSesion.getSession().getAttribute("usuario");
-        String rolSesion= (String) miSesion.getSession().getAttribute("rol");
+        String rolSesion = (String) miSesion.getSession().getAttribute("rol");
         this.estado = "0";
         if (rol.equals("admin")) {
             if (!(usuLogin != null)) {
@@ -183,7 +188,7 @@ public class ControladorUsuario implements Serializable {
                 FacesContext.getCurrentInstance().
                         responseComplete();
                 response.sendRedirect("/NowVet");
-            }else if(!rolSesion.equals("Administrador-Veterinario")){
+            } else if (!rolSesion.equals("Administrador-Veterinario")) {
                 HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
                 FacesContext.getCurrentInstance().
                         responseComplete();
@@ -195,7 +200,7 @@ public class ControladorUsuario implements Serializable {
                 FacesContext.getCurrentInstance().
                         responseComplete();
                 response.sendRedirect("/NowVet");
-            }else if(!rolSesion.equals("Cliente")){
+            } else if (!rolSesion.equals("Cliente")) {
                 HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
                 FacesContext.getCurrentInstance().
                         responseComplete();
@@ -204,17 +209,17 @@ public class ControladorUsuario implements Serializable {
         }
 
     }
-    
+
     public void miraSession() throws IOException {
         HttpServletRequest miSesion = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         this.usuLogin = (Usuarios) miSesion.getSession().getAttribute("usuario");
         this.estado = "0";
         if (!(usuLogin != null)) {
-                HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-                FacesContext.getCurrentInstance().
-                        responseComplete();
-                response.sendRedirect("/NowVet");
-            }
+            HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            FacesContext.getCurrentInstance().
+                    responseComplete();
+            response.sendRedirect("/NowVet");
+        }
     }
 
     public String cerrarSesion() {
@@ -236,7 +241,8 @@ public class ControladorUsuario implements Serializable {
         }
         if (this.rols.equals("Cliente")) {
             FacesContext contex = FacesContext.getCurrentInstance();
-            contex.getExternalContext().redirect("/NowVet/faces/cliente/indexCliente.xhtml");HttpServletRequest miSesion = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+            contex.getExternalContext().redirect("/NowVet/faces/cliente/indexCliente.xhtml");
+            HttpServletRequest miSesion = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
                     .getRequest();
             miSesion.getSession().setAttribute("rol", "Cliente");
         }
@@ -278,10 +284,10 @@ public class ControladorUsuario implements Serializable {
         this.estado = "7";
         return "perfil";
     }
-    
-    public List<Roles> listarRolesDisponiblies(){//Este metodo verificar que roles disponibles hay para un usuario
-        List<Roles> roles=this.rf.findAll();
-        for(Roles rol : this.usuTemp.getRolesCollection()) {
+
+    public List<Roles> listarRolesDisponiblies() {//Este metodo verificar que roles disponibles hay para un usuario
+        List<Roles> roles = this.rf.findAll();
+        for (Roles rol : this.usuTemp.getRolesCollection()) {
             roles.remove(rol);
         }
         return roles;
@@ -289,37 +295,37 @@ public class ControladorUsuario implements Serializable {
 
     public void eliminarRol(Roles rol) {
         this.usuTemp.getRolesCollection().remove(rol);
-        Roles rol2=this.rf.find(rol.getIdRol());
+        Roles rol2 = this.rf.find(rol.getIdRol());
         rol2.getUsuariosCollection().remove(this.usuTemp);
         this.rf.edit(rol2);
         this.usuFacade.edit(this.usuTemp);
         this.estado = "8";
     }
-    
-    public void agregarRol() throws ParseException{
+
+    public void agregarRol() throws ParseException {
         FacesContext faces = FacesContext.getCurrentInstance();
         ExternalContext externalContext = faces.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
-        Roles role=this.rf.find(this.rolTemp);
+        Roles role = this.rf.find(this.rolTemp);
         this.usuTemp.getRolesCollection().add(role);
         role.getUsuariosCollection().add(usuTemp);
-        if (this.rolTemp==1) {
-            Propietarios propietario=this.prf.find(this.usuTemp.getCedula());
-            if (propietario==null) {
-                propietario=new Propietarios();
+        if (this.rolTemp == 1) {
+            Propietarios propietario = this.prf.find(this.usuTemp.getCedula());
+            if (propietario == null) {
+                propietario = new Propietarios();
                 propietario.setBarrio((String) params.get("barrio"));
                 propietario.setDniPropietario(this.usuTemp.getCedula());
                 propietario.setUsuarios(this.usuTemp);
                 this.prf.create(propietario);
                 this.usuTemp.setPropietarios(propietario);
-            }else{
+            } else {
                 propietario.setBarrio((String) params.get("barrio"));
                 this.prf.edit(propietario);
             }
-        }else if(this.rolTemp==2){
-            Personalveterinario personalVet= this.pvf.find(this.usuTemp.getCedula());
-            if (personalVet==null) {
-                personalVet=new Personalveterinario();
+        } else if (this.rolTemp == 2) {
+            Personalveterinario personalVet = this.pvf.find(this.usuTemp.getCedula());
+            if (personalVet == null) {
+                personalVet = new Personalveterinario();
                 personalVet.setCargo((String) params.get("cargo"));
                 SimpleDateFormat formatoHE = new SimpleDateFormat("HH:mm");
                 String horarioEntrada = ((String) params.get("horaEntrada"));
@@ -333,9 +339,9 @@ public class ControladorUsuario implements Serializable {
                 personalVet.setUsuarios(this.usuTemp);
                 this.pvf.create(personalVet);
                 this.usuTemp.setPersonalveterinario(personalVet);
-            }else{
+            } else {
                 personalVet.setCargo((String) params.get("cargo"));
-                
+
                 this.pvf.edit(personalVet);
             }
         }
@@ -344,121 +350,121 @@ public class ControladorUsuario implements Serializable {
     }
 
     public String registrarUsuario() {
-        boolean exiteCorreo=false;
-        Usuarios usutemp2=this.usuFacade.find(this.usuTemp.getCedula());
-            List <Usuarios> usuList = this.usuFacade.findAll();
-            for(Usuarios usu : usuList){
-                if (usu.getCorreo().equals(this.usuTemp.getCorreo())) {
-                    exiteCorreo=true;
-                    break;
-                }
+        boolean exiteCorreo = false;
+        Usuarios usutemp2 = this.usuFacade.find(this.usuTemp.getCedula());
+        List<Usuarios> usuList = this.usuFacade.findAll();
+        for (Usuarios usu : usuList) {
+            if (usu.getCorreo().equals(this.usuTemp.getCorreo())) {
+                exiteCorreo = true;
+                break;
             }
-        if (usutemp2==null && exiteCorreo==false) {
-        Collection<Roles> rolescoll = new ArrayList<>();
-        rolescoll.add(this.rf.find(1));
-        this.usuTemp.setRolesCollection(rolescoll);
-        this.usuTemp.setEstado("Activo");
-        this.usuFacade.create(usuTemp);
-        Roles rol=this.rf.find(1);
-        rol.getUsuariosCollection().add(usuTemp);
-        this.rf.edit(rol);
-        this.prop.setDniPropietario(this.usuTemp.getCedula());
-        this.prop.setUsuarios(this.usuTemp);
-        this.prf.create(prop);
-        //Mailer.send(this.usuTemp.getCorreo(), "Bienvenido a NowVet " + this.usuTemp.getNombres(), "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Bienvenido "+this.usuTemp.getNombres()+" "+this.usuTemp.getApellidos()+"</h1><p style='font-size: 1.5em; color: #797979;'>Ahoras es mas facil agendar una cita a tus mascotas desde  NowVet, sin necesidad de ir hasta nuestra sede.</p></div>");
-        return "registroUsuarioMensaje.xhtml";
-        }else{
+        }
+        if (usutemp2 == null && exiteCorreo == false) {
+            Collection<Roles> rolescoll = new ArrayList<>();
+            rolescoll.add(this.rf.find(1));
+            this.usuTemp.setRolesCollection(rolescoll);
+            this.usuTemp.setEstado("Activo");
+            this.usuFacade.create(usuTemp);
+            Roles rol = this.rf.find(1);
+            rol.getUsuariosCollection().add(usuTemp);
+            this.rf.edit(rol);
+            this.prop.setDniPropietario(this.usuTemp.getCedula());
+            this.prop.setUsuarios(this.usuTemp);
+            this.prf.create(prop);
+            //Mailer.send(this.usuTemp.getCorreo(), "Bienvenido a NowVet " + this.usuTemp.getNombres(), "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Bienvenido "+this.usuTemp.getNombres()+" "+this.usuTemp.getApellidos()+"</h1><p style='font-size: 1.5em; color: #797979;'>Ahoras es mas facil agendar una cita a tus mascotas desde  NowVet, sin necesidad de ir hasta nuestra sede.</p></div>");
+            return "registroUsuarioMensaje.xhtml";
+        } else {
             this.estado = "9";
             return "registroUsuarios";
         }
     }
 
     public void registrarUsuarioCargaExcel() {
-        boolean exiteCorreo=false;
-        Usuarios usutemp2=this.usuFacade.find(this.usuTemp.getCedula());
-            List <Usuarios> usuList = this.usuFacade.findAll();
-            for(Usuarios usu : usuList){
-                if (usu.getCorreo().equals(this.usuTemp.getCorreo())) {
-                    exiteCorreo=true;
-                    break;
-                }
+        boolean exiteCorreo = false;
+        Usuarios usutemp2 = this.usuFacade.find(this.usuTemp.getCedula());
+        List<Usuarios> usuList = this.usuFacade.findAll();
+        for (Usuarios usu : usuList) {
+            if (usu.getCorreo().equals(this.usuTemp.getCorreo())) {
+                exiteCorreo = true;
+                break;
             }
-        if (usutemp2==null && exiteCorreo==false) {
-        Collection<Roles> rolescoll = new ArrayList<>();
-        rolescoll.add(this.rf.find(1));
-        this.usuTemp.setRolesCollection(rolescoll);
-        this.usuTemp.setEstado("Activo");
-        this.usuFacade.create(usuTemp);
-        Roles rol=this.rf.find(1);
-        rol.getUsuariosCollection().add(usuTemp);
-        this.rf.edit(rol);
-        this.prop.setDniPropietario(this.usuTemp.getCedula());
-        this.prop.setUsuarios(this.usuTemp);
-        this.prf.create(prop);
-        //Mailer.send(this.usuTemp.getCorreo(), "Bienvenido a NowVet " + this.usuTemp.getNombres(), "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Bienvenido "+this.usuTemp.getNombres()+" "+this.usuTemp.getApellidos()+"</h1><p style='font-size: 1.5em; color: #797979;'>Ahoras es mas facil agendar una cita a tus mascotas desde  NowVet, sin necesidad de ir hasta nuestra sede.</p></div>");
-      
+        }
+        if (usutemp2 == null && exiteCorreo == false) {
+            Collection<Roles> rolescoll = new ArrayList<>();
+            rolescoll.add(this.rf.find(1));
+            this.usuTemp.setRolesCollection(rolescoll);
+            this.usuTemp.setEstado("Activo");
+            this.usuFacade.create(usuTemp);
+            Roles rol = this.rf.find(1);
+            rol.getUsuariosCollection().add(usuTemp);
+            this.rf.edit(rol);
+            this.prop.setDniPropietario(this.usuTemp.getCedula());
+            this.prop.setUsuarios(this.usuTemp);
+            this.prf.create(prop);
+            //Mailer.send(this.usuTemp.getCorreo(), "Bienvenido a NowVet " + this.usuTemp.getNombres(), "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Bienvenido "+this.usuTemp.getNombres()+" "+this.usuTemp.getApellidos()+"</h1><p style='font-size: 1.5em; color: #797979;'>Ahoras es mas facil agendar una cita a tus mascotas desde  NowVet, sin necesidad de ir hasta nuestra sede.</p></div>");
+
         }
     }
-    
-    public void recuperarClave(){
+
+    public void recuperarClave() {
         FacesContext faces = FacesContext.getCurrentInstance();
         ExternalContext externalContext = faces.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
-        boolean exiteCorreo=false;
-            List <Usuarios> usuList = this.usuFacade.findAll();
-            Usuarios recuperado=new Usuarios();
-           String correoIngresado=(String) params.get("campoCorreoElectronico");
-            for(Usuarios usu : usuList){
-                if (usu.getCorreo().equals(correoIngresado)) {
-                    exiteCorreo=true;
-                    recuperado=usu;
-                    break;
-                }
+        boolean exiteCorreo = false;
+        List<Usuarios> usuList = this.usuFacade.findAll();
+        Usuarios recuperado = new Usuarios();
+        String correoIngresado = (String) params.get("campoCorreoElectronico");
+        for (Usuarios usu : usuList) {
+            if (usu.getCorreo().equals(correoIngresado)) {
+                exiteCorreo = true;
+                recuperado = usu;
+                break;
             }
-            if (exiteCorreo==true) {
-                 int nuevaClave=(int)(Math.random()*(10000000-99999999+1)+99999999);
-                 recuperado.setContrasena(""+nuevaClave);
-                 this.usuFacade.edit(recuperado);
-        Mailer.send(recuperado.getCorreo(), "Recuperacion De Contraseña", "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Hola "+recuperado.getNombres()+" "+recuperado.getApellidos()+"</h1><p style='font-size: 1.5em; color: #797979;'>Recuperacion de contraseña correcta, por seguridad le recomendamos cambiar su contraseña lo mas pronto posible.<br /><br /><strong>Correo: </strong>"+recuperado.getCorreo()+"<br /> <strong>Nueva Contraseña: </strong>"+nuevaClave+"</p></div>");
-                 this.estado="11";
-        }else{
-                this.estado="12";
-            }
+        }
+        if (exiteCorreo == true) {
+            int nuevaClave = (int) (Math.random() * (10000000 - 99999999 + 1) + 99999999);
+            recuperado.setContrasena("" + nuevaClave);
+            this.usuFacade.edit(recuperado);
+            Mailer.send(recuperado.getCorreo(), "Recuperacion De Contraseña", "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Hola " + recuperado.getNombres() + " " + recuperado.getApellidos() + "</h1><p style='font-size: 1.5em; color: #797979;'>Recuperacion de contraseña correcta, por seguridad le recomendamos cambiar su contraseña lo mas pronto posible.<br /><br /><strong>Correo: </strong>" + recuperado.getCorreo() + "<br /> <strong>Nueva Contraseña: </strong>" + nuevaClave + "</p></div>");
+            this.estado = "11";
+        } else {
+            this.estado = "12";
+        }
     }
-    
-    public void setearRegistro(){//Este metodos setea los usuario temp 
+
+    public void setearRegistro() {//Este metodos setea los usuario temp 
         //para que no cargue los datos de usuario registrado anteriormente
-        this.usuTemp=null;
-        this.prop=null;
-        this.usuTemp=new Usuarios();
-        this.prop=new Propietarios();
-        this.estado="0";
-} 
-    
-    public boolean validarCliente(){//este metodo valida si un usuario temporal es cliente
-        boolean cliente=false;
+        this.usuTemp = null;
+        this.prop = null;
+        this.usuTemp = new Usuarios();
+        this.prop = new Propietarios();
+        this.estado = "0";
+    }
+
+    public boolean validarCliente() {//este metodo valida si un usuario temporal es cliente
+        boolean cliente = false;
         for (Roles rol : this.usuTemp.getRolesCollection()) {
-            if (rol.getIdRol()==1) {
-               cliente=true;
-               break;
+            if (rol.getIdRol() == 1) {
+                cliente = true;
+                break;
             }
         }
         return cliente;
     }
-    
-    public void enviarCorreo(){
+
+    public void enviarCorreo() {
         FacesContext faces = FacesContext.getCurrentInstance();
         ExternalContext externalContext = faces.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
-        String mail=(String) params.get("emaiol");
-        String asunto=(String) params.get("asunto");
-        String encabezado= (String) params.get("encabezado");
-        String msj= (String) params.get("texto");
-        Mailer.send(mail, asunto, "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>"+encabezado+"</h1><p style='font-size: 1.5em; color: #797979;'>"+msj+"<br /></p></div>");
-        this.estado="13";
+        String mail = (String) params.get("emaiol");
+        String asunto = (String) params.get("asunto");
+        String encabezado = (String) params.get("encabezado");
+        String msj = (String) params.get("texto");
+        Mailer.send(mail, asunto, "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>" + encabezado + "</h1><p style='font-size: 1.5em; color: #797979;'>" + msj + "<br /></p></div>");
+        this.estado = "13";
     }
-    
-    public void enviarCorreoContactenos(){
+
+    public void enviarCorreoContactenos() {
         FacesContext faces = FacesContext.getCurrentInstance();
         ExternalContext externalContext = faces.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
@@ -466,175 +472,207 @@ public class ControladorUsuario implements Serializable {
         String email = (String) params.get("correo");
         String asunto = (String) params.get("asunto");
         String mensaje = (String) params.get("mensaje");
-        Mailer.send("jsbermudez381@misena.edu.co", asunto, "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><p style='font-size: 1.5em; color: #797979;'>Nombre Contacto: "+nombre+"<br/>Correo Contacto: "+email+"<br/>Mensaje: "+mensaje+"<br/></p></div>");
-        this.estado="14";
+        Mailer.send("jsbermudez381@misena.edu.co", asunto, "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><p style='font-size: 1.5em; color: #797979;'>Nombre Contacto: " + nombre + "<br/>Correo Contacto: " + email + "<br/>Mensaje: " + mensaje + "<br/></p></div>");
+        this.estado = "14";
     }
-    
+
     public void initAud() throws JRException {
-        this.lista1=this.auFacade.findAll();
+        this.lista1 = this.auFacade.findAll();
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(this.lista1);
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String realPath = (String) servletContext.getRealPath("/Reportes"); // Sustituye "/" por el directorio ej: "/upload"
-        realPath+="/auditoriaReport.jasper"; 
+        realPath += "/auditoriaReport.jasper";
         jasperPrint = JasperFillManager.fillReport(realPath, new HashMap(), beanCollectionDataSource);
     }
+
     public void PDFaud() throws JRException, IOException {
         initAud();
-       HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-      httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportAuditoria.pdf");
-      ServletOutputStream servletOutputStream;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportAuditoria.pdf");
+        ServletOutputStream servletOutputStream;
         servletOutputStream = httpServletResponse.getOutputStream();
-       JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+        JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
 
     }
 
     public void DOCXaud() throws JRException, IOException {
         initAud();
-           HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-      httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportAuditoria.docx");
-       ServletOutputStream servletOutputStream;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportAuditoria.docx");
+        ServletOutputStream servletOutputStream;
         servletOutputStream = httpServletResponse.getOutputStream();
-       JRDocxExporter docxExporter=new JRDocxExporter();
-       docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-       docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
-       docxExporter.setParameter(JRDocxExporterParameter.OUTPUT_STREAM, servletOutputStream);
-       docxExporter.exportReport();
+        JRDocxExporter docxExporter = new JRDocxExporter();
+        docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
+        docxExporter.setParameter(JRDocxExporterParameter.OUTPUT_STREAM, servletOutputStream);
+        docxExporter.exportReport();
     }
 
     public void XLSXaud() throws JRException, IOException {
-       initAud();
-       HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-       httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportAuditoria.xlsx");
-       ServletOutputStream servletOutputStream=httpServletResponse.getOutputStream();
-       JRXlsxExporter docxExporter=new JRXlsxExporter();
-       docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-       docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
-       docxExporter.exportReport();
+        initAud();
+        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportAuditoria.xlsx");
+        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+        JRXlsxExporter docxExporter = new JRXlsxExporter();
+        docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
+        docxExporter.exportReport();
     }
 
     public void ODTaud() throws JRException, IOException {
         initAud();
-       HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-      httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportAuditoria.odt");
-       ServletOutputStream servletOutputStream=httpServletResponse.getOutputStream();
-       JROdtExporter docxExporter=new JROdtExporter();
-       docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-       docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
-       docxExporter.exportReport();
-   }
-    
-       public void PPTaud() throws JRException, IOException{
-       initAud();
-       HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-      httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportAudotoria.pptx");
-       ServletOutputStream servletOutputStream=httpServletResponse.getOutputStream();
-       JRPptxExporter docxExporter=new JRPptxExporter();
-       docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-       docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
-       docxExporter.exportReport();
-   }
-    
+        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportAuditoria.odt");
+        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+        JROdtExporter docxExporter = new JROdtExporter();
+        docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
+        docxExporter.exportReport();
+    }
+
+    public void PPTaud() throws JRException, IOException {
+        initAud();
+        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reportAudotoria.pptx");
+        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+        JRPptxExporter docxExporter = new JRPptxExporter();
+        docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
+        docxExporter.exportReport();
+    }
+
     public void initusu() throws JRException {
-        this.lista1=this.usuFacade.findAll();
+        this.lista1 = this.usuFacade.findAll();
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(this.lista1);
         ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String realPath = (String) servletContext.getRealPath("/Reportes"); // Sustituye "/" por el directorio ej: "/upload"
-        realPath+="/usuariosReport.jasper"; 
+        realPath += "/usuariosReport.jasper";
         jasperPrint = JasperFillManager.fillReport(realPath, new HashMap(), beanCollectionDataSource);
     }
+
     public void PDFusu() throws JRException, IOException {
         initusu();
-       HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-      httpServletResponse.addHeader("Content-disposition", "attachment; filename=reporteUsuarios.pdf");
-      ServletOutputStream servletOutputStream;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reporteUsuarios.pdf");
+        ServletOutputStream servletOutputStream;
         servletOutputStream = httpServletResponse.getOutputStream();
-       JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+        JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
 
     }
 
     public void DOCXusu() throws JRException, IOException {
         initusu();
-           HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-      httpServletResponse.addHeader("Content-disposition", "attachment; filename=reporteUsuarios.docx");
-       ServletOutputStream servletOutputStream;
+        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reporteUsuarios.docx");
+        ServletOutputStream servletOutputStream;
         servletOutputStream = httpServletResponse.getOutputStream();
-       JRDocxExporter docxExporter=new JRDocxExporter();
-       docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-       docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
-       docxExporter.setParameter(JRDocxExporterParameter.OUTPUT_STREAM, servletOutputStream);
-       docxExporter.exportReport();
+        JRDocxExporter docxExporter = new JRDocxExporter();
+        docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
+        docxExporter.setParameter(JRDocxExporterParameter.OUTPUT_STREAM, servletOutputStream);
+        docxExporter.exportReport();
     }
 
     public void XLSXusu() throws JRException, IOException {
-       initusu();
-       HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-       httpServletResponse.addHeader("Content-disposition", "attachment; filename=reporteUsuarios.xlsx");
-       ServletOutputStream servletOutputStream=httpServletResponse.getOutputStream();
-       JRXlsxExporter docxExporter=new JRXlsxExporter();
-       docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-       docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
-       docxExporter.exportReport();
+        initusu();
+        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reporteUsuarios.xlsx");
+        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+        JRXlsxExporter docxExporter = new JRXlsxExporter();
+        docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
+        docxExporter.exportReport();
     }
 
     public void ODTusu() throws JRException, IOException {
         initusu();
-       HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-      httpServletResponse.addHeader("Content-disposition", "attachment; filename=reporteUsuarios.odt");
-       ServletOutputStream servletOutputStream=httpServletResponse.getOutputStream();
-       JROdtExporter docxExporter=new JROdtExporter();
-       docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-       docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
-       docxExporter.exportReport();
-   }
-    
-       public void PPTusu() throws JRException, IOException{
-       initusu();
-       HttpServletResponse httpServletResponse=(HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-      httpServletResponse.addHeader("Content-disposition", "attachment; filename=reporteUsuarios.pptx");
-       ServletOutputStream servletOutputStream=httpServletResponse.getOutputStream();
-       JRPptxExporter docxExporter=new JRPptxExporter();
-       docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
-       docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
-       docxExporter.exportReport();
-   }
-       
-       
-    
+        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reporteUsuarios.odt");
+        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+        JROdtExporter docxExporter = new JROdtExporter();
+        docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
+        docxExporter.exportReport();
+    }
+
+    public void PPTusu() throws JRException, IOException {
+        initusu();
+        HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        httpServletResponse.addHeader("Content-disposition", "attachment; filename=reporteUsuarios.pptx");
+        ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+        JRPptxExporter docxExporter = new JRPptxExporter();
+        docxExporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+        docxExporter.setParameter(JRExporterParameter.OUTPUT_STREAM, servletOutputStream);
+        docxExporter.exportReport();
+    }
+
     public int cantidadHojas(String ruta) throws IOException, BiffException {
         archivoExcel = Workbook.getWorkbook(new File(ruta));
         mihoja = archivoExcel.getSheet(0);
         return archivoExcel.getNumberOfSheets();
     }
 
-    public int cantidadDeCitas(int mes){
-        Personalveterinario per=this.pvf.find(this.veterinario);
-        int cantidad=0;
-        Date fecha1=new Date();
+    public int cantidadDeCitas(int mes) {
+        Personalveterinario per = this.pvf.find(this.veterinario);
+        int cantidad = 0;
+        Date fecha1 = new Date();
         fecha1.setMonth(mes);
         fecha1.setDate(0);
         fecha1.setHours(0);
         fecha1.setMinutes(0);
         fecha1.setSeconds(0);
-        Date fecha2=new Date();
+        Date fecha2 = new Date();
         fecha2.setMonth(mes);
         fecha2.setDate(31);
         fecha2.setHours(0);
         fecha2.setMinutes(0);
         fecha2.setSeconds(0);
-        for (Citas cita : per.getCitasCollection()){
+        for (Citas cita : per.getCitasCollection()) {
             if (cita.getFechaAsignada().before(fecha2) && fecha1.before(cita.getFechaAsignada())) {
                 cantidad++;
-            }else if(cita.getFechaAsignada().equals(fecha2) || cita.getFechaAsignada().equals(fecha1)){
+            } else if (cita.getFechaAsignada().equals(fecha2) || cita.getFechaAsignada().equals(fecha1)) {
                 cantidad++;
             }
         }
         return cantidad;
     }
-    
-    public List <Personalveterinario> listarPersonal(){
+
+    public void cargarArrayServicios() {
+        this.listaServicios = this.sf.findAll();
+    }
+
+    public int cantidadDeCitasPorServicio(int mes, String servicio) {
+        int cantidad = 0;
+        Date fecha1 = new Date();
+        fecha1.setMonth(mes);
+        fecha1.setDate(0);
+        fecha1.setHours(0);
+        fecha1.setMinutes(0);
+        fecha1.setSeconds(0);
+        Date fecha2 = new Date();
+        fecha2.setMonth(mes);
+        fecha2.setDate(31);
+        fecha2.setHours(0);
+        fecha2.setMinutes(0);
+        fecha2.setSeconds(0);
+        for (Servicios serv : this.listaServicios) {
+            if (serv.getTipo().equals(servicio)) {
+                for (Citas cit : serv.getCitasCollection()) {
+                    if (cit.getFechaAsignada().before(fecha2) && fecha1.before(cit.getFechaAsignada())) {
+                        cantidad++;
+                    } else if (cit.getFechaAsignada().equals(fecha2) || cit.getFechaAsignada().equals(fecha1)) {
+                        cantidad++;
+                    }
+                }
+            }
+        }
+        return cantidad;
+    }
+
+    public List<Personalveterinario> listarPersonal() {
         return this.pvf.findAll();
     }
-    
+
     public String getCorreo() {
         return correo;
     }
@@ -714,5 +752,5 @@ public class ControladorUsuario implements Serializable {
     public void setVeterinario(int veterinario) {
         this.veterinario = veterinario;
     }
-    
+
 }
