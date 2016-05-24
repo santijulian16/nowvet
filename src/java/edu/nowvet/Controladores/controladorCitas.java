@@ -225,7 +225,7 @@ public class controladorCitas implements Serializable {
         cambiarFechaTime = formatoTime.parse(fechaTime);
         listaCargaVeterinarios=this.usuariosFacade.buscarVeterinario(cambiarFechaTime);
         this.campoOculto = "1";
-        if(!citasFacade.verificarDisponibilidad(fechaA).isEmpty() && !citasFacade.consultarCitasRecientes().isEmpty()){
+        if(!citasFacade.verificarDisponibilidad(fechaA).isEmpty()){
             this.estados="3";
             this.estadosP="3";
         }

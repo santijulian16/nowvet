@@ -44,7 +44,7 @@ public class CitasFacade extends AbstractFacade<Citas> {
     
     public List<Citas> verificarDisponibilidad(Date fecha) {
         Query q;
-        q = em.createQuery("select c from Citas c where c.fechaAsignada  =:fecha");
+        q = em.createQuery("select c from Citas c where c.fechaAsignada  =:fecha and c.estado='Creada'");
         q.setParameter("fecha", fecha);
         return q.getResultList();
     }
