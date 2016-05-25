@@ -85,6 +85,7 @@
                             #{controladorUsuario.usuTemp.setCorreo(controladorUsuario.mihoja.getCell(3, fila).getContents())}
                             #{controladorUsuario.usuTemp.setContrasena(controladorUsuario.mihoja.getCell(4, fila).getContents())}
                             #{controladorUsuario.usuTemp.propietarios.setBarrio(controladorUsuario.mihoja.getCell(5, fila).getContents())}
+                            #{controladorUsuario.prop.setBarrio(controladorUsuario.mihoja.getCell(5, fila).getContents())}
                             #{controladorUsuario.usuTemp.setDireccion(controladorUsuario.mihoja.getCell(6, fila).getContents())}
                             #{controladorUsuario.registrarUsuarioCargaExcel()}
                         </c:forEach>
