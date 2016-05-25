@@ -88,8 +88,8 @@ public class controladorCitas implements Serializable {
     private String formulaMedica;
     private String sintomas;
     private Citas citas;
-    private String estados;
-    private String estadosP;
+    private String estados; /*Variable para verificar disponibilidad de citas clínicas*/
+    private String estadosP; /*Variable para verificar disponibilidad de citas de peluquería*/
     private String campoOculto;
     private Date fechaVerdadera;
     private String confirmar;
@@ -210,7 +210,7 @@ public class controladorCitas implements Serializable {
         }
     }
     
-    public void verificarDisponibilidad() throws ParseException{
+    public void verificarDisponibilidadCitaClinica() throws ParseException{
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
@@ -227,10 +227,32 @@ public class controladorCitas implements Serializable {
         this.campoOculto = "1";
         if(!citasFacade.verificarDisponibilidad(fechaA).isEmpty()){
             this.estados="3";
-            this.estadosP="3";
         }
         else{
             this.estados="4";
+            fechaVerdadera = fechaA;
+        }
+    }
+    
+    public void verificarDisponibilidadCitaPeluqueria() throws ParseException{
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String fecha = ((String) params.get("fecha"));
+        fecha=fecha+":00";
+        Date fechaA = new Date();
+        fechaA=formato.parse(fecha);
+        SimpleDateFormat formatoTime = new SimpleDateFormat("HH:mm:ss");
+        String fechaTime = formatoTime.format(fechaA);
+        Date cambiarFechaTime = new Date();
+        cambiarFechaTime = formatoTime.parse(fechaTime);
+        listaCargaVeterinarios=this.usuariosFacade.buscarVeterinario(cambiarFechaTime);
+        this.campoOculto = "1";
+        if(!citasFacade.verificarDisponibilidad(fechaA).isEmpty()){
+            this.estadosP="3";
+        }
+        else{
             this.estadosP="4";
             fechaVerdadera = fechaA;
         }

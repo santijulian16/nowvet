@@ -49,4 +49,10 @@ public class CitasFacade extends AbstractFacade<Citas> {
         return q.getResultList();
     }
 
+    public List crearReporteCitasEjecutadas(int cedula){
+        Query q = em.createQuery("select c.fechaAsignada as fecha, c.peso as peso, c.idMascota.nombre as mascota, c.idVeterinario.usuarios.nombres as vetNombre, c.idVeterinario.usuarios.apellidos as vetApellido, c.idVeterinario.usuarios.correo as vetCoreo from Citas c where c.idMascota.codigoPropietario.usuarios.cedula = :ced");
+        q.setParameter("ced", cedula);
+        List citaTemp=q.getResultList();
+        return citaTemp;
+    }
 }

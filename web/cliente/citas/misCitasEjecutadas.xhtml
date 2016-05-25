@@ -100,7 +100,7 @@
                 </nav>
             </div>
             <div class="col-md-10" id="colorbase">
-                <div class="row"></div>
+                
                 <div class="col-md-12 col-sm-12 col-xs-12" id="migas"><a href="../index.html">Inicio</a>\<a href="misCitas.html">Mis Citas</a>\<a href="misCitasEjecutadas.html">Citas Ejecutadas</a>
                 </div>
                 <div class="col-md-12 col-sm-12 col-xs-12" id="rol">
@@ -109,6 +109,15 @@
                 <h3>Citas Realizadas</h3>
                 <hr></hr>
                 <div class="panel panel-primary filterable clienteTablas">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <br></br>
+                                <h4>Exportar:</h4>
+                            <h:form>
+                                <h:commandButton image="../../imagenes/pdf.png" action="#{controladorUsuario.PDFusu()}" style="width: 35px; height: 35px;" title="Exportar a PDF"></h:commandButton>&nbsp;
+                                <h:commandButton image="../../imagenes/excel.png" action="#{controladorUsuario.XLSXusu()}" style="width: 35px; height: 35px;" title="Exportar a Excel"></h:commandButton>&nbsp;
+                                <h:commandButton image="../../imagenes/word.png" action="#{controladorUsuario.DOCXusu()}" style="width: 35px; height: 35px;" title="Exportar a Word"></h:commandButton>&nbsp;
+                            </h:form>
+                                </div>
                     <table data-toggle="table"
                            data-show-columns="false" 
                            data-search="true"
