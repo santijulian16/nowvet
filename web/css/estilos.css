@@ -545,8 +545,6 @@ footer{
 	color: #2AAC7D;
 }
 #panel1Footer, #panel2Footer, #panel3Footer{
-	float:left;
-	margin: 25px;
 	background-color: transparent;
 	color: white;
 	text-align: left;

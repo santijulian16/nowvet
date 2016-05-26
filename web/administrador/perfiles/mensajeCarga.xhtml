@@ -36,7 +36,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="../indexAdministrador.xhtml">
                             <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
                         </a>
                     </div>
@@ -45,7 +45,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li><h:link value="Inicio" outcome="/administrador/indexAdministrador" /></li>
-                            <li><a href="citas/misCitas.xhtml">Citas</a></li>
+                            <li><a href="../citas/misCitas.xhtml">Citas</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Perfiles <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
@@ -70,13 +70,13 @@
             </nav>
         </h:form>
         <section>
-            
-    <div class="container">
-		<div class="row">
-			<div id="textoBienvenidaAdmin" class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 ">
-                            <center><h1>¡Usuarios registrados con exito!</h1></center>
-                            <center><h3>Hojas Cargas: #{controladorUsuario.cantidadHojas(requestScope["libro"])}</h3></center>
-                            <c:set var="totalUsu" value="0"></c:set>
+
+            <div class="container">
+                <div class="row">
+                    <div id="textoBienvenidaAdmin" class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12 ">
+                        <center><h1>¡Usuarios registrados con exito!</h1></center>
+                        <center><h3>Hojas Cargas: #{controladorUsuario.cantidadHojas(requestScope["libro"])}</h3></center>
+                        <c:set var="totalUsu" value="0"></c:set>
                         <c:set var="totalUsuReg" value="0"></c:set>
                         <c:forEach end="#{controladorUsuario.mihoja.rows - 1}" begin="1" var="fila">
                             #{controladorUsuario.usuTemp.setCedula(controladorUsuario.mihoja.getCell(0, fila).getContents())}
@@ -89,63 +89,49 @@
                             #{controladorUsuario.usuTemp.setDireccion(controladorUsuario.mihoja.getCell(6, fila).getContents())}
                             #{controladorUsuario.registrarUsuarioCargaExcel()}
                         </c:forEach>
-                    <div id="datosPersonales" class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
-                        <img class="img-responsive" src="imagenes/Ok_check_yes_tick_accept_success_green_correct.png"></img>
-                        
-                        <h:link outcome="gestionPerfiles.xhtml"><i class="fa fa-arrow-left"></i>&nbsp;Regresar a la pagina anterior</h:link>
-			<br />
-		</div>
-                            </div>
-		</div>
-	</div>
-        </section>
-        <footer>
-            <div id="footer-contenedor" class="row">
-                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>SERVICIOS</h3>
-                    <a href="../NowVet%20English/clinica.html">&#187; Clínica</a><br />
-                    <a href="../NowVet%20English/peluqueria.html">&#187; Peluquería</a><br />
-                    <a href="../NowVet%20English/odontologia.html">&#187; Odontología</a><br />
-                    <a href="../NowVet%20English/vacunacion.html">&#187; Vacunación</a><br />
-                    <a href="../NowVet%20English/ambulancia.html">&#187; Ambulancia</a>
-                </div>
-                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>PRODUCTOS</h3>
-                    <a href="../NowVet%20English/concentrados.html">&#187; Concentrados</a><br />
-                    <a href="../NowVet%20English/petshop.html">&#187; Pet Shop</a><br />
-                    <a href="../NowVet%20English/guarderia.html">&#187; Guardería</a><br />
-                    <a href="#rayosx">&#187; Rayos c</a><br />
-                </div>
-                <div id="panel3Footer" class="col-md-3 col-sm-6 col-xs-12">
-                    <h3>¿QUIÉNES SOMOS?</h3>
-                    <a href="../NowVet%20English/mision.html">&#187; Misión</a><br />
-                    <a href="../NowVet%20English/vision.html">&#187; Visión</a>
-                </div>
-                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="row">
-                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
-                        <br />
-                        <br />
-                        <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
-                    </div>
-                    <div class="row">
-                        <div id="redesSociales">
-                            <a href="#"><span class=" fa fa-facebook-square"></span></a>
-                            <a href="#"><span class=" fa fa-twitter-square"></span></a>
-                            <a href="#"><span class=" fa fa-google-plus-square"></span></a>
-                            <a href="#"><span class=" fa fa-envelope-o"></span></a>
+                        <div id="datosPersonales" class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
+                            <img class="img-responsive" src="imagenes/Ok_check_yes_tick_accept_success_green_correct.png"></img>
+
+                            <h:link outcome="gestionPerfiles.xhtml"><i class="fa fa-arrow-left"></i>&nbsp;Regresar a la pagina anterior</h:link>
+                            <br />
                         </div>
-                    </div>
-                    <div class="row">
-                        <br />
-                        Now Vet | Todos los derechos reservados
-                        <br /> &#169; Copyright 2015
                     </div>
                 </div>
             </div>
+        </section>
+        <footer style="min-height: 160px !important;">
+            <div id="footer-contenedor" class="row">
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div id="panel1Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>UBICACIÓN</h3>
+                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
+                    </div>
+                    <div id="panel2Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>CONTÁCTENOS</h3>
+                        <div class="row">
+                            <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                        </div>
+                        <div class="row">
+                            <div id="redesSociales">
+                                <a href="https://www.facebook.com/clinicaveterinaria.santaisabel" target="_blank"><span class=" fa fa-facebook-square"></span></a>
+                                <a href="https://twitter.com/@vetsantaisabel" target="_blank"><span class=" fa fa-twitter-square"></span></a>
+                                <a href="https://plus.google.com/107918889656404618563" target="_blank"><span class=" fa fa-google-plus-square"></span></a>
+                                <a href="mailto:jsbermudez381@misena.edu.co"><span class=" fa fa-envelope-o"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="panel1Footer" class="col-md-4  col-sm-4 col-xs-12">
+                        <h3>INFORMACIÓN LEGAL</h3>
+                        Now Vet | Todos los derechos reservados
+                        <br /> &#169; Copyright 2016
+                    </div>
+                </div>
+                <br /><br /><br /><br /><br /><br /><br /><br />
+            </div>
         </footer>
     </h:body>
-                                    
-   
+
+
 </html>
 

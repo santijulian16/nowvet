@@ -30,7 +30,7 @@
             function mostrarConsultaClinica(antecedentes, peso, nombrePropietario, apellidoPropietario, correo, motivo, sintomas) {
                 $('#modalMostrarConsultaClinica').modal('show');
                 document.getElementById("antecedentes").innerHTML = antecedentes,
-                document.getElementById("peso").innerHTML = peso;
+                        document.getElementById("peso").innerHTML = peso;
                 document.getElementById("nombre").innerHTML = nombrePropietario;
                 document.getElementById("apellido").innerHTML = apellidoPropietario;
                 document.getElementById("correo").innerHTML = correo;
@@ -42,15 +42,15 @@
             function mostrarPeluqueria(antecedentesP, pesoP, nombrePropietarioP, apellidoPropietarioP, correoPP, serviciosAplicadosP) {
                 $('#modalMostrarPeluqueria').modal('show');
                 document.getElementById("antecedentesP").innerHTML = antecedentesP,
-                document.getElementById("pesoP").innerHTML = pesoP;
+                        document.getElementById("pesoP").innerHTML = pesoP;
                 document.getElementById("nombrePP").innerHTML = nombrePropietarioP;
                 document.getElementById("apellidoPP").innerHTML = apellidoPropietarioP;
                 document.getElementById("correoPP").innerHTML = correoPP;
                 document.getElementById("serviciosAplicados").innerHTML = serviciosAplicadosP;
             }
         </script>
-                <script>
-            function modificarCita(idCitaA,estadoA,fechaCita,idServicioA,idMascotaA,idVeterinarioA,vacunasA,pesoA,antecedentesA,fechaCitaV) {
+        <script>
+            function modificarCita(idCitaA, estadoA, fechaCita, idServicioA, idMascotaA, idVeterinarioA, vacunasA, pesoA, antecedentesA, fechaCitaV) {
                 $('#modalmodificarCita').modal('show');
                 document.getElementById("idCitaA").value = idCitaA;
                 document.getElementById("estadoA").value = estadoA;
@@ -75,43 +75,43 @@
         <f:event listener="#{controladorUsuario.miraSession('cliente')}" type="preRenderView"></f:event>
     </h:head>
     <h:body>
-    
+
         <img id="back" src="../../imagenes/fondo.jpg" height="751px" width="765px"></img>
         <h:form>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-       <a class="navbar-brand" href="index.html">
-        <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
-      </a>
-    </div>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="../indexCliente.xhtml">
+                            <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
+                        </a>
+                    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="../indexCliente.xhtml">Inicio</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-              <li><a href="../servicios/formularioCitasClinicas.xhtml">Agendar Cita Clínica</a></li>
-              <li><a href="../servicios/formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluquería</a></li>
-          </ul>
-        </li>
-        <li><a href="../citas/misCitas.xhtml">Citas</a></li>
-        <li><a href="../perfil/miperfil.xhtml">Mi Perfil</a></li>
-        <li><h:commandLink action="#{controladorUsuario.cerrarSesion()}">Salir&nbsp;<span class=" fa fa-sign-out"></span></h:commandLink></li>
-      </ul>
-    </div><!-- /.navbar-collapsee -->
-  </div><!-- /.container-fluid -->
-</nav>
-</h:form>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../indexCliente.xhtml">Inicio</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../servicios/formularioCitasClinicas.xhtml">Agendar Cita Clínica</a></li>
+                                    <li><a href="../servicios/formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluquería</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="../citas/misCitas.xhtml">Citas</a></li>
+                            <li><a href="../perfil/miperfil.xhtml">Mi Perfil</a></li>
+                            <li><h:commandLink action="#{controladorUsuario.cerrarSesion()}">Salir&nbsp;<span class=" fa fa-sign-out"></span></h:commandLink></li>
+                        </ul>
+                    </div><!-- /.navbar-collapsee -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </h:form>
         <section>
             <!-- InstanceBeginEditable name="section" -->
             <div class="col-md-2">
@@ -135,33 +135,33 @@
                 </div>
                 <h3>Citas Recientes</h3>
                 <hr></hr>
-                
+
                 <div class="panel panel-primary filterable clienteTablas">
                     <c:if test="#{controladorCitas.estados=='1'}">
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Alerta!! </strong> No se puede modificar la cita porque
-                        faltan menos de 24 horas para su ejecución
-                    </div>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Alerta!! </strong> No se puede modificar la cita porque
+                            faltan menos de 24 horas para su ejecución
+                        </div>
                     </c:if>
                     <c:if test="#{controladorCitas.estados=='2'}">
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        La cita se ha modificado exitosamente
-                    </div>
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            La cita se ha modificado exitosamente
+                        </div>
                     </c:if>
                     <c:if test="#{controladorCitas.estados=='3'}">
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>¡Alerta!</strong> No se puede cancelar la cita porque
-                        faltan menos de 24 horas para su ejecución
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <strong>¡Alerta!</strong> No se puede cancelar la cita porque
+                            faltan menos de 24 horas para su ejecución
                         </div>
                     </c:if>
                     <c:if test="#{controladorCitas.estados=='4'}">
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        La cita se ha cancelado exitosamente
-                    </div>
+                        <div class="alert alert-success alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            La cita se ha cancelado exitosamente
+                        </div>
                     </c:if>
                     <table data-toggle="table"
                            data-show-columns="false" 
@@ -195,120 +195,120 @@
                                         <td>#{listaCitas.idMascota.nombre}</td>
                                         <td>#{listaCitas.idServicio.tipo}</td>
                                         <td>#{listaCitas.estado}</td>
-                                        <td><button type="button" class="btn btn-default"><i class="fa fa-pencil" onclick="modificarCita('#{listaCitas.idCita}','#{listaCitas.estado}','#{listaCitas.fechaAsignada.toLocaleString()}','#{listaCitas.idServicio.codgoServicio}','#{listaCitas.idMascota.codigoMascota}','#{listaCitas.idVeterinario.dniPersonal}','#{listaCitas.vacunas}','#{listaCitas.peso}','#{listaCitas.antecedentes}','#{listaCitas.fechaAsignada.toLocaleString()}')"></i></button></td>
-                                        
+                                        <td><button type="button" class="btn btn-default"><i class="fa fa-pencil" onclick="modificarCita('#{listaCitas.idCita}', '#{listaCitas.estado}', '#{listaCitas.fechaAsignada.toLocaleString()}', '#{listaCitas.idServicio.codgoServicio}', '#{listaCitas.idMascota.codigoMascota}', '#{listaCitas.idVeterinario.dniPersonal}', '#{listaCitas.vacunas}', '#{listaCitas.peso}', '#{listaCitas.antecedentes}', '#{listaCitas.fechaAsignada.toLocaleString()}')"></i></button></td>
+
                                         <!--Ventana Modal Modificar Cita-->
                                         <div class="modal fade" id="modalmodificarCita" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">Modificar Cita</h4>
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="myModalLabel">Modificar Cita</h4>
+                                                    </div>
+                                                    <h:form id="formModificar">
+
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+
+                                                                <label for="fecha" class="lfecha">Fecha de la cita</label>
+                                                                <div class="input-group margin-bottom-sm">
+                                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                    <input type="text" id="datetimepicker" onfocus="this.blur()" name="fecha" required="true" class="form-control" tabindex="3" 
+                                                                           title="Debe seleccionar una fecha"></input>
+                                                                    <!--min="2013-01-01T00:00Z" max="2013-12-31T12:00Z"-->
+                                                                </div>
+                                                            </div>
+                                                            <script>
+                                                                $.datetimepicker.setLocale('en');
+                                                                $('#datetimepicker').datetimepicker({
+                                                                    formatTime: 'H:i',
+                                                                    formatDate: 'Y.m.d',
+                                                                    todayHighlight: true,
+                                                                    defaultTime: '00:00',
+                                                                    //language: 'es',
+                                                                    multidateSeparator: '/',
+                                                                    startView: 0, //si inicia mostrando el dia (0), mes (1), año (2)
+                                                                    //endDate: '+1m', //fecha final habilitada: 1 mes adelante
+                                                                    daysOfWeekDisabled: '7', //deshabilitar días 0-sabado, 1-lunes... etc
+                                                                    showMonthAfterYear: false,
+                                                                    yearStart: 2016,
+                                                                    yearEnd: 2020,
+                                                                    //disabledDates: ['03.04.2016','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'], formatDate:'d.m.Y',
+
+                                                                    autoclose: true, //autocerrar al perder el foco en el input
+                                                                    minDate: '1+d' // yesterday is minimum date
+                                                                });
+                                                                $('#datetimepicker').datetimepicker({step: 30});
+                                                            </script>
+
+                                                            <div class="form-group">  
+                                                                <input id="idCitaA" name="idCitaA" type="text" class="form-control" style="display: none;"/> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input id="estadoA" name="estadoA" type="text" class="form-control" style="display: none;"/> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input id="idServicioA" name="idServicioA" type="text" class="form-control" style="display: none;"/> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input id="idMascotaA" name="idMascotaA" type="text" class="form-control" style="display: none;"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input id="idVeterinarioA" name="idVeterinarioA" type="text" class="form-control" style="display: none;"/> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input id="vacunasA" name="vacunasA" type="text" class="form-control" style="display: none;"/> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input id="pesoA" name="pesoA" type="text" class="form-control" style="display: none;"/> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input id="antecedentesA" name="antecedentesA" type="text" class="form-control" style="display: none;"/> 
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input id="fechaCitaV" name="fechaCitaV" type="text" class="form-control" style="display: none;"/> 
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <h:commandButton class="btn btn-success" type="sumbit" action="#{controladorCitas.modificarCita()}" value="Modificar Cita"></h:commandButton>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                        </div>
+                                                    </h:form>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <h:form id="formModificar">
-                                            
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    
-                                <label for="fecha" class="lfecha">Fecha de la cita</label>
-                                <div class="input-group margin-bottom-sm">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text" id="datetimepicker" onfocus="this.blur()" name="fecha" required="true" class="form-control" tabindex="3" 
-                                           title="Debe seleccionar una fecha"></input>
-                                    <!--min="2013-01-01T00:00Z" max="2013-12-31T12:00Z"-->
-                                </div>
-                            </div>
-                            <script>
-                                $.datetimepicker.setLocale('en');
-                                $('#datetimepicker').datetimepicker({
-                                    formatTime: 'H:i',
-                                        formatDate: 'Y.m.d',
-                                        todayHighlight: true,                    
-                                        defaultTime:'00:00',
-                                        //language: 'es',
-                                        multidateSeparator: '/',
-                                        startView: 0, //si inicia mostrando el dia (0), mes (1), año (2)
-                                        //endDate: '+1m', //fecha final habilitada: 1 mes adelante
-                                        daysOfWeekDisabled: '7', //deshabilitar días 0-sabado, 1-lunes... etc
-                                        showMonthAfterYear: false,
-                                        yearStart: 2016,
-                                        yearEnd: 2020,
-                                        //disabledDates: ['03.04.2016','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'], formatDate:'d.m.Y',
-                                        
-                                        autoclose: true, //autocerrar al perder el foco en el input
-                                        minDate: '1+d' // yesterday is minimum date
-                                    });
-                                    $('#datetimepicker').datetimepicker({step:30});
-                            </script>
-                                                
-                                                <div class="form-group">  
-                                            <input id="idCitaA" name="idCitaA" type="text" class="form-control" style="display: none;"/> 
-                                            </div>
-                                            <div class="form-group">
-                                                    <input id="estadoA" name="estadoA" type="text" class="form-control" style="display: none;"/> 
-                                            </div>
-                                            <div class="form-group">
-                                            <input id="idServicioA" name="idServicioA" type="text" class="form-control" style="display: none;"/> 
-                                            </div>
-                                            <div class="form-group">
-                                            <input id="idMascotaA" name="idMascotaA" type="text" class="form-control" style="display: none;"/>
-                                            </div>
-                                            <div class="form-group">
-                                            <input id="idVeterinarioA" name="idVeterinarioA" type="text" class="form-control" style="display: none;"/> 
-                                            </div>
-                                            <div class="form-group">
-                                            <input id="vacunasA" name="vacunasA" type="text" class="form-control" style="display: none;"/> 
-                                            </div>
-                                            <div class="form-group">
-                                            <input id="pesoA" name="pesoA" type="text" class="form-control" style="display: none;"/> 
-                                            </div>
-                                                <div class="form-group">
-                                            <input id="antecedentesA" name="antecedentesA" type="text" class="form-control" style="display: none;"/> 
-                                           </div>
-                                                <div class="form-group">
-                                            <input id="fechaCitaV" name="fechaCitaV" type="text" class="form-control" style="display: none;"/> 
-                                           </div>
-                                            </div>
-                                            
-                                            <div class="modal-footer">
-                                                <h:commandButton class="btn btn-success" type="sumbit" action="#{controladorCitas.modificarCita()}" value="Modificar Cita"></h:commandButton>
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                            </div>
-                                        </h:form>
-                                    </div>
-                                </div>
-                                </div>
-                                        <td><button type="button" class="btn btn-danger"><i class="fa fa-trash" onclick="cancelarCita('#{listaCitas.idCita}','#{listaCitas.fechaAsignada.toLocaleString()}')"></i></button></td>
-                                        
+                                        <td><button type="button" class="btn btn-danger"><i class="fa fa-trash" onclick="cancelarCita('#{listaCitas.idCita}', '#{listaCitas.fechaAsignada.toLocaleString()}')"></i></button></td>
+
                                         <!--Venta Modal Cancelar Cita-->
 
-                    <div class="modal fade" id="modalCancelarCita" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">Cancelar Cita</h4>
-                                </div>
-                                <h:form id="formEliminar">
-                                    <div class="modal-body">
-                                        <input style="display: none;"  id="idCita" name="idCita" type="text" ></input>
-                                        <p id="eliminara"></p>
-                                        <div class="form-group">
-                                            <input id="fechaCitaC" name="fechaCitaC" type="text" class="form-control" style="display: none;"/> 
-                                           </div>
-                                    </div>
+                                        <div class="modal fade" id="modalCancelarCita" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="myModalLabel">Cancelar Cita</h4>
+                                                    </div>
+                                                    <h:form id="formEliminar">
+                                                        <div class="modal-body">
+                                                            <input style="display: none;"  id="idCita" name="idCita" type="text" ></input>
+                                                            <p id="eliminara"></p>
+                                                            <div class="form-group">
+                                                                <input id="fechaCitaC" name="fechaCitaC" type="text" class="form-control" style="display: none;"/> 
+                                                            </div>
+                                                        </div>
 
-                                    <div class="modal-footer">
-                                        <h:commandButton class="btn btn-danger" type="sumbit" action="#{controladorCitas.cancelarCita(listaCitas.idServicio)}" value="Cancelar Cita"></h:commandButton>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                    </div>
-                                </h:form>
-                            </div>
-                        </div>
-                    </div>
+                                                        <div class="modal-footer">
+                                                            <h:commandButton class="btn btn-danger" type="sumbit" action="#{controladorCitas.cancelarCita(listaCitas.idServicio)}" value="Cancelar Cita"></h:commandButton>
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                        </div>
+                                                    </h:form>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <c:if test="#{listaCitas.idServicio.tipo == 'Consulta Clinica'}">
                                             <td><button type="button" class="btn btn-success"><i class="fa fa-eye" onclick="mostrarConsultaClinica('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idVeterinario.usuarios.nombres}', '#{listaCitas.idVeterinario.usuarios.apellidos}', '#{listaCitas.idVeterinario.usuarios.correo}', '#{listaCitas.citasclinicas.motivo}', '#{listaCitas.citasclinicas.sintomas}')" width="16px"></i></button></td>
-                                                                                    
+
                                             <!--Modal para mostrar datos de una cita clínica en estado ejecutada-->
                                             <div class="modal fade" id="modalMostrarConsultaClinica" role="dialog" 
                                                  aria-labelledby="myModalLabel" aria-hidden="true">
@@ -371,59 +371,40 @@
                             </c:forEach>
                         </tbody>
                     </table>
-                        
+
                 </div>
                 <div class="clearfix"></div>
             </div>
         </section>
-        <footer>
+        <footer style="min-height: 160px !important;">
             <div id="footer-contenedor" class="row">
-                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>SERVICIOS</h3>
-                    <a href="../../clinica.html">&#187; Clínica</a><br />
-                    <a href="../../peluqueria.html">&#187; Peluquería</a><br />
-                    <a href="../../odontologia.html">&#187; Odontología</a><br />
-                    <a href="../../vacunacion.html">&#187; Vacunación</a><br />
-                    <a href="../../ambulancia.html">&#187; Ambulancia</a>
-                </div>
-                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>PRODUCTOS</h3>
-                    <a href="../../concentrados.html">&#187; Concentrados</a><br />
-                    <a href="../../petshop.html">&#187; Pet Shop</a><br />
-                    <a href="../../guarderia.html">&#187; Guardería</a><br />
-                    <a href="#rayosx">&#187; Rayos c</a><br />
-                </div>
-                <div id="panel3Footer" class="col-md-1 col-sm-6 col-xs-12">
-                    <h3>¿QUIÉNES SOMOS?</h3>
-                    <a href="../../mision.html">&#187; Misión</a><br />
-                    <a href="../../vision.html">&#187; Visión</a>
-                </div>
-                <div id="panel3Footer" class="col-md-2 col-sm-6 col-xs-12">
-
-                    <h3>GESTIÓN CORPORATIVA</h3>
-                    <a href="../../iniciarSesionAdministrador.html">&#187; Administrador</a>
-                </div>
-                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="row">
-                        <spam class=" fa fa-home"></spam>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
-                        <br />
-                        <br />
-                        <spam class=" fa fa-phone"></spam>&nbsp;&nbsp;Teléfono: 6826731
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div id="panel1Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>UBICACIÓN</h3>
+                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
                     </div>
-                    <div class="row">
-                        <div id="redesSociales">
-                            <a href="#"><spam class=" fa fa-facebook-square"></spam></a>
-                            <a href="#"><spam class=" fa fa-twitter-square"></spam></a>
-                            <a href="#"><spam class=" fa fa-google-plus-square"></spam></a>
-                            <a href="#"><spam class=" fa fa-envelope-o"></spam></a>
+                    <div id="panel2Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>CONTÁCTENOS</h3>
+                        <div class="row">
+                            <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                        </div>
+                        <div class="row">
+                            <div id="redesSociales">
+                                <a href="https://www.facebook.com/clinicaveterinaria.santaisabel" target="_blank"><span class=" fa fa-facebook-square"></span></a>
+                                <a href="https://twitter.com/@vetsantaisabel" target="_blank"><span class=" fa fa-twitter-square"></span></a>
+                                <a href="https://plus.google.com/107918889656404618563" target="_blank"><span class=" fa fa-google-plus-square"></span></a>
+                                <a href="mailto:jsbermudez381@misena.edu.co"><span class=" fa fa-envelope-o"></span></a>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <br />
+
+                    <div id="panel1Footer" class="col-md-4  col-sm-4 col-xs-12">
+                        <h3>INFORMACIÓN LEGAL</h3>
                         Now Vet | Todos los derechos reservados
-                        <br /> &#169; Copyright 2015
+                        <br /> &#169; Copyright 2016
                     </div>
                 </div>
+                <br /><br /><br /><br /><br /><br /><br /><br />
             </div>
         </footer>
     </h:body>

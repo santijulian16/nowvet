@@ -23,7 +23,7 @@
             function mostrarConsultaClinica(antecedentes, peso, nombrePropietario, apellidoPropietario, motivo, sintomas) {
                 $('#modalMostrarConsultaClinica').modal('show');
                 document.getElementById("antecedentes").innerHTML = antecedentes,
-                document.getElementById("peso").innerHTML = peso;
+                        document.getElementById("peso").innerHTML = peso;
                 document.getElementById("nombreP").innerHTML = nombrePropietario;
                 document.getElementById("apellidoP").innerHTML = apellidoPropietario;
                 document.getElementById("motivo").innerHTML = motivo;
@@ -34,7 +34,7 @@
             function mostrarPeluqueria(antecedentesP, pesoP, nombrePropietarioP, apellidoPropietarioP, serviciosAplicadosP) {
                 $('#modalMostrarPeluqueria').modal('show');
                 document.getElementById("antecedentesP").innerHTML = antecedentesP,
-                document.getElementById("pesoP").innerHTML = pesoP;
+                        document.getElementById("pesoP").innerHTML = pesoP;
                 document.getElementById("nombrePP").innerHTML = nombrePropietarioP;
                 document.getElementById("apellidoPP").innerHTML = apellidoPropietarioP;
                 document.getElementById("serviciosAplicados").innerHTML = serviciosAplicadosP;
@@ -55,7 +55,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="../indexAdministrador.xhtml">
                             <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
                         </a>
                     </div>
@@ -102,7 +102,7 @@
             </div>
             <div class="container col-md-10" id="colorbase">
                 <div class="row">
-                    
+
                     <div class="col-md-10 col-sm-12 col-xs-12" id="migasAdmin">
                         <h:link value="Inicio" outcome="/administrador/indexAdministrador" />\<h:link value="Mis Citas Ejecutadas" outcome="/administrador/citas/misCitasEjecutadas" />
                     </div>
@@ -112,30 +112,30 @@
                     <h3>Citas Ejecutadas</h3>
                     <hr></hr>
                     <div class="panel panel-primary filterable">
-                            <table data-toggle="table"
-                                   data-show-columns="false" 
-                                   data-search="true"
-                                   data-show-refresh="true"
-                                   data-show-toggle="true" 
-                                   data-pagination="true"
-                                   data-id-field="id"
-                                   data-sort-name="fechaAsignada"
-                                   data-sort-order="asc"
-                                   data-page-size="10"
-                                   data-page-list="[10,25,50,100,200]">
-                                <thead>
-                                    <tr>
-                                        <th data-field="idCita" data-sortable="true">Número Cita</th>
-                                        <th data-field="fechaAsignada" data-sortable="true">Fecha Asignada</th>
-                                        <th data-field="nombreP" data-sortable="true">Servicio</th>
-                                        <th data-field="nombreM" data-sortable="true">Nombre Mascota</th>
-                                        <th data-field="estado" data-sortable="true">Estado</th>
-                                        <th data-field="ver" data-sortable="true"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="listaCitas" items="#{controladorCitas.listarMisCitasEjecutadas()}">                          
-                                        <c:if test="#{listaCitas.idVeterinario.usuarios.personalveterinario.dniPersonal == controladorUsuario.usuLogin.cedula}">
+                        <table data-toggle="table"
+                               data-show-columns="false" 
+                               data-search="true"
+                               data-show-refresh="true"
+                               data-show-toggle="true" 
+                               data-pagination="true"
+                               data-id-field="id"
+                               data-sort-name="fechaAsignada"
+                               data-sort-order="asc"
+                               data-page-size="10"
+                               data-page-list="[10,25,50,100,200]">
+                            <thead>
+                                <tr>
+                                    <th data-field="idCita" data-sortable="true">Número Cita</th>
+                                    <th data-field="fechaAsignada" data-sortable="true">Fecha Asignada</th>
+                                    <th data-field="nombreP" data-sortable="true">Servicio</th>
+                                    <th data-field="nombreM" data-sortable="true">Nombre Mascota</th>
+                                    <th data-field="estado" data-sortable="true">Estado</th>
+                                    <th data-field="ver" data-sortable="true"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="listaCitas" items="#{controladorCitas.listarMisCitasEjecutadas()}">                          
+                                    <c:if test="#{listaCitas.idVeterinario.usuarios.personalveterinario.dniPersonal == controladorUsuario.usuLogin.cedula}">
                                         <tr>
                                             <td>#{listaCitas.idCita}</td> 
                                             <td>#{listaCitas.fechaAsignada.toLocaleString()}</td>
@@ -148,7 +148,7 @@
                                                 <td><button type="button" class="btn btn-success">
                                                         <i class="fa fa-eye" onclick="mostrarConsultaClinica('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idMascota.codigoPropietario.usuarios.nombres}', '#{listaCitas.idMascota.codigoPropietario.usuarios.apellidos}', '#{listaCitas.citasclinicas.motivo}', '#{listaCitas.citasclinicas.sintomas}')" width="16px"></i>
                                                     </button></td>
-                                                
+
                                                 <!--Modal para mostrar datos de una cita clínica en estado ejecutada-->
                                                 <div class="modal fade" id="modalMostrarConsultaClinica" role="dialog" 
                                                      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -180,7 +180,7 @@
                                                 <td><button type="button" class="btn btn-success">
                                                         <i class="fa fa-eye" onclick="mostrarPeluqueria('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idMascota.codigoPropietario.usuarios.nombres}', '#{listaCitas.idMascota.codigoPropietario.usuarios.apellidos}', '#{listaCitas.citaspeluqueria.serviciosAplicados}')" width="16px"></i>
                                                     </button></td>
-                                                
+
                                                 <!--Modal para mostrar datos de una cita de peluquería en estado ejecutada-->
                                                 <div class="modal fade" id="modalMostrarPeluqueria" role="dialog" 
                                                      aria-labelledby="myModalLabel" aria-hidden="true">
@@ -206,10 +206,10 @@
                                                 </div>
                                             </c:if>
                                         </tr>
-                                      </c:if>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
+                                    </c:if>
+                                </c:forEach>
+                            </tbody>
+                        </table>
 
                     </div> 
                 </div>
@@ -217,49 +217,35 @@
 
             <!-- InstanceEndEditable -->
         </section>
-        <footer>
+        <footer style="min-height: 160px !important;">
             <div id="footer-contenedor" class="row">
-                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>SERVICIOS</h3>
-                    <a href="../NowVet%20English/clinica.html">&#187; Clínica</a><br />
-                    <a href="../NowVet%20English/peluqueria.html">&#187; Peluquería</a><br />
-                    <a href="../NowVet%20English/odontologia.html">&#187; Odontología</a><br />
-                    <a href="../NowVet%20English/vacunacion.html">&#187; Vacunación</a><br />
-                    <a href="../NowVet%20English/ambulancia.html">&#187; Ambulancia</a>
-                </div>
-                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>PRODUCTOS</h3>
-                    <a href="../NowVet%20English/concentrados.html">&#187; Concentrados</a><br />
-                    <a href="../NowVet%20English/petshop.html">&#187; Pet Shop</a><br />
-                    <a href="../NowVet%20English/guarderia.html">&#187; Guardería</a><br />
-                    <a href="#rayosx">&#187; Rayos c</a><br />
-                </div>
-                <div id="panel3Footer" class="col-md-3 col-sm-6 col-xs-12">
-                    <h3>¿QUIÉNES SOMOS?</h3>
-                    <a href="../NowVet%20English/mision.html">&#187; Misión</a><br />
-                    <a href="../NowVet%20English/vision.html">&#187; Visión</a>
-                </div>
-                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="row">
-                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 1<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
-                        <br />
-                        <br />
-                        <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div id="panel1Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>UBICACIÓN</h3>
+                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
                     </div>
-                    <div class="row">
-                        <div id="redesSociales">
-                            <a href="#"><span class=" fa fa-facebook-square"></span></a>
-                            <a href="#"><span class=" fa fa-twitter-square"></span></a>
-                            <a href="#"><span class=" fa fa-google-plus-square"></span></a>
-                            <a href="#"><span class=" fa fa-envelope-o"></span></a>
+                    <div id="panel2Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>CONTÁCTENOS</h3>
+                        <div class="row">
+                            <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                        </div>
+                        <div class="row">
+                            <div id="redesSociales">
+                                <a href="https://www.facebook.com/clinicaveterinaria.santaisabel" target="_blank"><span class=" fa fa-facebook-square"></span></a>
+                                <a href="https://twitter.com/@vetsantaisabel" target="_blank"><span class=" fa fa-twitter-square"></span></a>
+                                <a href="https://plus.google.com/107918889656404618563" target="_blank"><span class=" fa fa-google-plus-square"></span></a>
+                                <a href="mailto:jsbermudez381@misena.edu.co"><span class=" fa fa-envelope-o"></span></a>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <br />
+
+                    <div id="panel1Footer" class="col-md-4  col-sm-4 col-xs-12">
+                        <h3>INFORMACIÓN LEGAL</h3>
                         Now Vet | Todos los derechos reservados
-                        <br /> &#169; Copyright 2015
+                        <br /> &#169; Copyright 2016
                     </div>
                 </div>
+                <br /><br /><br /><br /><br /><br /><br /><br />
             </div>
         </footer>
     </h:body>

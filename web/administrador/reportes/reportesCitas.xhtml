@@ -22,9 +22,9 @@
         <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
         <script src="https://www.amcharts.com/lib/3/serial.js"></script>
         <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
-	<style type="text/css">#chartdiv{width:100%;height:500px;font-size:11px;}.amcharts-export-menu-top-right{top:10px;right:0;}</style>
-	<link rel='stylesheet' id='amexport-css' href='https://www.amcharts.com/lib/3/plugins/export/export.css?ver=20160308-01' type='text/css' media='all'/>
-	<script type='text/javascript' src='https://www.amcharts.com/lib/3/plugins/export/export.min.js?ver=20160308-01'></script>
+        <style type="text/css">#chartdiv{width:100%;height:500px;font-size:11px;}.amcharts-export-menu-top-right{top:10px;right:0;}</style>
+        <link rel='stylesheet' id='amexport-css' href='https://www.amcharts.com/lib/3/plugins/export/export.css?ver=20160308-01' type='text/css' media='all'/>
+        <script type='text/javascript' src='https://www.amcharts.com/lib/3/plugins/export/export.min.js?ver=20160308-01'></script>
 
         <f:event listener="#{controladorUsuario.miraSession('admin')}" type="preRenderView"></f:event>
     </h:head>
@@ -41,7 +41,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="../indexAdministrador.xhtml">
                             <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
                         </a>
                     </div>
@@ -85,8 +85,8 @@
                     <div class="col-md-12 col-sm-12 col-xs-12" id="rolAdmin">
                         Rol: Administrador
                         <br></br>
-	</div>
                     </div>
+                </div>
                 <div class="row" id="rolAdmin">
                     <h2>Reporte Citas</h2>
                     <hr></hr>
@@ -94,143 +94,129 @@
                         <h:form>
                             <div class="form-group">
                                 <h:outputLabel for="vet">Veterinario</h:outputLabel>
-                            <h:selectOneMenu class="form-control" id="vet" value="#{controladorUsuario.veterinario}">
-                                <f:selectItem itemValue="0" itemLabel="Seleccionar veterinario"></f:selectItem>
-                                <c:forEach var="veter" items="#{controladorUsuario.listarPersonal()}">
-                                    <f:selectItem itemValue="#{veter.dniPersonal}" itemLabel="#{veter.usuarios.nombres} &nbsp;#{veter.usuarios.apellidos}"></f:selectItem>
-                                </c:forEach>
-                                <f:ajax render="grafica" execute="@this"></f:ajax>
-                            </h:selectOneMenu>
+                                <h:selectOneMenu class="form-control" id="vet" value="#{controladorUsuario.veterinario}">
+                                    <f:selectItem itemValue="0" itemLabel="Seleccionar veterinario"></f:selectItem>
+                                    <c:forEach var="veter" items="#{controladorUsuario.listarPersonal()}">
+                                        <f:selectItem itemValue="#{veter.dniPersonal}" itemLabel="#{veter.usuarios.nombres} &nbsp;#{veter.usuarios.apellidos}"></f:selectItem>
+                                    </c:forEach>
+                                    <f:ajax render="grafica" execute="@this"></f:ajax>
+                                </h:selectOneMenu>
                             </div>
                         </h:form>
-                        </div>
+                    </div>
                     <h:form id="grafica">
-                    <div class="col-md-10 col-sm-9 col-xs-12">
-                        <c:if test="#{controladorUsuario.veterinario != 0}">
-                <div id="chartdiv"></div>
-                <script>
-				var chart = AmCharts.makeChart( "chartdiv", {
-  "type": "serial",
-  "theme": "light",
-  "dataProvider": [ {
-    "country": "ENE",
-    "visits": #{controladorUsuario.cantidadDeCitas(0)}
-  }, {
-    "country": "FEB",
-    "visits": #{controladorUsuario.cantidadDeCitas(1)}
-  }, {
-    "country": "MAR",
-    "visits": #{controladorUsuario.cantidadDeCitas(2)}
-  }, {
-    "country": "ABR",
-    "visits": #{controladorUsuario.cantidadDeCitas(3)}
-  }, {
-    "country": "MAY",
-    "visits": #{controladorUsuario.cantidadDeCitas(4)}
-  },{
-    "country": "JUN",
-    "visits": #{controladorUsuario.cantidadDeCitas(5)}
-  },{
-    "country": "JUL",
-    "visits": #{controladorUsuario.cantidadDeCitas(6)}
-  },{
-    "country": "AGO",
-    "visits": #{controladorUsuario.cantidadDeCitas(7)}
-  },{
-    "country": "SEP",
-    "visits": #{controladorUsuario.cantidadDeCitas(8)}
-  }, {
-    "country": "OCT",
-    "visits": #{controladorUsuario.cantidadDeCitas(9)}
-  }, {
-    "country": "NOV",
-    "visits": #{controladorUsuario.cantidadDeCitas(10)}
-  }, {
-    "country": "DIC",
-    "visits": #{controladorUsuario.cantidadDeCitas(11)}
-  } ],
-  "valueAxes": [ {
-    "gridColor": "#FFFFFF",
-    "gridAlpha": 0.2,
-    "title": "Citas",
-    "dashLength": 0
-  } ],
-  "gridAboveGraphs": true,
-  "startDuration": 1,
-  "graphs": [ {
-    "balloonText": "[[category]]: <b>[[value]]</b>",
-    "fillAlphas": 0.8,
-    "lineAlpha": 0.2,
-    "type": "column",
-    "valueField": "visits"
-  } ],
-  "chartCursor": {
-    "categoryBalloonEnabled": false,
-    "cursorAlpha": 0,
-    "zoomable": false
-  },
-  "categoryField": "country",
-  "categoryAxis": {
-    "gridPosition": "start",
-    "gridAlpha": 0,
-    "tickPosition": "start",
-    "tickLength": 20
-  },
-  "export": {
-    "enabled": true
-  }
+                        <div class="col-md-10 col-sm-9 col-xs-12">
+                            <c:if test="#{controladorUsuario.veterinario != 0}">
+                                <div id="chartdiv"></div>
+                                <script>
+                                    var chart = AmCharts.makeChart("chartdiv", {
+                                        "type": "serial",
+                                        "theme": "light",
+                                        "dataProvider": [{
+                                                "country": "ENE",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(0)}
+                                            }, {
+                                                "country": "FEB",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(1)}
+                                            }, {
+                                                "country": "MAR",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(2)}
+                                            }, {
+                                                "country": "ABR",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(3)}
+                                            }, {
+                                                "country": "MAY",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(4)}
+                                            }, {
+                                                "country": "JUN",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(5)}
+                                            }, {
+                                                "country": "JUL",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(6)}
+                                            }, {
+                                                "country": "AGO",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(7)}
+                                            }, {
+                                                "country": "SEP",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(8)}
+                                            }, {
+                                                "country": "OCT",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(9)}
+                                            }, {
+                                                "country": "NOV",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(10)}
+                                            }, {
+                                                "country": "DIC",
+                                                "visits": #{controladorUsuario.cantidadDeCitas(11)}
+                                            }],
+                                        "valueAxes": [{
+                                                "gridColor": "#FFFFFF",
+                                                "gridAlpha": 0.2,
+                                                "title": "Citas",
+                                                "dashLength": 0
+                                            }],
+                                        "gridAboveGraphs": true,
+                                        "startDuration": 1,
+                                        "graphs": [{
+                                                "balloonText": "[[category]]: <b>[[value]]</b>",
+                                                "fillAlphas": 0.8,
+                                                "lineAlpha": 0.2,
+                                                "type": "column",
+                                                "valueField": "visits"
+                                            }],
+                                        "chartCursor": {
+                                            "categoryBalloonEnabled": false,
+                                            "cursorAlpha": 0,
+                                            "zoomable": false
+                                        },
+                                        "categoryField": "country",
+                                        "categoryAxis": {
+                                            "gridPosition": "start",
+                                            "gridAlpha": 0,
+                                            "tickPosition": "start",
+                                            "tickLength": 20
+                                        },
+                                        "export": {
+                                            "enabled": true
+                                        }
 
-} );
-                </script>
-                        </c:if>
-                </div>
+                                    });
+                                </script>
+                            </c:if>
+                        </div>
                     </h:form>
-                    </div>
                 </div>
+            </div>
         </section>
-        <footer>
+        <footer style="min-height: 160px !important;">
             <div id="footer-contenedor" class="row">
-                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>SERVICIOS</h3>
-                    <a href="../NowVet%20English/clinica.html">&#187; Clínica</a><br />
-                    <a href="../NowVet%20English/peluqueria.html">&#187; Peluquería</a><br />
-                    <a href="../NowVet%20English/odontologia.html">&#187; Odontología</a><br />
-                    <a href="../NowVet%20English/vacunacion.html">&#187; Vacunación</a><br />
-                    <a href="../NowVet%20English/ambulancia.html">&#187; Ambulancia</a>
-                </div>
-                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>PRODUCTOS</h3>
-                    <a href="../NowVet%20English/concentrados.html">&#187; Concentrados</a><br />
-                    <a href="../NowVet%20English/petshop.html">&#187; Pet Shop</a><br />
-                    <a href="../NowVet%20English/guarderia.html">&#187; Guardería</a><br />
-                    <a href="#rayosx">&#187; Rayos c</a><br />
-                </div>
-                <div id="panel3Footer" class="col-md-3 col-sm-6 col-xs-12">
-                    <h3>¿QUIÉNES SOMOS?</h3>
-                    <a href="../NowVet%20English/mision.html">&#187; Misión</a><br />
-                    <a href="../NowVet%20English/vision.html">&#187; Visión</a>
-                </div>
-                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="row">
-                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
-                        <br />
-                        <br />
-                        <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div id="panel1Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>UBICACIÓN</h3>
+                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
                     </div>
-                    <div class="row">
-                        <div id="redesSociales">
-                            <a href="#"><span class=" fa fa-facebook-square"></span></a>
-                            <a href="#"><span class=" fa fa-twitter-square"></span></a>
-                            <a href="#"><span class=" fa fa-google-plus-square"></span></a>
-                            <a href="#"><span class=" fa fa-envelope-o"></span></a>
+                    <div id="panel2Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>CONTÁCTENOS</h3>
+                        <div class="row">
+                            <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                        </div>
+                        <div class="row">
+                            <div id="redesSociales">
+                                <a href="https://www.facebook.com/clinicaveterinaria.santaisabel" target="_blank"><span class=" fa fa-facebook-square"></span></a>
+                                <a href="https://twitter.com/@vetsantaisabel" target="_blank"><span class=" fa fa-twitter-square"></span></a>
+                                <a href="https://plus.google.com/107918889656404618563" target="_blank"><span class=" fa fa-google-plus-square"></span></a>
+                                <a href="mailto:jsbermudez381@misena.edu.co"><span class=" fa fa-envelope-o"></span></a>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <br />
+
+                    <div id="panel1Footer" class="col-md-4  col-sm-4 col-xs-12">
+                        <h3>INFORMACIÓN LEGAL</h3>
                         Now Vet | Todos los derechos reservados
-                        <br /> &#169; Copyright 2015
+                        <br /> &#169; Copyright 2016
                     </div>
                 </div>
+                <br /><br /><br /><br /><br /><br /><br /><br />
             </div>
         </footer>
     </h:body>

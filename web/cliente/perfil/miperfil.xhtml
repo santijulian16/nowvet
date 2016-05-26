@@ -60,87 +60,87 @@
             });
         </script>
         <script>
-        	$().ready(function () {
-            	$('#modicarDatos').formValidation({
-                	err: {container: 'tooltip'},
-                    	icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
-                        locale: 'es_ES',
-                        fields: {
-                        	nombremod: {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    regexp: {
-                                    	regexp: '^[A-Za-z ñÑáéíúó]+$',
-                                        message: 'Solo letra, sin números o caracteres especiales'
-                                    },
-                                    stringLength: {
-                                    	min: 3,
-                                        max: 15
-                                    }
-                               	}
-                           },
-				apellidomod: {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    regexp: {
-                                    	regexp: '^[A-Za-z ñÑáéíúó]+$',
-                                        message: 'Solo letras, sin números o caracteres especiales'
-                                    },
-                                    stringLength: {
-                                    	min: 3,
-                                        max: 30
-                                    }
-                               	}
-                           },
-				cedulamod: {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},
-                                    regexp: {
-                                    	regexp: /^[0-9]+$/,
-                                        message: 'Solo números, sin caractéres especiales'
-                                    },
-                                    stringLength: {
-                                    	min: 2,
-                                        max: 11
-                                    }
-                               	}
-                           },
-				correomod: {
-                            	row: '.form-group',
-                                validators: {
-                                	notEmpty: {},                            
-                           			emailAddress: {
-                            			message: 'Ingrese un correo electronico valido'
-                        			},
-							 		regexp: {
-                            			regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
-                            			message: 'Ingrese un correo electronico valido'
-                        			}
-                               	}
-                           },
-				direccionmod: {
-                            	row: '.form-group',
-                                validators: {
-                                    regexp: {
-                            			regexp: '^[A-Za-z0-9# ,-]+$',
-                            			message: 'Solo letras minusculas sin caracteres especiales'
-                        			}
-                               	}
-                           }
-						   
-                       }
-        		});
-    		});
-    	</script>
+            $().ready(function () {
+                $('#modicarDatos').formValidation({
+                    err: {container: 'tooltip'},
+                    icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
+                    locale: 'es_ES',
+                    fields: {
+                        nombremod: {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: '^[A-Za-z ñÑáéíúó]+$',
+                                    message: 'Solo letra, sin números o caracteres especiales'
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 15
+                                }
+                            }
+                        },
+                        apellidomod: {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: '^[A-Za-z ñÑáéíúó]+$',
+                                    message: 'Solo letras, sin números o caracteres especiales'
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 30
+                                }
+                            }
+                        },
+                        cedulamod: {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: /^[0-9]+$/,
+                                    message: 'Solo números, sin caractéres especiales'
+                                },
+                                stringLength: {
+                                    min: 2,
+                                    max: 11
+                                }
+                            }
+                        },
+                        correomod: {
+                            row: '.form-group',
+                            validators: {
+                                notEmpty: {},
+                                emailAddress: {
+                                    message: 'Ingrese un correo electronico valido'
+                                },
+                                regexp: {
+                                    regexp: '^[^@\\s]+@([^@\\s]+\\.)+[^@\\s]+$',
+                                    message: 'Ingrese un correo electronico valido'
+                                }
+                            }
+                        },
+                        direccionmod: {
+                            row: '.form-group',
+                            validators: {
+                                regexp: {
+                                    regexp: '^[A-Za-z0-9# ,-]+$',
+                                    message: 'Solo letras minusculas sin caracteres especiales'
+                                }
+                            }
+                        }
+
+                    }
+                });
+            });
+        </script>
         <script>
             function mostraModal(idModal) {
                 $(idModal).modal('show');
             }
         </script>
-        
+
         <script>
             function eliminarMas(idmasco) {
                 $('#eliminarMascota').modal('show');
@@ -153,40 +153,40 @@
     <h:body>
         <img id="back" src="../../imagenes/fondo.jpg" height="751px" width="765px" />
         <h:form>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-       <a class="navbar-brand" href="index.html">
-        <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
-      </a>
-    </div>
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="../indexCliente.xhtml">
+                            <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
+                        </a>
+                    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="../indexCliente.xhtml">Inicio</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-              <li><a href="../servicios/formularioCitasClinicas.xhtml">Agendar Cita Clínica</a></li>
-              <li><a href="../servicios/formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluquería</a></li>
-          </ul>
-        </li>
-        <li><a href="../citas/misCitas.xhtml">Citas</a></li>
-        <li><a href="../perfil/miperfil.xhtml">Mi Perfil</a></li>
-        <li><h:commandLink action="#{controladorUsuario.cerrarSesion()}">Salir&nbsp;<span class=" fa fa-sign-out"></span></h:commandLink></li>
-      </ul>
-    </div><!-- /.navbar-collapsee -->
-  </div><!-- /.container-fluid -->
-</nav>
-</h:form>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="../indexCliente.xhtml">Inicio</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="../servicios/formularioCitasClinicas.xhtml">Agendar Cita Clínica</a></li>
+                                    <li><a href="../servicios/formularioCitasDePeluqueria.xhtml">Agendar Cita De Peluquería</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="../citas/misCitas.xhtml">Citas</a></li>
+                            <li><a href="../perfil/miperfil.xhtml">Mi Perfil</a></li>
+                            <li><h:commandLink action="#{controladorUsuario.cerrarSesion()}">Salir&nbsp;<span class=" fa fa-sign-out"></span></h:commandLink></li>
+                        </ul>
+                    </div><!-- /.navbar-collapsee -->
+                </div><!-- /.container-fluid -->
+            </nav>
+        </h:form>
         <section>
             <c:if test="#{controladorUsuario.estado eq '4'}">
                 <div class="alert alert-success alert-dismissible" role="alert">
@@ -204,43 +204,43 @@
             <c:if test="#{controladorUsuario.estado eq '6'}">
                 <div class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                     ¡Actualzación de datos correcta!
+                    ¡Actualzación de datos correcta!
                 </div>
             </c:if>
             <!-- InstanceBeginEditable name="section" --><div class="container" id="colorbase">
-               	
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12" id="migasAdmin">
-                            <h:link value="Inicio" outcome="/cliente/indexCliente" />\
-                            <h:link value="Perfil" outcome="/cliente/perfil/miperfil" />
-                        </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12" id="rolAdmin">
-                            Rol: Cliente
-                        </div>
 
-                        <div class="col-md-1 col-sm-2 col-xs-3" style="padding-top:20px;">
-                            <img src="../../imagenes/usuarioDesconocido.jpg" alt="Mi Nombre" class="img-circle img-responsive"></img>
-                        </div>
-                        <div class="col-md-11 col-sm-9 col-xs-9">
-                            <h3><h:outputText value="#{controladorUsuario.usuLogin.nombres}&nbsp;#{controladorUsuario.usuLogin.apellidos}"/></h3>
-                            <h5>Rol(es):<ul><c:forEach var="roles" items="#{controladorUsuario.usuLogin.rolesCollection}">
-                                        <li>#{roles.nombre}</li>
-                                    </c:forEach>
-                                </ul></h5>
-                            <h5><h:outputText value="CC:&nbsp;#{controladorUsuario.usuLogin.cedula}"/></h5>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="migasAdmin">
+                        <h:link value="Inicio" outcome="/cliente/indexCliente" />\
+                        <h:link value="Perfil" outcome="/cliente/perfil/miperfil" />
                     </div>
-                    <div class="row">
-                        <div id="subtitulo" class="col-md-12 col-sm-12 col-xs-12">
-                            <h3>Datos Personales</h3>
-                        </div>
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="rolAdmin">
+                        Rol: Cliente
                     </div>
-                    <div class="row">
-                        <div class="col-md-10" id="datosPersonales">
-                            <h4><h:outputText value="Correo Electronico:&nbsp;#{controladorUsuario.usuLogin.correo}"></h:outputText></h4>
-                            <h4>Contraseña: ******</h4>
-                            <h4><h:outputText value="Dirección:&nbsp;#{controladorUsuario.usuLogin.direccion}" /></h4>
-                        </div>
+
+                    <div class="col-md-1 col-sm-2 col-xs-3" style="padding-top:20px;">
+                        <img src="../../imagenes/usuarioDesconocido.jpg" alt="Mi Nombre" class="img-circle img-responsive"></img>
+                    </div>
+                    <div class="col-md-11 col-sm-9 col-xs-9">
+                        <h3><h:outputText value="#{controladorUsuario.usuLogin.nombres}&nbsp;#{controladorUsuario.usuLogin.apellidos}"/></h3>
+                        <h5>Rol(es):<ul><c:forEach var="roles" items="#{controladorUsuario.usuLogin.rolesCollection}">
+                                    <li>#{roles.nombre}</li>
+                                </c:forEach>
+                            </ul></h5>
+                        <h5><h:outputText value="CC:&nbsp;#{controladorUsuario.usuLogin.cedula}"/></h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="subtitulo" class="col-md-12 col-sm-12 col-xs-12">
+                        <h3>Datos Personales</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10" id="datosPersonales">
+                        <h4><h:outputText value="Correo Electronico:&nbsp;#{controladorUsuario.usuLogin.correo}"></h:outputText></h4>
+                        <h4>Contraseña: ******</h4>
+                        <h4><h:outputText value="Dirección:&nbsp;#{controladorUsuario.usuLogin.direccion}" /></h4>
+                    </div>
                     <div class="col-md-2" id="editarDatosPersonales">
                         <br></br>
 
@@ -319,7 +319,7 @@
                             </div>
                         </div>
                     </div>
-                    </div>
+                </div>
                 <div class="row" id="subtitulo">
                     <div  class="col-md-9 col-sm-8 col-xs-12">
                         <h3>Mascotas</h3>
@@ -409,55 +409,38 @@
                 </div>
             </div>
 
-	
+
             <!-- InstanceEndEditable -->
         </section>
-        <footer>
+        <footer style="min-height: 160px !important;">
             <div id="footer-contenedor" class="row">
-                <div id="panel1Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>SERVICIOS</h3>
-                    <a href="/NowVet/faces/clinica.xhtml">&#187; Clínica</a><br />
-                    <a href="/NowVet/faces/peluqueria.xhtml">&#187; Peluquería</a><br />
-                    <a href="/NowVet/faces/odontologia.xhtml">&#187; Odontología</a><br />
-                    <a href="/NowVet/faces/vacunacion.xhtml">&#187; Vacunación</a><br />
-                    <a href="/NowVet/faces/ambulancia.xhtml">&#187; Ambulancia</a>
-                </div>
-                <div id="panel2Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>PRODUCTOS</h3>
-                    <a href="/NowVet/faces/concentrados.xhtml">&#187; Concentrados</a><br />
-                    <a href="/NowVet/faces/petshop.xhtml">&#187; Pet Shop</a><br />
-                    <a href="/NowVet/faces/guarderia.xhtml">&#187; Guardería</a><br />
-                    <a href="/NowVet/faces/#rayosx">&#187; Rayos-X</a><br />
-                </div>
-                <div id="panel3Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <h3>¿QUIÉNES SOMOS?</h3>
-                    <a href="/NowVet/faces/mision.xhtml">&#187; Misión</a><br />
-                    <a href="/NowVet/faces/vision.xhtml">&#187; Visión</a>
-                </div>
-                <div id="panel3Footer" class="col-md-1 col-sm-6 col-xs-12">
-                    <h3>IDIOMA</h3>
-                    <a href="ingles/index.html">&#187; English</a> </div>
-                <div id="panel4Footer" class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="row">
-                        <spam class=" fa fa-home"></spam>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
-                        <br />
-                        <br />
-                        <spam class=" fa fa-phone"></spam>&nbsp;&nbsp;Teléfono: 6826731
+                <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div id="panel1Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>UBICACIÓN</h3>
+                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
                     </div>
-                    <div class="row">
-                        <div id="redesSociales">
-                            <a href="#"><spam class=" fa fa-facebook-square"></spam></a>
-                            <a href="#"><spam class=" fa fa-twitter-square"></spam></a>
-                            <a href="#"><spam class=" fa fa-google-plus-square"></spam></a>
-                            <a href="#"><spam class=" fa fa-envelope-o"></spam></a>
+                    <div id="panel2Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>CONTÁCTENOS</h3>
+                        <div class="row">
+                            <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                        </div>
+                        <div class="row">
+                            <div id="redesSociales">
+                                <a href="https://www.facebook.com/clinicaveterinaria.santaisabel" target="_blank"><span class=" fa fa-facebook-square"></span></a>
+                                <a href="https://twitter.com/@vetsantaisabel" target="_blank"><span class=" fa fa-twitter-square"></span></a>
+                                <a href="https://plus.google.com/107918889656404618563" target="_blank"><span class=" fa fa-google-plus-square"></span></a>
+                                <a href="mailto:jsbermudez381@misena.edu.co"><span class=" fa fa-envelope-o"></span></a>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <br />
+
+                    <div id="panel1Footer" class="col-md-4  col-sm-4 col-xs-12">
+                        <h3>INFORMACIÓN LEGAL</h3>
                         Now Vet | Todos los derechos reservados
-                        <br /> &#169; Copyright 2015
+                        <br /> &#169; Copyright 2016
                     </div>
                 </div>
+                <br /><br /><br /><br /><br /><br /><br /><br />
             </div>
         </footer>
     </h:body>
