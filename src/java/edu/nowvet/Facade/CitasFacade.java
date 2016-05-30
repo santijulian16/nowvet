@@ -6,6 +6,7 @@
 package edu.nowvet.Facade;
 
 import edu.nowvet.Entitys.Citas;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -54,5 +55,12 @@ public class CitasFacade extends AbstractFacade<Citas> {
         q.setParameter("ced", cedula);
         List citaTemp=q.getResultList();
         return citaTemp;
+    }
+    
+    public List hisorialClinico(int codigoMascota){
+        Query q=em.createQuery("select c.citasclinicas.diagnostico, c.citasclinicas.motivo, c.citasclinicas.alimento, c.citasclinicas.formulaMedica, c.citasclinicas.sintomas, c.fechaAsignada, c.vacunas, c.peso, c.antecedentes, c.idVeterinario.usuarios.cedula, c.idVeterinario.usuarios.nombres, c.idVeterinario.usuarios.apellidos, c.idVeterinario.usuarios.correo from Citas c where c.idMascota.codigoMascota= :idMasco");
+        q.setParameter("idMasco", codigoMascota);
+        List histo=q.getResultList();
+        return histo;
     }
 }

@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0155365a-84c6-40bc-9e8e-a541555ed6c3">
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="2aeb4e7d-7223-410a-868c-2ae0387d5c99"/>
+	<parameter name="mascota" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     citas.`fechaAsignada` AS citas_fechaAsignada,
+     citas.`vacunas` AS citas_vacunas,
+     citas.`peso` AS citas_peso,
+     citas.`antecedentes` AS citas_antecedentes,
+     usuarios.`cedula` AS usuarios_cedula,
+     usuarios.`nombres` AS usuarios_nombres,
+     usuarios.`apellidos` AS usuarios_apellidos,
+     usuarios.`correo` AS usuarios_correo,
+     citasclinicas.`diagnostico` AS citasclinicas_diagnostico,
+     citasclinicas.`motivo` AS citasclinicas_motivo,
+     citasclinicas.`alimento` AS citasclinicas_alimento,
+     citasclinicas.`formulaMedica` AS citasclinicas_formulaMedica,
+     citasclinicas.`sintomas` AS citasclinicas_sintomas
+FROM
+     `personalveterinario` personalveterinario INNER JOIN `citas` citas ON personalveterinario.`dniPersonal` = citas.`idVeterinario` AND citas.`idMascota` = $P{mascota} AND citas.`estado` = "Ejecutada"
+     INNER JOIN `usuarios` usuarios ON personalveterinario.`dniPersonal` = usuarios.`cedula`
+     INNER JOIN `citasclinicas` citasclinicas ON citas.`idCita` = citasclinicas.`idCita`]]>
+	</queryString>
+	<field name="citas_fechaAsignada" class="java.sql.Timestamp"/>
+	<field name="citas_vacunas" class="java.lang.String"/>
+	<field name="citas_peso" class="java.lang.String"/>
+	<field name="citas_antecedentes" class="java.lang.String"/>
+	<field name="usuarios_cedula" class="java.lang.Integer"/>
+	<field name="usuarios_nombres" class="java.lang.String"/>
+	<field name="usuarios_apellidos" class="java.lang.String"/>
+	<field name="usuarios_correo" class="java.lang.String"/>
+	<field name="citasclinicas_diagnostico" class="java.lang.String"/>
+	<field name="citasclinicas_motivo" class="java.lang.String"/>
+	<field name="citasclinicas_alimento" class="java.lang.String"/>
+	<field name="citasclinicas_formulaMedica" class="java.lang.String"/>
+	<field name="citasclinicas_sintomas" class="java.lang.String"/>
+	<background>
+		<band height="555" splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="166" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="0" width="822" height="94" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="53bf173b-4c65-40b1-a86f-2ef244cb4b32"/>
+				<staticText>
+					<reportElement style="Title" x="20" y="0" width="612" height="94" forecolor="#2ACC7D" uuid="039193cc-35eb-4542-8b4e-307a3d36c60e"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="54" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Historial Clinico]]></text>
+				</staticText>
+				<image>
+					<reportElement x="650" y="6" width="169" height="78" uuid="378330f7-7395-470f-ab99-fdd4e386ed66"/>
+					<imageExpression><![CDATA["C:\\Users\\Julian\\Documents\\NetBeansProjects\\NowVet\\web\\imagenes\\logo.png"]]></imageExpression>
+				</image>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<frame>
+				<reportElement x="6" y="0" width="796" height="29" uuid="fcd87c35-7dc9-4dee-85d9-ccb57b36b169"/>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="13" y="0" width="39" height="14" forecolor="#000000" uuid="79e94520-148f-4a0e-926f-eea7430750cf"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="52" y="0" width="52" height="14" forecolor="#000000" uuid="c56c2b19-cfc8-450f-b27d-e061f957cc04"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Vacunas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="105" y="0" width="44" height="14" forecolor="#000000" uuid="042581d1-b6d0-4125-aff0-c228aa8a5697"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Peso]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="150" y="0" width="62" height="29" forecolor="#000000" uuid="96a0ffdb-24ad-404b-a4db-464f3c9bf0fb"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Antece-dentes]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="213" y="0" width="60" height="29" forecolor="#000000" uuid="83de1901-a283-44cd-9ca6-d9c7c92b2398"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Diadnós-tico]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="273" y="0" width="66" height="14" forecolor="#000000" uuid="3bf8828e-9ab5-456c-be67-78bc72b663be"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Motivo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="338" y="0" width="53" height="14" forecolor="#000000" uuid="70fc3594-5023-4bd3-b9e7-f37d494338a5"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Alimento]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="390" y="0" width="66" height="29" forecolor="#000000" uuid="78e2a4fa-36a9-4ad3-9ac1-e6729bbb8cfb"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Fórmula Médica]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="455" y="0" width="63" height="14" forecolor="#000000" uuid="a290d7c2-1868-4b43-9e26-80c332e1dca7"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Síntomas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="518" y="0" width="68" height="29" forecolor="#000000" uuid="8da5ac00-0bd6-4f42-9d56-090dc0ece40f"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Veterinario: Nombre]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="585" y="0" width="66" height="29" forecolor="#000000" uuid="f26e9e85-d47a-438e-8aaa-62e63782f288"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Apellido]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="650" y="0" width="79" height="29" forecolor="#000000" uuid="5fe3dbc1-a91a-4a23-be08-cfa12eba70f9"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Correo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="728" y="0" width="68" height="29" forecolor="#000000" uuid="78650c63-2cd2-4d7a-a17c-7c8548967565"/>
+					<textElement verticalAlignment="Bottom">
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Cédula]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="6" y="28" width="796" height="1" uuid="5aa5a4b2-0411-4631-abf7-76943362d34a"/>
+			</line>
+			<frame>
+				<reportElement x="6" y="6" width="796" height="14" uuid="153829ac-b78d-4831-85f9-c9ac3e0d7ecd"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="false">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="52" height="14" uuid="9d36c60c-beb2-46f2-a281-ed63beff9ae2"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{citas_fechaAsignada}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="52" y="0" width="52" height="14" uuid="f538f4a8-4d5d-4f52-a806-653b08f01855"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{citas_vacunas}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="105" y="0" width="44" height="14" uuid="77e221ab-22d7-4231-a892-806edb31de78"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{citas_peso}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="150" y="0" width="62" height="14" uuid="23e9ae90-eae8-473c-a827-c8868c490434"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{citas_antecedentes}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="213" y="0" width="60" height="14" uuid="c4da04b0-a870-4d2e-bf4b-1a848c04dbeb"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{citasclinicas_diagnostico}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="272" y="0" width="66" height="14" uuid="cde9a48f-ddfe-4878-af73-007600d6b326"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{citasclinicas_motivo}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="338" y="0" width="53" height="14" uuid="a3eace2e-4686-4854-9ec2-d7e216775401"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{citasclinicas_alimento}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="390" y="0" width="66" height="14" uuid="077cf3fe-d7f2-4d21-8bec-c0f00f05e4eb"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{citasclinicas_formulaMedica}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="734" y="6" width="69" height="14" uuid="29a41094-7321-4b87-98ee-5344e78cef93"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_cedula}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="656" y="6" width="78" height="14" uuid="4aff3168-4d1e-43c4-b54f-0cc895fdaf32"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_correo}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="591" y="6" width="66" height="14" uuid="0676c94c-a38f-46d3-8bcf-f98e3bc913f5"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_apellidos}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="524" y="6" width="68" height="14" uuid="349b3188-0227-4bc9-a9fb-22faf4ae8edf"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuarios_nombres}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="Detail" positionType="Float" x="461" y="6" width="63" height="14" uuid="2cb3ffa1-78cc-45ed-a73c-9ae64ce1d74b"/>
+				<textElement>
+					<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{citasclinicas_sintomas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="a8da0ff8-fb51-4897-8407-add5d8d04c9b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="2" y="0" width="800" height="16" forecolor="#D0B48E" backcolor="#2ACC7D" uuid="709dff2c-c282-4eb5-be51-c1f8b76a1b06"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="753" y="0" width="40" height="16" forecolor="#FFFFFF" uuid="9d588a66-1ad7-46c0-845e-819c192d4090"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="673" y="0" width="80" height="16" forecolor="#FFFFFF" uuid="5295bb98-fa61-4d91-9078-5d3eb9243176"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="4" y="0" width="195" height="16" forecolor="#FFFFFF" uuid="d1a7de60-36fb-4bb7-b917-799799932a75"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

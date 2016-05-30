@@ -22,15 +22,20 @@ import edu.nowvet.Facade.MascotasFacade;
 import edu.nowvet.Facade.PersonalveterinarioFacade;
 import edu.nowvet.Facade.ServiciosFacade;
 import edu.nowvet.Facade.UsuariosFacade;
+import java.io.File;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -38,7 +43,21 @@ import java.util.logging.Logger;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.oasis.JROdtExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRDocxExporterParameter;
+import net.sf.jasperreports.engine.export.ooxml.JRPptxExporter;
+import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 
 
 /**
@@ -48,9 +67,14 @@ import javax.servlet.http.HttpServletRequest;
 @Named(value = "controladorCitas")
 @SessionScoped
 public class controladorCitas implements Serializable {
+    
+    JasperPrint jasperPrint;
+    List lista1;
 
     @Inject
     CitasFacade citasFacade;
+    @Inject 
+    ControladorMascotas conMas;
     @Inject
     CitasclinicasFacade citasClinicasFacade;
     @Inject
@@ -445,6 +469,28 @@ public class controladorCitas implements Serializable {
         List <Citas> listaCitasEjecutadas;
         listaCitasEjecutadas=this.citasFacade.consultarCitasEjecutadas();
         return listaCitasEjecutadas;
+    }
+    
+     public void pdfHis (Mascotas mascota) throws ClassNotFoundException, SQLException, JRException, IOException {
+        
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/nowvet", "root", "");
+        
+        
+        Map<String, Object> parametros = new HashMap<String, Object>();
+        parametros.put("mascota", mascota.getCodigoMascota());
+
+        File archivo = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/historial.jasper"));
+        JasperPrint jp = JasperFillManager.fillReport(archivo.getPath(), parametros,conexion);
+        
+        HttpServletResponse sr = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        sr.addHeader("Content-disposition", "attachment; filename=Historial Clinico "+mascota.getNombre()+"-"+mascota.getCodigoPropietario().getUsuarios().getNombres()+" "+mascota.getCodigoPropietario().getUsuarios().getApellidos()+".pdf");
+        
+        ServletOutputStream stream = sr.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jp, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
     }
 
     public Integer getIdCita() {
