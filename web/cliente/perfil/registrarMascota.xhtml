@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta charset="UTF-8"></meta>
         <meta name="viewport" content="width=device-width, user-scalable=no"></meta>
@@ -24,6 +25,8 @@
         <script src="../../js/formValidation.min.js" type="text/javascript"></script>
         <script src="../../js/bootstrapValidator.js" type="text/javascript"></script>
         <script src="../../js/es_ES.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
         <script>
             $().ready(function () {
                 $('#registroMascota').formValidation({
@@ -33,6 +36,7 @@
                     fields: {
                         'registroMascota:campoNombre': {
                             row: '.form-group',
+                            message: 'Debe digitar un nombre válido',
                             validators: {
                                 notEmpty: {},
                                 regexp: {
@@ -47,6 +51,7 @@
                         },
                         'registroMascota:campoColor': {
                             row: '.form-group',
+                            message: 'Debe digitar un color válido',
                             validators: {
                                 notEmpty: {},
                                 regexp: {
@@ -59,8 +64,38 @@
                                 }
                             }
                         },
-                        'registroMascota:campoRaza': {
+                        'registroMascota:campoRazaPerros': {
                             row: '.form-group',
+                            message: 'Debe seleccionar una raza',
+                            validators: {
+                                notEmpty: {},
+                                regexp: {
+                                    regexp: '^[A-Za-z ñÑáéíúó]+$',
+                                    message: 'Solo letras, sin números o caracteres especiales'
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 30
+                                }
+                            }
+                        },
+                        razaPerros: {
+                            row: '.form-group',
+                            message: 'Debe seleccionar una raza',
+                            validators: {
+                                notEmpty: {}
+                            }
+                        },
+                        razaGatos: {
+                            row: '.form-group',
+                            message: 'Debe seleccionar una raza',
+                            validators: {
+                                notEmpty: {}
+                            }
+                        },
+                        'registroMascota:campoRazaGatos': {
+                            row: '.form-group',
+                            message: 'Debe seleccionar una raza',
                             validators: {
                                 notEmpty: {},
                                 regexp: {
@@ -75,12 +110,14 @@
                         },
                         'registroMascota:sexo': {
                             row: '.form-group',
+                            message: 'Debe seleccionar el tipo de sexo',
                             validators: {
                                 notEmpty: {}
                             }
                         },
-                        'registroMascota:especie': {
+                        especie: {
                             row: '.form-group',
+                            message: 'Debe seleccionar una especie',
                             validators: {
                                 notEmpty: {}
                             }
@@ -131,7 +168,7 @@
         </h:form>
         <section>
             <!-- InstanceBeginEditable name="section" -->
-            <div class="container" style="background-color: #fff;">
+            <div class="container" id="colorbase">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12" id="migas">
                         <h:link value="Inicio" outcome="/cliente/indexCliente" />\
@@ -142,8 +179,8 @@
                         Rol: Cliente
                     </div>
                 </div>
-            </div>
-            <div class="container" id="containerFormularios">
+            
+            <div class="container col-md-8 col-md-offset-2" id="containerFormularios">
                 <div class="row" id="rowFormularios">
                     <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12" id="Formularios">
                         <h:form id="registroMascota">
@@ -156,22 +193,196 @@
                                     <h:inputText id="campoNombre" value="#{controladorMascotas.mascotaReg.nombre}" pt:class="form-control" pt:placeholder="Nombre" pt:tabindex="2" required="true" title="De 3 a 25 caracteres, sin caracteres especiales"></h:inputText>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" >
                                 <label for="especie">Especie</label>
                                 <div class="input-group margin-bottom-sm">
                                     <span class="input-group-addon"><i class="fa fa-paw"></i></span>
-                                    <h:inputText id="especie" pt:list="especies" value="#{controladorMascotas.mascotaReg.especie}"  class="form-control" tabindex="3" pt:placeholder="Especie"></h:inputText>
+                                    <input name="especie" oninput="myFunction()" id="especie" list="especies" value="#{controladorMascotas.mascotaReg.especie}"  class="form-control" tabindex="3" placeholder="Especie"></input>
                                     <datalist id="especies">
-                                        <option value="Perro"></option>
+                                        <option value="Perro" ></option>
                                         <option value="Gato"></option>
                                     </datalist>
                                 </div>
                             </div>
+                            <script>
+                                function myFunction() {
+                                    var valor = document.getElementById("especie").value;
+                                    if (valor == "Perro") {
+                                        document.getElementById('razaGatos').style.display = "none";
+                                        document.getElementById('razaPerros').style.display = "block";
+                                    }
+                                    if (valor == "Gato") {
+                                        document.getElementById('razaPerros').style.display = "none";
+                                        document.getElementById('razaGatos').style.display = "block";
+                                    }
+                                }
+                            </script>
+                            <div class="form-group" style="display: none" id="razaPerros">
+                                        <label for="razaPerros" class="lveterinario">Raza Perro</label>
+                                        <div class="input-group margin-bottom-sm">
+                                            <span class="input-group-addon"><i class="fa fa-paw"></i></span>
+                                            <select name="razaPerros" class="form-control"  data-live-search="true" id="razaPerros">                               
+                                                <option>Akita Inu</option>
+                                                <option>Alaskan Malamute</option>
+                                                <option>Barzoi</option>
+                                                <option>Basset Azul de Gascuña</option>
+                                                <option>Basset Hound</option>
+                                                <option>Beagle</option>
+                                                <option>Beagle Harrier</option>
+                                                <option>Beauceron</option>
+                                                <option>Bichón Maltés</option>
+                                                <option>Bobtail</option>
+                                                <option>Border Collie</option>
+                                                <option>Boxer</option>
+                                                <option>Boyero de Berna</option>
+                                                <option>Braco Alemán</option>
+                                                <option>Braco Francés</option>
+                                                <option>Briard</option>
+                                                <option>Bull terrier Inglés</option>
+                                                <option>Bulldog Francés</option>
+                                                <option>Bulldog Inglés</option>
+                                                <option>Bullmastiff</option>
+                                                <option>Cairn Terrier</option>
+                                                <option>Cane Corso</option>
+                                                <option>Caniche</option>
+                                                <option>Cavalier King Charles</option>
+                                                <option>Chihuahua</option>
+                                                <option>Chow Chow</option>
+                                                <option>Cocker Spaniel Americano</option>
+                                                <option>Cocker Spaniel Inglés</option>
+                                                <option>Collie Rough</option>
+                                                <option>Collie Smooth</option>
+                                                <option>Dálmata</option>
+                                                <option>Doberman</option>
+                                                <option>Dogo Argentino</option>
+                                                <option>Dogo de Burdeos</option>
+                                                <option>Epagneul Bretón</option>
+                                                <option>Epagneul Francés</option>
+                                                <option>Epagneul Japonés</option>
+                                                <option>Fox Terrier</option>
+                                                <option>Galgo Español</option>
+                                                <option>Galgo Irlandés</option>
+                                                <option>Golden Retriever</option>
+                                                <option>Gordon Setter</option>
+                                                <option>Gos d'Atura</option>
+                                                <option>Gran Danés</option>
+                                                <option>Husky Siberiano</option>
+                                                <option>Komondor</option>
+                                                <option>Labrador Retriever</option>
+                                                <option>Lebrel Afgano</option>
+                                                <option>Lebrel Polaco</option>
+                                                <option>Mastiff</option>
+                                                <option>Mastín de los Pirineos</option>
+                                                <option>Mastín Español</option>
+                                                <option>Mastín Napolitano</option>
+                                                <option>Montaña de los Pirineos</option>
+                                                <option>Norfolk Terrier</option>
+                                                <option>Norwich Terrier</option>
+                                                <option>Papillon</option>
+                                                <option>Pastor Alemán</option>
+                                                <option>Pastor Australiano</option>
+                                                <option>Pastor Belga</option>
+                                                <option>Pastor Blanco Suizo</option>
+                                                <option>Pastor de los Pirineos</option>
+                                                <option>Pekinés</option>
+                                                <option>Pequeño Azul de Gascuña</option>
+                                                <option>Pequeño Basset Griffon</option>
+                                                <option>Pequeño Brabantino</option>
+                                                <option>Pequeño Perro León</option>
+                                                <option>Pequeño Perro Ruso</option>
+                                                <option>Pequeño Sabueso Suizo</option>
+                                                <option>Perdiguero de Burgos</option>
+                                                <option>Perdiguero Portugués</option>
+                                                <option>Perro de Agua Español</option>
+                                                <option>Perro Lobo de Checoslovaquia</option>
+                                                <option>Pinscher miniatura</option>
+                                                <option>Pit Bull</option>
+                                                <option>Podenco Canario</option>
+                                                <option>Podenco Ibicenco</option>
+                                                <option>Pointer Inglés</option>
+                                                <option>Presa Canario</option>
+                                                <option>Pug</option>
+                                                <option>Rafeiro do Alentejo</option>
+                                                <option>Rafeiro do Alentejo</option>
+                                                <option>Samoyedo</option>
+                                                <option>San Bernardo</option>
+                                                <option>Schnauzer gigante</option>
+                                                <option>Schnauzer mediano</option>
+                                                <option>Schnauzer miniatura</option>
+                                                <option>Scottish Terrier</option>
+                                                <option>Setter Inglés</option>
+                                                <option>Setter Irlandés</option>
+                                                <option>Shar Pei</option>
+                                                <option>Shih Tzu</option>
+                                                <option>Spitz</option>
+                                                <option>Springer Spaniel Galés</option>
+                                                <option>Springer Spaniel Inglés</option>
+                                                <option>Teckel</option>
+                                                <option>Terranova</option>
+                                                <option>Weimaraner</option>
+                                                <option>Westies</option>
+                                                <option>Whippet</option>
+                                                <option>Yorkshire Terrier</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                            
+                            
+
+                            <div class="form-group" style="display: none" id="razaGatos">
+                                        <label for="razaGatos" class="lveterinario">Raza Gato</label>
+                                        <div class="input-group margin-bottom-sm">
+                                            <span class="input-group-addon"><i class="fa fa-paw"></i></span>
+                                            <select name="razaGatos" class="form-control"  data-live-search="true" id="razaGatos">                               
+                                                <option>Abisinio</option>
+                                                <option>Angora</option>
+                                                <option>Azul Ruso</option>
+                                                <option>Balinés</option>
+                                                <option>Bengal</option>
+                                                <option>Bobtail Japonés</option>
+                                                <option>Bombay, Británico</option>
+                                                <option>British Shorthair</option>
+                                                <option>Burmés, Burmilla</option>
+                                                <option>Cartujo (Chartreux)</option>
+                                                <option>Cornish Rex</option>
+                                                <option>Cymric (Man de pelo largo)</option>
+                                                <option>Del Bosque Noruego</option>
+                                                <option>Devon rex</option>
+                                                <option>Exóticos, Fold escocés</option>
+                                                <option>Foldex</option>
+                                                <option>Habana</option>
+                                                <option>Himalayo</option>
+                                                <option>Javanés</option>
+                                                <option>Korat</option>
+                                                <option>Maine Coon</option>
+                                                <option>Manx</option>
+                                                <option>Mau Egipcio</option>
+                                                <option>Munchkin</option>
+                                                <option>Ocicat</option>
+                                                <option>Oriental</option>
+                                                <option>Pelicorto Americano</option>
+                                                <option>Pelicorto Europeo</option>
+                                                <option>Persas</option>
+                                                <option>Ragdoll's</option>
+                                                <option>Rex selkirk</option>
+                                                <option>Sagrados de Birmania</option>
+                                                <option>Siamés</option>
+                                                <option>Siberiano</option>
+                                                <option>Singapur</option>
+                                                <option>Snowshoe</option>
+                                                <option>Somalí</option>
+                                                <option>Sphynx</option>
+                                                <option>Tonquinés</option>
+                                                <option>Van turco</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
                             <div class="form-group">
                                 <label for="sexo">Sexo</label>
                                 <div class="input-group margin-bottom-sm">
                                     <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
-                                    <h:inputText id="sexo" pt:list="sexo" value="#{controladorMascotas.mascotaReg.sexo}" class="form-control" tabindex="4" pt:placeholder="Sexo"></h:inputText>
+                                    <h:inputText id="sexo" onfocus="this.blur()" pt:list="sexo" value="#{controladorMascotas.mascotaReg.sexo}" class="form-control" tabindex="4" pt:placeholder="Sexo"></h:inputText>
                                     <datalist id="sexo">
                                         <option value="Macho"></option>
                                         <option value="Hembra"></option>
@@ -185,64 +396,7 @@
                                     <h:inputText id="campoColor" value="#{controladorMascotas.mascotaReg.color}"   pt:class="form-control" pt:placeholder="Color" pt:tabindex="5" required="true" title="De 3 a 25 caracteres, sin caracteres especiales"></h:inputText>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <h:outputLabel for="campoRaza">Raza</h:outputLabel>
-                                <div class="input-group margin-bottom-sm">
-                                    <span class="input-group-addon"><i class="fa fa-paw"></i></span>
-                                    <h:inputText id="campoRaza" value="#{controladorMascotas.mascotaReg.raza}" class="form-control"  pt:placeholder="Raza" pt:tabindex="6" required="true" title="De 3 a 25 caracteres"></h:inputText>
-                                    <!--<input list="browsers"></input>
-                                    <datalist type="range" id="browsers" min="0" max="10" step="1">
-                                        <option value="Internet Explorer"></option>
-                                        <option value="Firefox"></option>
-                                        <option value="Chrome"></option>
-                                        <option value="Opera"></option>
-                                        <option value="Safari"></option>
-                                        <option value="Internet Explorer"></option>
-                                        <option value="Firefox"></option>
-                                        <option value="Chrome"></option>
-                                        <option value="Opera"></option>
-                                        <option value="Safari"></option>
-                                        <option value="Internet Explorer"></option>
-                                        <option value="Firefox"></option>
-                                        <option value="Chrome"></option>
-                                        <option value="Opera"></option>
-                                        <option value="Safari"></option>
-                                        <option value="Firefox"></option>
-                                        <option value="Chrome"></option>
-                                        <option value="Opera"></option>
-                                        <option value="Safari"></option>
-                                        <option value="Internet Explorer"></option>
-                                        <option value="Firefox"></option>
-                                        <option value="Chrome"></option>
-                                        <option value="Opera"></option>
-                                        <option value="Safari"></option>
-                                        <option value="Internet Explorer"></option>
-                                        <option value="Firefox"></option>
-                                        <option value="Chrome"></option>
-                                        <option value="Opera"></option>
-                                        <option value="Safari"></option>
-                                        <option value="Internet Explorer"></option>
-                                        <option value="Firefox"></option>
-                                        <option value="Chrome"></option>
-                                        <option value="Opera"></option>
-                                        <option value="Safari"></option>
-                                        <option value="Internet Explorer"></option>
-                                        <option value="Firefox"></option>
-                                        <option value="Chrome"></option>
-                                        <option value="Opera"></option>
-                                        <option value="Safari"></option>
-                                        <option value="Firefox"></option>
-                                        <option value="Chrome"></option>
-                                        <option value="Opera"></option>
-                                        <option value="Safari"></option>
-                                        <option value="Internet Explorer"></option>
-                                        <option value="Firefox"></option>
-                                        <option value="Chrome"></option>
-                                        <option value="Opera"></option>
-                                        <option value="Safari"></option>
-                                    </datalist>-->
-                                </div>
-                            </div>
+
                             <div id="botonEnviar">
                                 <h:commandButton class="btn btn-success pull-right" value="Registrar" action="#{controladorMascotas.registrarMascota(controladorUsuario.usuLogin.propietarios)}" tabindex="7">
                                 </h:commandButton>
@@ -252,6 +406,7 @@
                     </div>
                 </div>
             </div>
+                </div>
             <!-- InstanceEndEditable -->
         </section>
         <footer style="min-height: 160px !important;">

@@ -135,29 +135,32 @@
                                 </div> 
                             </div>
                             <script>
-                                $.datetimepicker.setLocale('es');
-                                
-                                $('#fecha').datetimepicker({
-                                    defaultTime:'00:00',
-                                    formatTime: 'H:i',
-                                    formatDate: 'Y.m.d',
-                                    todayHighlight: true,                                  
-                                    //language: 'es',
-                                    multidateSeparator: '/',
-                                    startView: 0, //si inicia mostrando el dia (0), mes (1), año (2)
-                                    //endDate: '+1m', //fecha final habilitada: 1 mes adelante
-                                    daysOfWeekDisabled: '7', //deshabilitar días 0-sabado, 1-lunes... etc
-                                    showMonthAfterYear: false,
-                                    yearStart: 2016,
-                                    yearEnd: 2020,
-                                    
-                                    //disabledDates: ['03.04.2016','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'], formatDate:'d.m.Y',
-                                    
-                                    autoclose: true, //autocerrar al perder el foco en el input
-                                    minDate: '1+d' // yesterday is minimum date
-                                });
-                                $('#datetimepicker').datetimepicker({value: '', step: 30});
-                            </script>
+                                    $.datetimepicker.setLocale('es');
+                                    $('#fecha').datetimepicker({
+                                    onGenerate:function(ct){
+                                    $(this).find('.xdsoft_date')
+                                            .toggleClass('xdsoft_disabled');
+                                    },
+                                            maxDate:'+1970/01/1',
+                                            defaultTime:'00:00',
+                                            formatTime: 'H:i',
+                                            formatDate: 'Y.m.d',
+                                            todayHighlight: true,
+                                            //language: 'es',
+                                            multidateSeparator: '/',
+                                            startView: 0, //si inicia mostrando el dia (0), mes (1), año (2)
+                                            //endDate: '+1m', //fecha final habilitada: 1 mes adelante
+                                            daysOfWeekDisabled: '7', //deshabilitar días 0-sabado, 1-lunes... etc
+                                            showMonthAfterYear: false,
+                                            yearStart: 2016,
+                                            yearEnd: 2018,
+                                            //disabledDates: ['03.04.2016','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'], formatDate:'d.m.Y',
+
+                                            autoclose: true, //autocerrar al perder el foco en el input
+                                            // minDate:'1970/01/1' // yesterday is minimum date
+                                    });
+                                    $('#datetimepicker').datetimepicker({value: '', step: 30});
+                                </script>
             <c:if test="#{controladorCitas.estadosP == '3'}">
                             <div class="alert alert-danger">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>

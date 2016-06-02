@@ -100,6 +100,11 @@ private Propietarios prop;
     }
     
     public String registrarMascota(Propietarios prop2){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+        String especie = ((String) params.get("especie"));
+        this.mascotaReg.setEspecie(especie);
         this.mascotaReg.setEstado("Activa");
         this.mascotaReg.setCodigoPropietario(prop2);
         this.mf.create(this.mascotaReg);

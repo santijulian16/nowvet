@@ -20,9 +20,9 @@
         <link rel="stylesheet" type="text/css" href="../../css/font-awesome.css"></link>
         <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css"></link>
         <link rel="stylesheet" type="text/css" href="../../css/jquery.datetimepicker.css"></link>
-	<script src="../../js/jquery-1.11.3.min.js"></script>
-	<script src="../../js/bootstrap.js"></script>
-	<!-- InstanceBeginEditable name="head" -->
+        <script src="../../js/jquery-1.11.3.min.js"></script>
+        <script src="../../js/bootstrap.js"></script>
+        <!-- InstanceBeginEditable name="head" -->
         <link rel="stylesheet" type="text/css" href="css/formValidation.css"></link>
         <script src="../../js/jquery.datetimepicker.full.js"></script>
         <script src="../../js/formValidation.min.js"></script>
@@ -31,60 +31,60 @@
 
         <script>
             $().ready(function () {
-                $('#fecha').change(function(){
-			$('#formularioDeSolicitudDeCitasClinicas').formValidation('revalidateField', 'fecha');
-		});
-		$('#fecha').blur(function(){
-			$('#formularioDeSolicitudDeCitasClinicas').formValidation('revalidateField', 'fecha');
-		});
-                $('#formularioDeSolicitudDeCitasClinicas').formValidation({
-                    err: {container: 'tooltip'},
+            $('#fecha').change(function(){
+            $('#formularioDeSolicitudDeCitasClinicas').formValidation('revalidateField', 'fecha');
+            });
+            $('#fecha').blur(function(){
+            $('#formularioDeSolicitudDeCitasClinicas').formValidation('revalidateField', 'fecha');
+            });
+            $('#formularioDeSolicitudDeCitasClinicas').formValidation({
+            err: {container: 'tooltip'},
                     icon: {valid: 'fa fa-check-circle', invalid: 'fa fa-times-circle', validating: 'fa fa-refresh'},
                     locale: 'es_ES',
                     fields: {
-                        nombre: {
-                            row: '.form-group',
+                    nombre: {
+                    row: '.form-group',
                             validators: {
-                                notEmpty: {},
-                                regexp: {
+                            notEmpty: {},
+                                    regexp: {
                                     regexp: /[A-ZÑ Á,É,Í,Ó,Ú a-zñ á,é,í,ó,ú]+$/,
-                                    message: 'De 3 a 30 letras sin carácteres especiales'
-                                },
-                                stringLength: {
+                                            message: 'De 3 a 30 letras sin carácteres especiales'
+                                    },
+                                    stringLength: {
                                     min: 3,
-                                    max: 30
-                                }
+                                            max: 30
+                                    }
                             }
-                        },
-                        mascota: {
+                    },
+                            mascota: {
                             row: '.form-group',
-                            message: 'Debe seleccionar una mascota'
-                        },
-                        fecha: {
+                                    message: 'Debe seleccionar una mascota'
+                            },
+                            fecha: {
                             row: '.form-group',
-                            message: 'Debe seleccionar una fecha'
-                        },
-                        hora: {
+                                    message: 'Debe seleccionar una fecha'
+                            },
+                            hora: {
                             row: '.form-group',
-                            message: 'Debe seleccionar una hora'
-                        },
-                        motivo: {
+                                    message: 'Debe seleccionar una hora'
+                            },
+                            motivo: {
                             row: '.form-group',
-                            message: 'Debe digitar un motivo',
-                            validators: {
-                                notEmpty: {},
-                                regexp: {
-                                    regexp: /[A-ZÑ Á,É,Í,Ó,Ú a-zñ á,é,í,ó,ú]+$/,
-                                    message: 'De 2 a 50 letras sin carácteres especiales'
-                                },
-                                stringLength: {
-                                    min: 2,
-                                    max: 50
-                                }
+                                    message: 'Debe digitar un motivo',
+                                    validators: {
+                                    notEmpty: {},
+                                            regexp: {
+                                            regexp: /[A-ZÑ Á,É,Í,Ó,Ú a-zñ á,é,í,ó,ú]+$/,
+                                                    message: 'De 2 a 50 letras sin carácteres especiales'
+                                            },
+                                            stringLength: {
+                                            min: 2,
+                                                    max: 50
+                                            }
+                                    }
                             }
-                        }
                     }
-                });
+            });
             });
         </script>
     </h:head>
@@ -158,29 +158,32 @@
                                 </div>
                                 <script>
                                     $.datetimepicker.setLocale('es');
-                                
-                                $('#fecha').datetimepicker({
-                                    defaultTime:'00:00',
-                                    formatTime: 'H:i',
-                                    formatDate: 'Y.m.d',
-                                    todayHighlight: true,                                  
-                                    //language: 'es',
-                                    multidateSeparator: '/',
-                                    startView: 0, //si inicia mostrando el dia (0), mes (1), año (2)
-                                    //endDate: '+1m', //fecha final habilitada: 1 mes adelante
-                                    daysOfWeekDisabled: '7', //deshabilitar días 0-sabado, 1-lunes... etc
-                                    showMonthAfterYear: false,
-                                    yearStart: 2016,
-                                    yearEnd: 2020,
-                                    
-                                    //disabledDates: ['03.04.2016','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'], formatDate:'d.m.Y',
-                                    
-                                    autoclose: true, //autocerrar al perder el foco en el input
-                                    minDate: '1+d' // yesterday is minimum date
-                                });
-                                $('#datetimepicker').datetimepicker({value: '', step: 30});
+                                    $('#fecha').datetimepicker({
+                                    onGenerate:function(ct){
+                                    $(this).find('.xdsoft_date')
+                                            .toggleClass('xdsoft_disabled');
+                                    },
+                                            maxDate:'+1970/01/1',
+                                            defaultTime:'00:00',
+                                            formatTime: 'H:i',
+                                            formatDate: 'Y.m.d',
+                                            todayHighlight: true,
+                                            //language: 'es',
+                                            multidateSeparator: '/',
+                                            startView: 0, //si inicia mostrando el dia (0), mes (1), año (2)
+                                            //endDate: '+1m', //fecha final habilitada: 1 mes adelante
+                                            daysOfWeekDisabled: '7', //deshabilitar días 0-sabado, 1-lunes... etc
+                                            showMonthAfterYear: false,
+                                            yearStart: 2016,
+                                            yearEnd: 2018,
+                                            //disabledDates: ['03.04.2016','02.01.2014','03.01.2014','04.01.2014','05.01.2014','06.01.2014'], formatDate:'d.m.Y',
+
+                                            autoclose: true, //autocerrar al perder el foco en el input
+                                            // minDate:'1970/01/1' // yesterday is minimum date
+                                    });
+                                    $('#datetimepicker').datetimepicker({value: '', step: 30});
                                 </script>
-                         
+
                                 <c:if test="#{controladorCitas.estados eq '3'}">
                                     <div class="alert alert-danger">
                                         <button type="button" class="close" data-dismiss="alert" >&times;</button>
@@ -204,7 +207,7 @@
                                                 <option selected="true" disabled="true">Seleccione su mascota</option>
                                                 <c:forEach var="listaMascotas" items="#{controladorUsuario.usuLogin.propietarios.mascotasCollection}">
                                                     <c:if test="#{listaMascotas.estado == 'Activa'}">
-                                                    <option value="#{listaMascotas.codigoMascota}">#{listaMascotas.nombre}</option>
+                                                        <option value="#{listaMascotas.codigoMascota}">#{listaMascotas.nombre}</option>
                                                     </c:if>
                                                     <c:if test="#{listaMascotas.estado == 'Inactiva'}">
                                                         <option disabled="true" value="#{listaMascotas.codigoMascota}">#{listaMascotas.nombre}</option>
@@ -216,13 +219,13 @@
                                     <div class="form-group">
                                         <label for="veterinario" class="lveterinario">Veterinario</label>
                                         <div class="input-group margin-bottom-sm">
-                                        <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-                                        <select id="veterinario" name="veterinario" class="form-control" required="true" tabindex="4" title="Debe seleccionar un veterinario">
-                                            <option selected="true" disabled="true">Seleccione su veterinario</option>
-                                            <c:forEach var="listaVeterinarios" items="#{controladorCitas.listaCargaVeterinarios}">
-                                                <option value="#{listaVeterinarios.cedula}">#{listaVeterinarios.nombres}&nbsp;#{listaVeterinarios.apellidos}</option>
-                                            </c:forEach>
-                                        </select>
+                                            <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+                                            <select id="veterinario" name="veterinario" class="form-control" required="true" tabindex="4" title="Debe seleccionar un veterinario">
+                                                <option selected="true" disabled="true">Seleccione su veterinario</option>
+                                                <c:forEach var="listaVeterinarios" items="#{controladorCitas.listaCargaVeterinarios}">
+                                                    <option value="#{listaVeterinarios.cedula}">#{listaVeterinarios.nombres}&nbsp;#{listaVeterinarios.apellidos}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -256,30 +259,30 @@
         <footer style="min-height: 160px !important;">
             <div id="footer-contenedor" class="row">
                 <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
-                <div id="panel1Footer" class="col-md-4 col-sm-4 col-xs-12">
-                    <h3>UBICACIÓN</h3>
-                    <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
-                </div>
-                <div id="panel2Footer" class="col-md-4 col-sm-4 col-xs-12">
-                    <h3>CONTÁCTENOS</h3>
-                    <div class="row">
-                        <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                    <div id="panel1Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>UBICACIÓN</h3>
+                        <span class=" fa fa-home"></span>&nbsp;&nbsp;Carrera 92 # 147 - 31<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Suba La Campiña<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bogota Colombia
                     </div>
-                    <div class="row">
-                        <div id="redesSociales">
-                            <a href="https://www.facebook.com/clinicaveterinaria.santaisabel" target="_blank"><span class=" fa fa-facebook-square"></span></a>
-                            <a href="https://twitter.com/@vetsantaisabel" target="_blank"><span class=" fa fa-twitter-square"></span></a>
-                            <a href="https://plus.google.com/107918889656404618563" target="_blank"><span class=" fa fa-google-plus-square"></span></a>
-                            <a href="mailto:jsbermudez381@misena.edu.co"><span class=" fa fa-envelope-o"></span></a>
+                    <div id="panel2Footer" class="col-md-4 col-sm-4 col-xs-12">
+                        <h3>CONTÁCTENOS</h3>
+                        <div class="row">
+                            <span class=" fa fa-phone"></span>&nbsp;&nbsp;Teléfono: 6826731
+                        </div>
+                        <div class="row">
+                            <div id="redesSociales">
+                                <a href="https://www.facebook.com/clinicaveterinaria.santaisabel" target="_blank"><span class=" fa fa-facebook-square"></span></a>
+                                <a href="https://twitter.com/@vetsantaisabel" target="_blank"><span class=" fa fa-twitter-square"></span></a>
+                                <a href="https://plus.google.com/107918889656404618563" target="_blank"><span class=" fa fa-google-plus-square"></span></a>
+                                <a href="mailto:jsbermudez381@misena.edu.co"><span class=" fa fa-envelope-o"></span></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div id="panel1Footer" class="col-md-4  col-sm-4 col-xs-12">
-                    <h3>INFORMACIÓN LEGAL</h3>
+
+                    <div id="panel1Footer" class="col-md-4  col-sm-4 col-xs-12">
+                        <h3>INFORMACIÓN LEGAL</h3>
                         Now Vet | Todos los derechos reservados
                         <br /> &#169; Copyright 2016
-                </div>
+                    </div>
                 </div>
                 <br /><br /><br /><br /><br /><br /><br /><br />
             </div>
