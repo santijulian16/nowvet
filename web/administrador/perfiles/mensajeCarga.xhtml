@@ -37,7 +37,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="../indexAdministrador.xhtml">
-                            <img alt="Brand" src="../../imagenes/logo.png" width="132px" height="90px" />
+                            <img alt="Brand" src="imagenes/logo.png" width="132px" height="90px" />
                         </a>
                     </div>
 
@@ -79,6 +79,7 @@
                         <c:set var="totalUsu" value="0"></c:set>
                         <c:set var="totalUsuReg" value="0"></c:set>
                         <c:forEach end="#{controladorUsuario.mihoja.rows - 1}" begin="1" var="fila">
+                            #{fila}
                             #{controladorUsuario.usuTemp.setCedula(controladorUsuario.mihoja.getCell(0, fila).getContents())}
                             #{controladorUsuario.usuTemp.setNombres(controladorUsuario.mihoja.getCell(1, fila).getContents())}
                             #{controladorUsuario.usuTemp.setApellidos(controladorUsuario.mihoja.getCell(2, fila).getContents())}
