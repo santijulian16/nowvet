@@ -25,7 +25,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  */
 @WebServlet(name = "precargaControlador", urlPatterns = {"/precargaControlador"})
 public class precargaControlador extends HttpServlet {
-
+public static String nombre;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
