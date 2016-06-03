@@ -330,7 +330,6 @@ public class controladorCitas implements Serializable {
         misCitasClinicasA.setFormulaMedica(formulaMedicaM);
         misCitasClinicasA.setSintomas(sintomasM);
         citasClinicasFacade.edit(misCitasClinicasA);
-        
     }
     
     public void atenderCitaPeluqueria() throws ParseException{

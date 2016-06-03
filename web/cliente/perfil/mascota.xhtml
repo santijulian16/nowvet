@@ -208,6 +208,116 @@
                                                 <h:outputLabel for="raza" value="Raza"></h:outputLabel>
                                                 <h:inputText class="form-control" id="raza" value="#{controladorMascotas.mascotaTemp.raza}"></h:inputText>
                                             </div>
+                                            <div class="form-group"  id="razaPerros">
+                                        <label for="razaPerros" class="lveterinario">Raza Perro</label>
+                                        <div class="input-group margin-bottom-sm">
+                                            <span class="input-group-addon"><i class="fa fa-paw"></i></span>
+                                            <select name="raza" class="form-control"  data-live-search="true" id="razaPerros">                               
+                                                <option value="#{controladorMascotas.mascotaTemp.raza}" selected="true"></option>
+                                                <option>Akita Inu</option>
+                                                <option>Alaskan Malamute</option>
+                                                <option>Barzoi</option>
+                                                <option>Basset Azul de Gascuña</option>
+                                                <option>Basset Hound</option>
+                                                <option>Beagle</option>
+                                                <option>Beagle Harrier</option>
+                                                <option>Beauceron</option>
+                                                <option>Bichón Maltés</option>
+                                                <option>Bobtail</option>
+                                                <option>Border Collie</option>
+                                                <option>Boxer</option>
+                                                <option>Boyero de Berna</option>
+                                                <option>Braco Alemán</option>
+                                                <option>Braco Francés</option>
+                                                <option>Briard</option>
+                                                <option>Bull terrier Inglés</option>
+                                                <option>Bulldog Francés</option>
+                                                <option>Bulldog Inglés</option>
+                                                <option>Bullmastiff</option>
+                                                <option>Cairn Terrier</option>
+                                                <option>Cane Corso</option>
+                                                <option>Caniche</option>
+                                                <option>Cavalier King Charles</option>
+                                                <option>Chihuahua</option>
+                                                <option>Chow Chow</option>
+                                                <option>Cocker Spaniel Americano</option>
+                                                <option>Cocker Spaniel Inglés</option>
+                                                <option>Collie Rough</option>
+                                                <option>Collie Smooth</option>
+                                                <option>Dálmata</option>
+                                                <option>Doberman</option>
+                                                <option>Dogo Argentino</option>
+                                                <option>Dogo de Burdeos</option>
+                                                <option>Epagneul Bretón</option>
+                                                <option>Epagneul Francés</option>
+                                                <option>Epagneul Japonés</option>
+                                                <option>Fox Terrier</option>
+                                                <option>Galgo Español</option>
+                                                <option>Galgo Irlandés</option>
+                                                <option>Golden Retriever</option>
+                                                <option>Gordon Setter</option>
+                                                <option>Gos d'Atura</option>
+                                                <option>Gran Danés</option>
+                                                <option>Husky Siberiano</option>
+                                                <option>Komondor</option>
+                                                <option>Labrador Retriever</option>
+                                                <option>Lebrel Afgano</option>
+                                                <option>Lebrel Polaco</option>
+                                                <option>Mastiff</option>
+                                                <option>Mastín de los Pirineos</option>
+                                                <option>Mastín Español</option>
+                                                <option>Mastín Napolitano</option>
+                                                <option>Montaña de los Pirineos</option>
+                                                <option>Norfolk Terrier</option>
+                                                <option>Norwich Terrier</option>
+                                                <option>Papillon</option>
+                                                <option>Pastor Alemán</option>
+                                                <option>Pastor Australiano</option>
+                                                <option>Pastor Belga</option>
+                                                <option>Pastor Blanco Suizo</option>
+                                                <option>Pastor de los Pirineos</option>
+                                                <option>Pekinés</option>
+                                                <option>Pequeño Azul de Gascuña</option>
+                                                <option>Pequeño Basset Griffon</option>
+                                                <option>Pequeño Brabantino</option>
+                                                <option>Pequeño Perro León</option>
+                                                <option>Pequeño Perro Ruso</option>
+                                                <option>Pequeño Sabueso Suizo</option>
+                                                <option>Perdiguero de Burgos</option>
+                                                <option>Perdiguero Portugués</option>
+                                                <option>Perro de Agua Español</option>
+                                                <option>Perro Lobo de Checoslovaquia</option>
+                                                <option>Pinscher miniatura</option>
+                                                <option>Pit Bull</option>
+                                                <option>Podenco Canario</option>
+                                                <option>Podenco Ibicenco</option>
+                                                <option>Pointer Inglés</option>
+                                                <option>Presa Canario</option>
+                                                <option>Pug</option>
+                                                <option>Rafeiro do Alentejo</option>
+                                                <option>Rafeiro do Alentejo</option>
+                                                <option>Samoyedo</option>
+                                                <option>San Bernardo</option>
+                                                <option>Schnauzer gigante</option>
+                                                <option>Schnauzer mediano</option>
+                                                <option>Schnauzer miniatura</option>
+                                                <option>Scottish Terrier</option>
+                                                <option>Setter Inglés</option>
+                                                <option>Setter Irlandés</option>
+                                                <option>Shar Pei</option>
+                                                <option>Shih Tzu</option>
+                                                <option>Spitz</option>
+                                                <option>Springer Spaniel Galés</option>
+                                                <option>Springer Spaniel Inglés</option>
+                                                <option>Teckel</option>
+                                                <option>Terranova</option>
+                                                <option>Weimaraner</option>
+                                                <option>Westies</option>
+                                                <option>Whippet</option>
+                                                <option>Yorkshire Terrier</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                             <div class="form-group">
                                                 <h:outputLabel for="especie" value="Especie"></h:outputLabel>
                                                 <h:selectOneMenu id="especie" class="form-control" value="#{controladorMascotas.mascotaTemp.especie}">
@@ -226,13 +336,13 @@
                                                 <h:outputLabel for="color" value="Color"></h:outputLabel>
                                                 <h:inputText class="form-control" id="color" value="#{controladorMascotas.mascotaTemp.color}"></h:inputText>
                                             </div>
-                                            <div class="form-group">
+                                            <!--<div class="form-group">
                                                 <h:outputLabel for="estado" value="Estado"></h:outputLabel>
                                                 <h:selectOneMenu id="estado" class="form-control" value="#{controladorMascotas.mascotaTemp.estado}">
                                                     <f:selectItem itemValue="Activa" itemLabel="Activa"></f:selectItem>
                                                     <f:selectItem itemValue="Inactiva" itemLabel="Inactiva"></f:selectItem>
                                                 </h:selectOneMenu>
-                                            </div>
+                                            </div>-->
 
 
 
