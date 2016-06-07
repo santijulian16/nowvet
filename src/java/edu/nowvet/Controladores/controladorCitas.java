@@ -317,7 +317,7 @@ public class controladorCitas implements Serializable {
         citasFacade.edit(misCitasA);
         
         Citasclinicas misCitasClinicasA = new Citasclinicas();
-        int idCitaAM = Integer.parseInt((String) params.get("idCitaAC"));
+        int idCitaAM = Integer.parseInt((String) params.get("idCitaA"));
         String diagnosticoM = ((String) params.get("diagnosticoA"));
         String motivoM = ((String) params.get("motivoA"));
         String alimentoM = ((String) params.get("alimentoA"));
@@ -367,7 +367,7 @@ public class controladorCitas implements Serializable {
         citasFacade.edit(misCitasA);
         
         Citaspeluqueria misCitasPeluqueriaB = new Citaspeluqueria();
-        int idCitaAB = Integer.parseInt((String) params.get("idCitaAB"));
+        int idCitaAB = Integer.parseInt((String) params.get("idCitaB"));
         String serviciosAplicadosB = ((String) params.get("serviciosAplicadosB"));
         misCitasPeluqueriaB.setIdCita(idCitaAB);
         misCitasPeluqueriaB.setServiciosAplicados(serviciosAplicadosB);
@@ -484,6 +484,28 @@ public class controladorCitas implements Serializable {
         
         HttpServletResponse sr = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         sr.addHeader("Content-disposition", "attachment; filename=Historial Clinico "+mascota.getNombre()+"-"+mascota.getCodigoPropietario().getUsuarios().getNombres()+" "+mascota.getCodigoPropietario().getUsuarios().getApellidos()+".pdf");
+        
+        ServletOutputStream stream = sr.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jp, stream);
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+     
+     public void pdfCitasEjecutadas (Usuarios usuario) throws ClassNotFoundException, SQLException, JRException, IOException {
+        
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/nowvet", "root", "");
+        
+        
+        Map<String, Object> parametros = new HashMap<String, Object>();
+        parametros.put("usuario", usuario.getCedula());
+
+        File archivo = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("Reportes/reporteCitas.jasper"));
+        JasperPrint jp = JasperFillManager.fillReport(archivo.getPath(), parametros,conexion);
+        
+        HttpServletResponse sr = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        sr.addHeader("Content-disposition", "attachment; filename=Reporte Citas Ejecutadas "+" - "+usuario.getNombres()+" "+usuario.getApellidos()+".pdf");
         
         ServletOutputStream stream = sr.getOutputStream();
         JasperExportManager.exportReportToPdfStream(jp, stream);

@@ -113,9 +113,8 @@
                         <br></br>
                         <h4>Exportar:</h4>
                         <h:form>
-                            <h:commandButton image="../../imagenes/pdf.png" action="#{controladorUsuario.PDFusu()}" style="width: 35px; height: 35px;" title="Exportar a PDF"></h:commandButton>&nbsp;
-                            <h:commandButton image="../../imagenes/excel.png" action="#{controladorUsuario.XLSXusu()}" style="width: 35px; height: 35px;" title="Exportar a Excel"></h:commandButton>&nbsp;
-                            <h:commandButton image="../../imagenes/word.png" action="#{controladorUsuario.DOCXusu()}" style="width: 35px; height: 35px;" title="Exportar a Word"></h:commandButton>&nbsp;
+                            <h:commandButton image="../../imagenes/pdf.png" action="#{controladorCitas.pdfCitasEjecutadas(controladorUsuario.usuLogin)}" style="width: 35px; height: 35px;" title="Exportar a PDF"></h:commandButton>&nbsp;
+                            
                         </h:form>
                     </div>
                     <table data-toggle="table"
