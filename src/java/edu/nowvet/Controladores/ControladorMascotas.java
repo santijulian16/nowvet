@@ -120,8 +120,14 @@ private Propietarios prop;
         Map params = externalContext.getRequestParameterMap();
         String especie = ((String) params.get("especie"));
         String raza = ((String) params.get("raza"));
+        String razaG = ((String) params.get("raza2"));
+        if(especie.equals("Perro")){
+            this.mascotaReg.setRaza(raza);
+        }
+        else{
+            this.mascotaReg.setRaza(razaG);
+        }
         this.mascotaReg.setEspecie(especie);
-        this.mascotaReg.setRaza(raza);
         this.mascotaReg.setEstado("Activa");
         this.mascotaReg.setCodigoPropietario(prop2);
         this.mf.create(this.mascotaReg);
