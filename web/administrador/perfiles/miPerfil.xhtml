@@ -72,6 +72,7 @@
         <f:event listener="#{controladorUsuario.miraSession('admin')}" type="preRenderView"></f:event>
     </h:head>
     <h:body>
+        <img id="back" src="../../imagenes/fondo.jpg" height="751px" width="765px" />
         <h:form>
             <nav class="navbar navbar-default navbar-fixed-top" id="navAdmin">
                 <div class="container-fluid">
@@ -178,36 +179,60 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Modificar Datos</h4>
                                     </div>
-                                    <h:form id="modicarDatos">
+                                    <h:form id="modicarDatos" onkeypress="if (event.keyCode == 13) {
+                                                document.getElementById('modicarDatos:botonModificarPerfil').click();
+                                                return false;
+                                            }">
                                         <div class="modal-body">
 
                                             <div class="form-group">
                                                 <label for="cedulamod">Cédula</label>
-                                                <input id="cedulampod" name="cedulamod" type="text" class="form-control" value="#{controladorUsuario.usuLogin.cedula}" disabled="true"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
+                                                    <input id="cedulampod" name="cedulamod" type="text" class="form-control" value="#{controladorUsuario.usuLogin.cedula}" disabled="true"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="nombremod">Nombre</label>
-                                                <input id="nombremod" name="nombremod" type="text"  value="#{controladorUsuario.usuLogin.nombres}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                    <input id="nombremod" name="nombremod" type="text"  value="#{controladorUsuario.usuLogin.nombres}" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="apellidomod">Apellido</label>
-                                                <input id="apellidomod" name="apellidomod" type="text" value="#{controladorUsuario.usuLogin.apellidos}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                    <input id="apellidomod" name="apellidomod" type="text" value="#{controladorUsuario.usuLogin.apellidos}" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="direccionmod">Dirección</label>
-                                                <input id="direccionmod" name="direccionmod" type="text" value="#{controladorUsuario.usuLogin.direccion}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                                    <input id="direccionmod" name="direccionmod" type="text" value="#{controladorUsuario.usuLogin.direccion}" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="correomod">Correo Electrónico</label>
-                                                <input id="correomod" name="correomod" type="text" value="#{controladorUsuario.usuLogin.correo}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                    <input id="correomod" name="correomod" type="text" value="#{controladorUsuario.usuLogin.correo}" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="cargo">Cargo</label>
-                                                <input id="cargo" name="cargo" type="text" value="#{controladorUsuario.usuLogin.personalveterinario.cargo}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+                                                    <input id="cargo" name="cargo" type="text" value="#{controladorUsuario.usuLogin.personalveterinario.cargo}" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="horarioEntrada">Horario Entrada</label>
-                                                <input onfocus="this.blur()" id="horarioEntrada" name="horarioEntrada" type="text" value="#{controladorUsuario.usuLogin.personalveterinario.horarioEntrada.hours}:#{controladorUsuario.usuLogin.personalveterinario.horarioEntrada.minutes}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    <input onfocus="this.blur()" id="horarioEntrada" name="horarioEntrada" type="text" value="#{controladorUsuario.usuLogin.personalveterinario.horarioEntrada.hours}:#{controladorUsuario.usuLogin.personalveterinario.horarioEntrada.minutes}" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <script>
                                                 $('#horarioEntrada').datetimepicker({
@@ -218,7 +243,10 @@
                                             </script>
                                             <div class="form-group">
                                                 <label for="horarioSalida">Horario Salida</label>
-                                                <input onfocus="this.blur()" id="horarioSalida" name="horarioSalida" type="text" value="#{controladorUsuario.usuLogin.personalveterinario.horarioSalida.hours}:#{controladorUsuario.usuLogin.personalveterinario.horarioSalida.minutes}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                                    <input onfocus="this.blur()" id="horarioSalida" name="horarioSalida" type="text" value="#{controladorUsuario.usuLogin.personalveterinario.horarioSalida.hours}:#{controladorUsuario.usuLogin.personalveterinario.horarioSalida.minutes}" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <script>
                                                 $('#horarioSalida').datetimepicker({
@@ -229,13 +257,14 @@
                                             </script>
                                         </div>
                                         <div class="modal-footer">
-                                            <h:commandButton class="btn btn-success" value="Modificar" action="#{controladorUsuario.modificarDatos()}"></h:commandButton>
+                                            <h:commandButton id="botonModificarPerfil" class="btn btn-success" value="Modificar" action="#{controladorUsuario.modificarDatos()}"></h:commandButton>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </h:form>
                                 </div>
                             </div>
                         </div>
+                        
                         <a href="#" onclick="mostraModal('#modificarContrasena')"><span class=" fa fa-lock"></span> Cambiar Contraseña</a><br></br><br></br>
                         <div class="modal fade" id="modificarContrasena" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
@@ -249,30 +278,40 @@
 
                                             <div class="form-group">
                                                 <label for="contraActual">Contraseña Actual</label>
-                                                <input id="contraActual" name="contraActual" placeholder="******" type="password" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+                                                    <input id="contraActual" name="contraActual" placeholder="******" type="password" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="contraNueva">Contraseña Nueva</label>
-                                                <input id="contraNueva" name="contraNueva" placeholder="******" type="password" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+                                                    <input id="contraNueva" name="contraNueva" placeholder="******" type="password" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="repNuevaCon">Repetir Nueva Contraseña</label>
-                                                <input id="repNuevaCon" name="repNuevaCon" placeholder="******" type="password" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-undo"></i></span>
+                                                    <input id="repNuevaCon" name="repNuevaCon" placeholder="******" type="password" class="form-control"></input>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <h:commandButton  class="btn btn-success" value="Guardar Cambios" action="#{controladorUsuario.cambiarClave()}" >
-                                            </h:commandButton>
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                        </div>
+                                            <div class="modal-footer">
+                                                <h:commandButton  class="btn btn-success" value="Guardar Cambios" action="#{controladorUsuario.cambiarClave()}" >
+                                                </h:commandButton>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                            </div>
                                     </h:form>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
+                        
                 </div>
-            </div
-            ><!-- InstanceEndEditable -->
+            </div>
+            </div><!-- InstanceEndEditable -->
         </section>
         <footer style="min-height: 160px !important;">
             <div id="footer-contenedor" class="row">

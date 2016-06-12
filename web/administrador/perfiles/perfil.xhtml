@@ -23,9 +23,15 @@
         <script src="../../js/bootstrap.js"></script>
         <script src="../../js/bootstrap-table.js" type="text/javascript"></script>
         <script>
-            function eliminarMas(idmasco) {
-                $('#eliminarMascota').modal('show');
+            function inactivarMas(idmasco) {
+                $('#inactivarMascota').modal('show');
                 document.getElementById('idmas').value = idmasco;
+            }
+        </script>
+        <script>
+            function activarMas(idmasco2) {
+                $('#activarMascota').modal('show');
+                document.getElementById('idmas2').value = idmasco2;
             }
         </script>
         <f:event listener="#{controladorUsuario.miraSession('admin')}" type="preRenderView"></f:event>
@@ -86,7 +92,7 @@
             <c:if test="#{controladorUsuario.estado eq '7'}">
                 <div class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>¡Alerta!</strong> Usuario modifica con exito
+                    <strong>¡Alerta!</strong> Usuario modificado con exito
                 </div>
             </c:if>
             <!-- InstanceBeginEditable name="section" -->
@@ -163,7 +169,8 @@
                                     <th data-field="raza" data-sortable="true">Raza</th>
                                     <th data-field="sexo" data-sortable="true">Sexo</th>
                                     <th data-field="estado" data-sortable="true">Estado</th>
-                                    <th>Inhabilitar</th>
+                                    
+                                    <th>Cambiar Estado</th>
                                     <th>Mas Detalles</th>
                                     <!--<th>Más Detalles</th>-->
                                 </tr>
@@ -177,10 +184,11 @@
                                             <td>#{listaMas.raza}</td> 
                                             <td>#{listaMas.sexo}</td> 
                                             <td>#{listaMas.estado}</td>
-                                            <td><button type="button" onclick="eliminarMas(#{listaMas.codigoMascota})" class="btn btn-danger"><i class="fa fa-ban"></i></button></td> 
+                                            <td><button type="button" onclick="activarMas(#{listaMas.codigoMascota})" class="btn btn-danger"><i class="fa fa-unlock"></i></button></td> 
                                             <td><h:commandLink action="#{controladorMascotas.mostrarMas(listaMas)}" class="btn btn-default"><i class="fa fa-eye"></i></h:commandLink></td>
                                         </tr>
                                     </c:if>
+                                    
                                     <c:if test="#{listaMas.estado eq 'Activa'}">
                                         <tr>
                                             <td>#{listaMas.nombre}</td> 
@@ -188,7 +196,7 @@
                                             <td>#{listaMas.raza}</td> 
                                             <td>#{listaMas.sexo}</td> 
                                             <td>#{listaMas.estado}</td>
-                                            <td><button type="button" onclick="eliminarMas(#{listaMas.codigoMascota})" class="btn btn-danger"><i class="fa fa-ban"></i></button></td> 
+                                            <td><button type="button" onclick="inactivarMas(#{listaMas.codigoMascota})" class="btn btn-danger"><i class="fa fa-unlock-alt"></i></button></td> 
                                             <td><h:commandLink action="#{controladorMascotas.mostrarMas(listaMas)}" class="btn btn-default"><i class="fa fa-eye"></i></h:commandLink></td>
                                         </tr>
                                     </c:if>
@@ -198,24 +206,50 @@
                     </h:form>
                 </c:if>
             </div>
-            <div class="modal fade" id="eliminarMascota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="inactivarMascota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Alerta</h4>
+                            <h4 class="modal-title" id="myModalLabel">Inhabilitar Mascota</h4>
                         </div>
-                        <h:form id="eliminar">
+                        
+                        <h:form id="eliminar" onkeypress="if(event.keyCode == 13) { document.getElementById('eliminar:inhabilitarMascota').click(); return false;}">
                             <div class="modal-body">
                                 <input style="display: none;" id="idmas" name="idmas"></input>
                                 ¿Desea inhabilitar esta mascota?
                             </div>
                             <div class="modal-footer">
-                                <h:commandButton action="#{controladorMascotas.eliminarMascota()}" class="btn btn-danger" value="Inhabilitar"></h:commandButton>
+                                <h:commandButton id="inhabilitarMascota" action="#{controladorMascotas.inactivarMascota()}" class="btn btn-danger" value="Inhabilitar"></h:commandButton>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 
                             </div>
                         </h:form>
+                       
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal fade" id="activarMascota" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Habilitar Mascota</h4>
+                        </div>
+                        
+                        <h:form id="formActivarMascota" onkeypress="if(event.keyCode == 13) { document.getElementById('formActivarMascota:formHabilitarMascota').click(); return false;}">
+                            <div class="modal-body">
+                                <input style="display: none;" id="idmas2" name="idmas2"></input>
+                                ¿Desea habilitar esta mascota?
+                            </div>
+                            <div class="modal-footer">
+                                <h:commandButton id="formHabilitarMascota" action="#{controladorMascotas.activarMascota()}" class="btn btn-success" value="Habilitar"></h:commandButton>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+                            </div>
+                        </h:form>
+                       
                     </div>
                 </div>
             </div>

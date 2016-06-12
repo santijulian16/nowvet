@@ -258,32 +258,50 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Modificar Datos</h4>
                                     </div>
-                                    <h:form id="modicarDatos">
+                                    <h:form id="modicarDatos" onkeypress="if (event.keyCode == 13) {
+                                                document.getElementById('modicarDatos:botonModificarDatos').click();
+                                                return false;
+                                            }">
                                         <div class="modal-body">
 
                                             <div class="form-group">
                                                 <label for="cedulamod">Cédula</label>
-                                                <input id="cedulampod" name="cedulamod" type="text" class="form-control" value="#{controladorUsuario.usuLogin.cedula}" disabled="true"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-credit-card"></i></span>                                             
+                                                    <input id="cedulampod" name="cedulamod" type="text" class="form-control" value="#{controladorUsuario.usuLogin.cedula}" disabled="true"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="nombremod">Nombre</label>
-                                                <input id="nombremod" name="nombremod" type="text"  value="#{controladorUsuario.usuLogin.nombres}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-user"></i></span>
+                                                    <input id="nombremod" name="nombremod" type="text"  value="#{controladorUsuario.usuLogin.nombres}" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="apellidomod">Apellido</label>
-                                                <input id="apellidomod" name="apellidomod" type="text" value="#{controladorUsuario.usuLogin.apellidos}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-user"></i></span>
+                                                    <input id="apellidomod" name="apellidomod" type="text" value="#{controladorUsuario.usuLogin.apellidos}" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="direccionmod">Dirección</label>
-                                                <input id="direccionmod" name="direccionmod" type="text" value="#{controladorUsuario.usuLogin.direccion}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-home"></i></span>
+                                                    <input id="direccionmod" name="direccionmod" type="text" value="#{controladorUsuario.usuLogin.direccion}" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="correomod">Correo Electrónico</label>
-                                                <input id="correomod" name="correomod" type="text" value="#{controladorUsuario.usuLogin.correo}" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-envelope"></i></span>
+                                                    <input id="correomod" name="correomod" type="text" value="#{controladorUsuario.usuLogin.correo}" class="form-control"></input>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <h:commandButton class="btn btn-success" value="Modificar" action="#{controladorUsuario.modificarDatos()}"></h:commandButton>
+                                            <h:commandButton id="botonModificarDatos" class="btn btn-success" value="Modificar" action="#{controladorUsuario.modificarDatos()}"></h:commandButton>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                                         </div>
                                     </h:form>
@@ -304,17 +322,25 @@
 
                                             <div class="form-group">
                                                 <label for="contraActual">Contraseña Actual</label>
-                                                <input id="contraActual" name="contraActual" placeholder="******" type="password" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-unlock-alt"></i></span>
+                                                    <input id="contraActual" name="contraActual" placeholder="******" type="password" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="contraNueva">Contraseña Nueva</label>
-                                                <input id="contraNueva" name="contraNueva" placeholder="******" type="password" class="form-control"></input>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-unlock-alt"></i></span>
+                                                    <input id="contraNueva" name="contraNueva" placeholder="******" type="password" class="form-control"></input>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="repNuevaCon">Repetir Nueva Contraseña</label>
-                                                <input id="repNuevaCon" name="repNuevaCon" placeholder="******" type="password" class="form-control"></input>
-                                            </div>
-                                        </div>
+                                                <div class="input-group margin-bottom-sm">
+                                                    <span class="input-group-addon"><i class="fa fa-undo"></i></span>
+                                                    <input id="repNuevaCon" name="repNuevaCon" placeholder="******" type="password" class="form-control"></input>
+                                                </div>
+                                            </div></div>
                                         <div class="modal-footer">
                                             <h:commandButton  class="btn btn-success" value="Guardar Cambios" action="#{controladorUsuario.cambiarClave()}" >
                                             </h:commandButton>
@@ -400,13 +426,16 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title" id="myModalLabel">Alerta</h4>
                         </div>
-                        <h:form id="eliminar">
+                        <h:form id="eliminarMascota" onkeypress="if (event.keyCode == 13) {
+                                    document.getElementById('eliminarMascota:botonInhabilitarMascota').click();
+                                    return false;
+                                }">
                             <div class="modal-body">
                                 <input style="display: none;" id="idmas" name="idmas"></input>
                                 ¿Desea inhabilitar esta mascota?
                             </div>
                             <div class="modal-footer">
-                                <h:commandButton action="#{controladorMascotas.eliminarMascota()}" class="btn btn-danger" value="Inhabilitar"></h:commandButton>
+                                <h:commandButton id="botonInhabilitarMascota" action="#{controladorMascotas.eliminarMascota()}" class="btn btn-danger" value="Inhabilitar"></h:commandButton>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 
                             </div>

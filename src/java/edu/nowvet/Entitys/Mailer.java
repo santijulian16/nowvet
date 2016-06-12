@@ -9,18 +9,18 @@ import javax.mail.internet.MimeMessage;
 public class Mailer {
 public static void send(String para,String sujeto,String mensaje){
 
-final String user="jsbermudez381@misena.edu.co";//cambiará en consecuencia al servidor utilizado
-final String pass="106958542616mj";
+final String user="soporte@nowvet.net";//cambiará en consecuencia al servidor utilizado
+final String pass="FDug855l9-Jf";
 
 //1st paso) Obtener el objeto de sesión
 
 Properties props = new Properties();
-        props.setProperty("mail.smtp.host", "smtp.gmail.com"); // envia 
+        props.setProperty("mail.smtp.host", "mail.nowvet.net"); // envia 
         props.setProperty("mail.smtp.starttls.enable", "true");
-        props.setProperty("mail.smtp.port", "25");
+        props.setProperty("mail.smtp.port", "26");
         props.setProperty("mail.smtp.starttls.required", "false");
         props.setProperty("mail.smtp.auth", "true");
-        props.setProperty("mail.smtp.ssl.trust", "smtp.gmail.com");
+        props.setProperty("mail.smtp.ssl.trust", "mail.nowvet.net");
 
 
 

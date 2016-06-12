@@ -94,13 +94,16 @@
                         <h:form>
                             <div class="form-group">
                                 <h:outputLabel for="vet">Veterinario</h:outputLabel>
-                                <h:selectOneMenu class="form-control" id="vet" value="#{controladorUsuario.veterinario}">
-                                    <f:selectItem itemValue="0" itemLabel="Seleccionar veterinario"></f:selectItem>
-                                    <c:forEach var="veter" items="#{controladorUsuario.listarPersonal()}">
-                                        <f:selectItem itemValue="#{veter.dniPersonal}" itemLabel="#{veter.usuarios.nombres} &nbsp;#{veter.usuarios.apellidos}"></f:selectItem>
-                                    </c:forEach>
-                                    <f:ajax render="grafica" execute="@this"></f:ajax>
-                                </h:selectOneMenu>
+                                <div class="input-group margin-bottom-sm">
+                                    <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+                                    <h:selectOneMenu class="form-control" id="vet" value="#{controladorUsuario.veterinario}">
+                                        <f:selectItem itemValue="0" itemLabel="Seleccionar veterinario"></f:selectItem>
+                                        <c:forEach var="veter" items="#{controladorUsuario.listarPersonal()}">
+                                            <f:selectItem itemValue="#{veter.dniPersonal}" itemLabel="#{veter.usuarios.nombres} &nbsp;#{veter.usuarios.apellidos}"></f:selectItem>
+                                        </c:forEach>
+                                        <f:ajax render="grafica" execute="@this"></f:ajax>
+                                    </h:selectOneMenu>
+                                </div>
                             </div>
                         </h:form>
                     </div>

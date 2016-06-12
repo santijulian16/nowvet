@@ -6,6 +6,9 @@
 package edu.nowvet.Facade;
 
 import edu.nowvet.Entitys.Citas;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,13 +37,70 @@ public class CitasFacade extends AbstractFacade<Citas> {
     }
     
     public List<Citas> consultarCitasRecientes(){
-        Query q = em.createQuery("Select c from Citas c where c.estado='Creada'");
+        Query q = em.createQuery("Select c from Citas c where c.estado = 'Creada'");
         return q.getResultList();
+    }
+    
+    public String consultarMotivo(int idCita){
+        Query q = em.createQuery("Select cc.motivo from Citasclinicas cc where cc.idCita=:idCita");
+        q.setParameter("idCita", idCita);
+        String motivo = String.join("", q.getResultList());
+        return motivo;
+    }
+    
+    public String consultarSintomas(int idCita){
+        Query q = em.createQuery("Select cc.sintomas from Citasclinicas cc where cc.idCita=:idCita");
+        q.setParameter("idCita", idCita);
+        String sintomas = String.join("", q.getResultList());
+        return sintomas;
+    }
+    
+    public String consultarServiciosAplicados(int idCita){
+        Query q = em.createQuery("Select cp.serviciosAplicados from Citaspeluqueria cp where cp.idCita=:idCita");
+        q.setParameter("idCita", idCita);
+        String serviciosA = String.join("", q.getResultList());
+        return serviciosA;
+    }
+    
+    public List<Citas> consultarFechaAsignada(int idCita) throws ParseException{
+        Query q = em.createQuery("Select c.fechaAsignada from Citas c where c.idCita=:idCita");
+        q.setParameter("idCita", idCita);
+        return q.getResultList();
+    }
+    
+    public String consultarVacunas(int idCita){
+        Query q = em.createQuery("Select c.vacunas from Citas c where c.idCita=:idCita");
+        q.setParameter("idCita", idCita);
+        String vacunas = String.join("", q.getResultList());
+        return vacunas;
+    }
+    
+    public String consultarPeso(int idCita){
+        Query q = em.createQuery("Select c.peso from Citas c where c.idCita=:idCita");
+        q.setParameter("idCita", idCita);
+        String peso = String.join("", q.getResultList());
+        return peso;
+    }
+    
+    public String consultarAntecedentes(int idCita){
+        Query q = em.createQuery("Select c.antecedentes from Citas c where c.idCita=:idCita");
+        q.setParameter("idCita", idCita);
+        String antecedentes = String.join("", q.getResultList());
+        return antecedentes;
     }
     
     public List<Citas> consultarCitasEjecutadas(){
         Query q = em.createQuery("Select c from Citas c where c.estado='Ejecutada'");
         return q.getResultList();
+    }
+    
+    public List<Citas> listarHistorialFecha(int idCita){
+        Query q;
+        q=this.em.createQuery("select c from Citas c where c.idCita=:id and c.estado='Ejecutada'");
+        q.setParameter("id", idCita);
+        List<Citas> historial;
+        historial=q.getResultList();
+        return historial;
     }
     
     public List<Citas> verificarDisponibilidad(Date fecha) {

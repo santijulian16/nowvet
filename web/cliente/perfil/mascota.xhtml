@@ -61,6 +61,13 @@
                                 }
                             }
                         },
+                        raza: {
+                            row: '.form-group',
+                            message: 'Debe seleccionar una raza',
+                            validators: {
+                                notEmpty: {}
+                            }
+                        },
                         'modificarMascota:raza': {
                             row: '.form-group',
                             validators: {
@@ -198,22 +205,23 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title" id="myModalLabel">Modificar Mascota</h4>
                                     </div>
-                                    <h:form id="modificarMascota">
+                                    <h:form id="modificarMascota" onkeypress="if(event.keyCode == 13) { document.getElementById('modificarMascota:botonModificarMascota').click(); return false;}">
                                         <div class="modal-body">
-                                            <div class="form-group">
+                                            <!--<div class="form-group">
                                                 <h:outputLabel for="nombre" value="Nombre"></h:outputLabel>
                                                 <h:inputText class="form-control" id="nombre" value="#{controladorMascotas.mascotaTemp.nombre}"></h:inputText>
                                             </div>
                                             <div class="form-group">
                                                 <h:outputLabel for="raza" value="Raza"></h:outputLabel>
                                                 <h:inputText class="form-control" id="raza" value="#{controladorMascotas.mascotaTemp.raza}"></h:inputText>
-                                            </div>
+                                            </div>-->
+                                            <c:if test="#{controladorMascotas.mascotaTemp.especie eq 'Perro'}">
                                             <div class="form-group"  id="razaPerros">
                                         <label for="razaPerros" class="lveterinario">Raza Perro</label>
                                         <div class="input-group margin-bottom-sm">
                                             <span class="input-group-addon"><i class="fa fa-paw"></i></span>
                                             <select name="raza" class="form-control"  data-live-search="true" id="razaPerros">                               
-                                                <option value="#{controladorMascotas.mascotaTemp.raza}" selected="true"></option>
+                                                <option>#{controladorMascotas.mascotaTemp.raza}</option>
                                                 <option>Akita Inu</option>
                                                 <option>Alaskan Malamute</option>
                                                 <option>Barzoi</option>
@@ -318,23 +326,81 @@
                                             </select>
                                         </div>
                                     </div>
-                                            <div class="form-group">
+                                    </c:if>
+                                            <c:if test="#{controladorMascotas.mascotaTemp.especie eq 'Gato'}">    
+                                        <div class="form-group" id="razaGatos">
+                                        <label for="razaGatos" class="lveterinario">Raza Gato</label>
+                                        <div class="input-group margin-bottom-sm">
+                                            <span class="input-group-addon"><i class="fa fa-paw"></i></span>
+                                            <select name="raza" class="form-control"  data-live-search="true" id="razaGatos">                               
+                                                <option>#{controladorMascotas.mascotaTemp.raza}</option>
+                                                <option>Abisinio</option>
+                                                <option>Angora</option>
+                                                <option>Azul Ruso</option>
+                                                <option>Balinés</option>
+                                                <option>Bengal</option>
+                                                <option>Bobtail Japonés</option>
+                                                <option>Bombay, Británico</option>
+                                                <option>British Shorthair</option>
+                                                <option>Burmés, Burmilla</option>
+                                                <option>Cartujo (Chartreux)</option>
+                                                <option>Cornish Rex</option>
+                                                <option>Cymric (Man de pelo largo)</option>
+                                                <option>Del Bosque Noruego</option>
+                                                <option>Devon rex</option>
+                                                <option>Exóticos, Fold escocés</option>
+                                                <option>Foldex</option>
+                                                <option>Habana</option>
+                                                <option>Himalayo</option>
+                                                <option>Javanés</option>
+                                                <option>Korat</option>
+                                                <option>Maine Coon</option>
+                                                <option>Manx</option>
+                                                <option>Mau Egipcio</option>
+                                                <option>Munchkin</option>
+                                                <option>Ocicat</option>
+                                                <option>Oriental</option>
+                                                <option>Pelicorto Americano</option>
+                                                <option>Pelicorto Europeo</option>
+                                                <option>Persas</option>
+                                                <option>Ragdoll's</option>
+                                                <option>Rex selkirk</option>
+                                                <option>Sagrados de Birmania</option>
+                                                <option>Siamés</option>
+                                                <option>Siberiano</option>
+                                                <option>Singapur</option>
+                                                <option>Snowshoe</option>
+                                                <option>Somalí</option>
+                                                <option>Sphynx</option>
+                                                <option>Tonquinés</option>
+                                                <option>Van turco</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    </c:if>
+                                            <!--<div class="form-group">
                                                 <h:outputLabel for="especie" value="Especie"></h:outputLabel>
                                                 <h:selectOneMenu id="especie" class="form-control" value="#{controladorMascotas.mascotaTemp.especie}">
                                                     <f:selectItem itemValue="Perro" itemLabel="Perro"></f:selectItem>
                                                     <f:selectItem itemValue="Gato" itemLabel="Gato"></f:selectItem>
                                                 </h:selectOneMenu>
-                                            </div>
+                                            </div>-->
                                             <div class="form-group">
                                                 <h:outputLabel for="sexo" value="Sexo"></h:outputLabel>
+                                                <div class="input-group margin-bottom-sm">
+                                                <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>                             
                                                 <h:selectOneMenu id="sexo" class="form-control" value="#{controladorMascotas.mascotaTemp.sexo}">
                                                     <f:selectItem itemValue="Macho" itemLabel="Macho"></f:selectItem>
                                                     <f:selectItem itemValue="Hembra" itemLabel="Hembra"></f:selectItem>
                                                 </h:selectOneMenu>
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <h:outputLabel for="color" value="Color"></h:outputLabel>
+                                                <div class="input-group margin-bottom-sm">
+                                                <span class="input-group-addon"><i class="fa fa-paint-brush"></i></span>                                               
                                                 <h:inputText class="form-control" id="color" value="#{controladorMascotas.mascotaTemp.color}"></h:inputText>
+                                                </div>
                                             </div>
                                             <!--<div class="form-group">
                                                 <h:outputLabel for="estado" value="Estado"></h:outputLabel>
@@ -348,7 +414,7 @@
 
                                         </div>
                                         <div class="modal-footer">
-                                            <h:commandButton action="#{controladorMascotas.modificarMascota()}" class="btn btn-success" value="Modificar"></h:commandButton>
+                                            <h:commandButton id="botonModificarMascota" action="#{controladorMascotas.modificarMascota()}" class="btn btn-success" value="Modificar"></h:commandButton>
                                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 
                                         </div>
@@ -393,18 +459,18 @@
                             <tbody>
                                 <c:forEach var="listaHistorial" items="#{controladorMascotas.listarHistorialClinico()}">
                                     <tr>
-                                        <td>#{listaHistorial.citas.fechaAsignada.toLocaleString()}</td> 
-                                        <td>#{listaHistorial.citas.vacunas}</td> 
-                                        <td>#{listaHistorial.citas.peso}</td> 
+                                        <td>#{controladorCitas.listarFechaAsignada(listaHistorial.idCita)}</td> 
+                                        <td>#{controladorCitas.listarVacunas(listaHistorial.idCita)}</td> 
+                                        <td>#{controladorCitas.listarPeso(listaHistorial.idCita)}</td> 
                                         <td>#{listaHistorial.alimento}</td> 
-                                        <td><button type="button" onclick="mostraHis('#{listaHistorial.citas.fechaAsignada.toLocaleString()}',
-                                                                '#{listaHistorial.citas.vacunas}',
-                                                                '#{listaHistorial.citas.peso}',
-                                                                '#{listaHistorial.citas.antecedentes}',
-                                                                '#{listaHistorial.diagnostico}',
-                                                                '#{listaHistorial.motivo}',
-                                                                '#{listaHistorial.alimento}',
-                                                                '#{listaHistorial.formulaMedica}')" class="btn btn-default"><i class="fa fa-eye"></i></button></td> 
+                                        <td><button type="button" onclick="mostraHis('#{controladorCitas.listarFechaAsignada(listaHistorial.idCita)}',
+                                                        '#{controladorCitas.listarVacunas(listaHistorial.idCita)}',
+                                                        '#{controladorCitas.listarPeso(listaHistorial.idCita)}',
+                                                        '#{controladorCitas.listarAntecedentes(listaHistorial.idCita)}',
+                                                        '#{listaHistorial.diagnostico}',
+                                                        '#{controladorCitas.listarMotivo(listaHistorial.idCita)}',
+                                                        '#{listaHistorial.alimento}',
+                                                        '#{listaHistorial.formulaMedica}')" class="btn btn-default"><i class="fa fa-eye"></i></button></td> 
                                     </tr>
                                 </c:forEach>
                             </tbody>

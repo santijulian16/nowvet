@@ -137,7 +137,7 @@
                 <div class="container col-md-8 col-md-offset-2" id="containerFormularios">
                     <div class="row" id="rowFormularios" > 
                         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1" >   
-                            <h:form id="formularioDeSolicitudDeCitasClinicas">
+                            <h:form id="formularioDeSolicitudDeCitasClinicas" onkeypress="if(event.keyCode == 13) { document.getElementById('formularioDeSolicitudDeCitasClinicas:botonAgendarCitaClinica').click(); return false;}">
 
                                 <h2>Programe la cita clínica para su mascota</h2><hr></hr>
 
@@ -247,7 +247,7 @@
                                                          p:pattern="[A-Z Á,É,Í,Ó,Ú a-z á,é,í,ó,ú]{2,200}" title="Debe digitar los síntomas de su mascota" value="#{controladorCitas.sintomas}"></h:inputTextarea>
                                     </div>
                                     <div id="botonEnviar">
-                                        <h:commandButton class="btn btn-success pull-right" tabindex="7" value="Agendar Cita" action="#{controladorCitas.agendarCitaClinica()}"></h:commandButton>           
+                                        <h:commandButton id="botonAgendarCitaClinica" class="btn btn-success pull-right" tabindex="7" value="Agendar Cita" action="#{controladorCitas.agendarCitaClinica()}"></h:commandButton>           
                                     </div>
                                 </c:if>
                             </h:form>

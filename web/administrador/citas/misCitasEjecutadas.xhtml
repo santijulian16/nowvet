@@ -20,23 +20,25 @@
         <script src="../../js/bootstrap.js"></script>
         <script src="../../js/bootstrap-table.js" type="text/javascript"></script>
         <script>
-            function mostrarConsultaClinica(antecedentes, peso, nombrePropietario, apellidoPropietario, motivo, sintomas) {
+            function mostrarConsultaClinica(antecedentes, peso, nombrePropietario, apellidoPropietario, correo, motivo, sintomas) {
                 $('#modalMostrarConsultaClinica').modal('show');
                 document.getElementById("antecedentes").innerHTML = antecedentes,
-                        document.getElementById("peso").innerHTML = peso;
+                document.getElementById("peso").innerHTML = peso;
                 document.getElementById("nombreP").innerHTML = nombrePropietario;
                 document.getElementById("apellidoP").innerHTML = apellidoPropietario;
+                document.getElementById("correoP").innerHTML = correo;
                 document.getElementById("motivo").innerHTML = motivo;
                 document.getElementById("sintomas").innerHTML = sintomas;
             }
         </script>
         <script>
-            function mostrarPeluqueria(antecedentesP, pesoP, nombrePropietarioP, apellidoPropietarioP, serviciosAplicadosP) {
+            function mostrarPeluqueria(antecedentesP, pesoP, nombrePropietarioP, apellidoPropietarioP, correoP, serviciosAplicadosP) {
                 $('#modalMostrarPeluqueria').modal('show');
                 document.getElementById("antecedentesP").innerHTML = antecedentesP,
-                        document.getElementById("pesoP").innerHTML = pesoP;
+                document.getElementById("pesoP").innerHTML = pesoP;
                 document.getElementById("nombrePP").innerHTML = nombrePropietarioP;
                 document.getElementById("apellidoPP").innerHTML = apellidoPropietarioP;
+                document.getElementById("correoPP").innerHTML = correoP;
                 document.getElementById("serviciosAplicados").innerHTML = serviciosAplicadosP;
             }
         </script>
@@ -146,7 +148,7 @@
                                             <c:if test="#{listaCitas.idServicio.tipo == 'Consulta Clinica'}">
 
                                                 <td><button type="button" class="btn btn-success">
-                                                        <i class="fa fa-eye" onclick="mostrarConsultaClinica('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idMascota.codigoPropietario.usuarios.nombres}', '#{listaCitas.idMascota.codigoPropietario.usuarios.apellidos}', '#{listaCitas.citasclinicas.motivo}', '#{listaCitas.citasclinicas.sintomas}')" width="16px"></i>
+                                                        <i class="fa fa-eye" onclick="mostrarConsultaClinica('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idMascota.codigoPropietario.usuarios.nombres}', '#{listaCitas.idMascota.codigoPropietario.usuarios.apellidos}', '#{listaCitas.idMascota.codigoPropietario.usuarios.correo}', '#{controladorCitas.listarMotivo(listaCitas.idCita)}', '#{controladorCitas.listarSintomas(listaCitas.idCita)}')" width="16px"></i>
                                                     </button></td>
 
                                                 <!--Modal para mostrar datos de una cita clínica en estado ejecutada-->
@@ -162,6 +164,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <strong>Nombre Propietario: </strong><i id="nombreP"></i>&nbsp;<i id="apellidoP"></i><br></br>
+                                                                <strong>Correo Propietario: </strong><i id="correoP"></i><br></br>
                                                                 <strong>Antecedentes: </strong><i id="antecedentes"></i><br></br>
                                                                 <strong>Peso: </strong><i id="peso"></i><br></br>
                                                                 <strong>Motivo: </strong><i id="motivo"></i><br></br>
@@ -178,7 +181,7 @@
                                             <c:if test="#{listaCitas.idServicio.tipo == 'Peluqueria'}">
 
                                                 <td><button type="button" class="btn btn-success">
-                                                        <i class="fa fa-eye" onclick="mostrarPeluqueria('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idMascota.codigoPropietario.usuarios.nombres}', '#{listaCitas.idMascota.codigoPropietario.usuarios.apellidos}', '#{listaCitas.citaspeluqueria.serviciosAplicados}')" width="16px"></i>
+                                                        <i class="fa fa-eye" onclick="mostrarPeluqueria('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idMascota.codigoPropietario.usuarios.nombres}', '#{listaCitas.idMascota.codigoPropietario.usuarios.apellidos}', '#{listaCitas.idMascota.codigoPropietario.usuarios.correo}', '#{controladorCitas.listarServiciosAplicados(listaCitas.idCita)}')" width="16px"></i>
                                                     </button></td>
 
                                                 <!--Modal para mostrar datos de una cita de peluquería en estado ejecutada-->
@@ -194,6 +197,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <strong>Nombre Propietario: </strong><i id="nombrePP"></i>&nbsp;<i id="apellidoPP"></i><br></br>
+                                                                <strong>Correo Propietario: </strong><i id="correoPP"></i><br></br>
                                                                 <strong>Antecedentes: </strong><i id="antecedentesP"></i><br></br>
                                                                 <strong>Peso: </strong><i id="pesoP"></i><br></br>
                                                                 <strong>Servicios Aplicados: </strong><i id="serviciosAplicados"></i><br></br>

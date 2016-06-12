@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -76,9 +77,9 @@ public class Citas implements Serializable {
     @JoinColumn(name = "idMascota", referencedColumnName = "codigoMascota")
     @ManyToOne(optional = false)
     private Mascotas idMascota;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "citas")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "citas", fetch = FetchType.LAZY)
     private Citasclinicas citasclinicas;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "citas")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "citas", fetch = FetchType.LAZY)
     private Citaspeluqueria citaspeluqueria;
 
     public Citas() {

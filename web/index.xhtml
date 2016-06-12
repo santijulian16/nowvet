@@ -162,7 +162,7 @@
                         <iframe src="wowslider.html" style="width: 100%; height:450px;max-width:100%;overflow:hidden;border:none;padding:0;margin:0 auto;display:block;" marginheight="0" marginwidth="0"></iframe>
                     </div>
                     <div class="col-md-3 col-sm-12 col-xs-12" id="loginContenedor">
-                        <h:form id="iniciarSesion">
+                        <h:form id="iniciarSesion" onkeypress="if(event.keyCode == 13) { document.getElementById('iniciarSesion:botonIniciarSesion').click(); return false;}">
                             <legend><h2 class="text-center">Iniciar Sesión</h2></legend>
                             <div class="form-group">
                                 <label for="correoElectronico" >Correo Electrónico</label><br />
@@ -185,7 +185,7 @@
                                     <div class="alert alert-danger" role="alert">Error correo o contraseña no coinciden</div>
                                 </div>
                             </c:if>
-                            <h:commandButton styleClass="btn btn-success botonesLogin" value="Iniciar Sesion" action="#{controladorUsuario.login()}" tabindex="3"></h:commandButton>  
+                            <h:commandButton id="botonIniciarSesion" styleClass="btn btn-success botonesLogin" value="Iniciar Sesion" action="#{controladorUsuario.login()}" tabindex="3"></h:commandButton>  
 
 
 

@@ -27,7 +27,7 @@
             function mostrarConsultaClinica(antecedentes, peso, nombrePropietario, apellidoPropietario, correo, motivo, sintomas) {
                 $('#modalMostrarConsultaClinica').modal('show');
                 document.getElementById("antecedentes").innerHTML = antecedentes,
-                        document.getElementById("peso").innerHTML = peso;
+                document.getElementById("peso").innerHTML = peso;
                 document.getElementById("nombreP").innerHTML = nombrePropietario;
                 document.getElementById("apellidoP").innerHTML = apellidoPropietario;
                 document.getElementById("correo").innerHTML = correo;
@@ -39,7 +39,7 @@
             function mostrarPeluqueria(antecedentesP, pesoP, nombrePropietarioP, apellidoPropietarioP, correoP, serviciosAplicadosP) {
                 $('#modalMostrarPeluqueria').modal('show');
                 document.getElementById("antecedentesP").innerHTML = antecedentesP,
-                        document.getElementById("pesoP").innerHTML = pesoP;
+                document.getElementById("pesoP").innerHTML = pesoP;
                 document.getElementById("nombrePP").innerHTML = nombrePropietarioP;
                 document.getElementById("apellidoPP").innerHTML = apellidoPropietarioP;
                 document.getElementById("correoP").innerHTML = correoP;
@@ -150,7 +150,7 @@
                                         <c:if test="#{listaCitas.idServicio.tipo == 'Consulta Clinica'}">
 
                                             <td><button type="button" class="btn btn-success">
-                                                    <i class="fa fa-eye" onclick="mostrarConsultaClinica('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idVeterinario.usuarios.nombres}', '#{listaCitas.idVeterinario.usuarios.apellidos}', '#{listaCitas.idVeterinario.usuarios.correo}', '#{listaCitas.citasclinicas.motivo}', '#{listaCitas.citasclinicas.sintomas}')" width="16px"></i>
+                                                    <i class="fa fa-eye" onclick="mostrarConsultaClinica('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idVeterinario.usuarios.nombres}', '#{listaCitas.idVeterinario.usuarios.apellidos}', '#{listaCitas.idVeterinario.usuarios.correo}', '#{controladorCitas.listarMotivo(listaCitas.idCita)}', '#{controladorCitas.listarSintomas(listaCitas.idCita)}')" width="16px"></i>
                                                 </button></td>
 
                                             <!--Modal para mostrar datos de una cita clínica en estado ejecutada-->
@@ -166,7 +166,7 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <strong>Nombre Veterinario: </strong><i id="nombreP"></i>&nbsp;<i id="apellidoP"></i><br></br>
-                                                            <strong>Correo Veterinario: </strong><i id="correoP"></i><br></br>
+                                                            <strong>Correo Veterinario: </strong><i id="correo"></i><br></br>
                                                             <strong>Antecedentes: </strong><i id="antecedentes"></i><br></br>
                                                             <strong>Peso: </strong><i id="peso"></i><br></br>
                                                             <strong>Motivo: </strong><i id="motivo"></i><br></br>
@@ -183,7 +183,7 @@
                                         <c:if test="#{listaCitas.idServicio.tipo == 'Peluqueria'}">
 
                                             <td><button type="button" class="btn btn-success">
-                                                    <i class="fa fa-eye" onclick="mostrarPeluqueria('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idVeterinario.usuarios.nombres}', '#{listaCitas.idVeterinario.usuarios.apellidos}', '#{listaCitas.idVeterinario.usuarios.correo}', '#{listaCitas.citaspeluqueria.serviciosAplicados}')" width="16px"></i>
+                                                    <i class="fa fa-eye" onclick="mostrarPeluqueria('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idVeterinario.usuarios.nombres}', '#{listaCitas.idVeterinario.usuarios.apellidos}', '#{listaCitas.idVeterinario.usuarios.correo}', '#{controladorCitas.listarServiciosAplicados(listaCitas.idCita)}')" width="16px"></i>
                                                 </button></td>
 
                                             <!--Modal para mostrar datos de una cita de peluquería en estado ejecutada-->

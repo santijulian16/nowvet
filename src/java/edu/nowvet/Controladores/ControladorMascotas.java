@@ -62,13 +62,23 @@ private Propietarios prop;
         return mas2;
     }
     
-    public void eliminarMascota(){
+    public void inactivarMascota(){
         FacesContext faces = FacesContext.getCurrentInstance();
         ExternalContext externalContext = faces.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
         int idmas= Integer.parseInt((String) params.get("idmas"));
         Mascotas mas=this.mf.find(idmas);
         mas.setEstado("Inactiva");
+        this.mf.edit(mas);
+    }
+    
+    public void activarMascota(){
+        FacesContext faces = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = faces.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+        int idmas= Integer.parseInt((String) params.get("idmas2"));
+        Mascotas mas=this.mf.find(idmas);
+        mas.setEstado("Activa");
         this.mf.edit(mas);
     }
     
@@ -95,6 +105,11 @@ private Propietarios prop;
     }
     
     public void modificarMascota(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+        String raza = (String) params.get("raza");
+        this.mascotaTemp.setRaza(raza);
         this.mf.edit(mascotaTemp);
         this.estado="1";
     }

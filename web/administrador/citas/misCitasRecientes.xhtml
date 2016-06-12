@@ -21,12 +21,13 @@
         <script src="../../js/bootstrap-table.js" type="text/javascript"></script>
 
         <script>
-            function mostrarConsultaClinica(antecedentes, peso, nombrePropietario, apellidoPropietario, motivo, sintomas) {
+            function mostrarConsultaClinica(antecedentes, peso, nombrePropietario, apellidoPropietario, correoPropietario, motivo, sintomas) {
                 $('#modalMostrarConsultaClinica').modal('show');
                 document.getElementById("antecedentes").innerHTML = antecedentes,
-                        document.getElementById("peso").innerHTML = peso;
+                document.getElementById("peso").innerHTML = peso;
                 document.getElementById("nombreP").innerHTML = nombrePropietario;
                 document.getElementById("apellidoP").innerHTML = apellidoPropietario;
+                document.getElementById("correoP").innerHTML = correoPropietario;
                 document.getElementById("motivo").innerHTML = motivo;
                 document.getElementById("sintomas").innerHTML = sintomas;
             }
@@ -52,12 +53,13 @@
             }
         </script>
         <script>
-            function mostrarPeluqueria(antecedentesP, pesoP, nombrePropietarioP, apellidoPropietarioP, serviciosAplicadosP) {
+            function mostrarPeluqueria(antecedentesP, pesoP, nombrePropietarioP, apellidoPropietarioP, correoPP, serviciosAplicadosP) {
                 $('#modalMostrarPeluqueria').modal('show');
                 document.getElementById("antecedentesP").innerHTML = antecedentesP,
-                        document.getElementById("pesoP").innerHTML = pesoP;
+                document.getElementById("pesoP").innerHTML = pesoP;
                 document.getElementById("nombrePP").innerHTML = nombrePropietarioP;
                 document.getElementById("apellidoPP").innerHTML = apellidoPropietarioP;
+                document.getElementById("correoPP").innerHTML = correoPP;
                 document.getElementById("serviciosAplicados").innerHTML = serviciosAplicadosP;
             }
         </script>
@@ -183,9 +185,9 @@
 
 
                                             <c:if test="#{listaCitas.idServicio.tipo == 'Consulta Clinica'}">
-                                                <td><button type="button" class="btn btn-default"><i class="fa fa-calendar-check-o" onclick="atenderConsultaClinica('#{listaCitas.vacunas}', '#{listaCitas.peso}', '#{listaCitas.antecedentes}', '#{listaCitas.citasclinicas.diagnostico}', '#{listaCitas.citasclinicas.alimento}', '#{listaCitas.citasclinicas.formulaMedica}', '#{listaCitas.idCita}', '#{listaCitas.estado}', '#{listaCitas.fechaAsignada.toLocaleString()}', '#{listaCitas.idServicio.codgoServicio}', '#{listaCitas.idMascota.codigoMascota}', '#{listaCitas.idVeterinario.dniPersonal}', '#{listaCitas.citasclinicas.idCita}', '#{listaCitas.citasclinicas.motivo}', '#{listaCitas.citasclinicas.sintomas}')"></i></button></td>
+                                                <td><button type="button" class="btn btn-default"><i class="fa fa-calendar-check-o" onclick="atenderConsultaClinica('#{listaCitas.vacunas}', '#{listaCitas.peso}', '#{listaCitas.antecedentes}', '#{listaCitas.citasclinicas.diagnostico}', '#{listaCitas.citasclinicas.alimento}', '#{listaCitas.citasclinicas.formulaMedica}', '#{listaCitas.idCita}', '#{listaCitas.estado}', '#{listaCitas.fechaAsignada.toLocaleString()}', '#{listaCitas.idServicio.codgoServicio}', '#{listaCitas.idMascota.codigoMascota}', '#{listaCitas.idVeterinario.dniPersonal}', '#{listaCitas.citasclinicas.idCita}', '#{controladorCitas.listarMotivo(listaCitas.idCita)}', '#{controladorCitas.listarSintomas(listaCitas.idCita)}')"></i></button></td>
                                                 <td><button type="button" class="btn btn-success">
-                                                        <i class="fa fa-eye" onclick="mostrarConsultaClinica('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idMascota.codigoPropietario.usuarios.nombres}', '#{listaCitas.idMascota.codigoPropietario.usuarios.apellidos}', '#{listaCitas.citasclinicas.motivo}', '#{listaCitas.citasclinicas.sintomas}')" width="16px"></i>
+                                                        <i class="fa fa-eye" onclick="mostrarConsultaClinica('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idMascota.codigoPropietario.usuarios.nombres}', '#{listaCitas.idMascota.codigoPropietario.usuarios.apellidos}', '#{listaCitas.idMascota.codigoPropietario.usuarios.correo}','#{controladorCitas.listarMotivo(listaCitas.idCita)}', '#{controladorCitas.listarSintomas(listaCitas.idCita)}')" width="16px"></i>
                                                     </button></td>
 
                                                 <!--Ventana Modal Mostrar Cita Clinica-->
@@ -201,6 +203,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <strong>Nombre Propietario: </strong><i id="nombreP"></i>&nbsp;<i id="apellidoP"></i><br></br>
+                                                                <strong>Correo Propietario: </strong><i id="correoP"></i><br></br>
                                                                 <strong>Antecedentes: </strong><i id="antecedentes"></i><br></br>
                                                                 <strong>Peso: </strong><i id="peso"></i><br></br>
                                                                 <strong>Motivo: </strong><i id="motivo"></i><br></br>
@@ -222,32 +225,53 @@
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                 <h4 class="modal-title" id="myModalLabel">Atender Cita Clínica</h4>
                                                             </div>
-                                                            <h:form id="formModificar">
+                                                            <h:form id="formAtenderCitaClinica" onkeypress="if (event.keyCode == 13) {
+                                                                        document.getElementById('formAtenderCitaClinica:botonAtenderCitaClinica').click();
+                                                                        return false;
+                                                                    }">
 
                                                                 <div class="modal-body">
                                                                     <div class="form-group">
-                                                                        <label for="vacunasA">Vacunas</label>  
-                                                                        <input id="vacunasA" name="vacunasA" type="text" class="form-control" required=""/> 
+                                                                        <label for="vacunasA">Vacunas</label>
+                                                                        <div class="input-group margin-bottom-sm">
+                                                                            <span class="input-group-addon"><i class="fa fa-eyedropper"></i></span>
+                                                                            <input id="vacunasA" name="vacunasA" type="text" class="form-control" required=""/> 
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="pesoA">Peso</label>  
-                                                                        <input id="pesoA" name="pesoA"  type="text" class="form-control" required=""/>                      
+                                                                        <label for="pesoA">Peso</label>
+                                                                        <div class="input-group margin-bottom-sm">
+                                                                            <span class="input-group-addon"><i class="glyphicon glyphicon-scale"></i></span>
+                                                                            <input id="pesoA" name="pesoA"  type="text" class="form-control" required=""/>                      
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="modeloMod">Antecedentes</label>
-                                                                        <input id="antecedentesA" name="antecedentesA"  type="text" class="form-control" required=""/> 
+                                                                        <div class="input-group margin-bottom-sm">
+                                                                            <span class="input-group-addon"><i class="fa fa-file-text-o"></i></span>
+                                                                            <input id="antecedentesA" name="antecedentesA"  type="text" class="form-control" required=""/> 
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="diagnosticoA">Diagnóstico</label>  
-                                                                        <textarea id="diagnosticoA" name="diagnosticoA" type="text" class="form-control" required=""/>
+                                                                        <label for="diagnosticoA">Diagnóstico</label>
+                                                                        <div class="input-group margin-bottom-sm">
+                                                                            <span class="input-group-addon"><i class="fa fa-file-text-o"></i></span>
+                                                                            <textarea id="diagnosticoA" name="diagnosticoA" type="text" class="form-control" required=""/>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="alimentoA">Alimento</label>  
-                                                                        <input id="alimentoA" name="alimentoA"   type="text" class="form-control" required=""/>
+                                                                        <label for="alimentoA">Alimento</label>
+                                                                        <div class="input-group margin-bottom-sm">
+                                                                            <span class="input-group-addon"><i class="fa fa-paw"></i></span>
+                                                                            <input id="alimentoA" name="alimentoA"   type="text" class="form-control" required=""/>
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="formulaMedicaA">Fórmula Médica</label>            
-                                                                        <input id="formulaMedicaA" name="formulaMedicaA" type="text" class="form-control" required=""/> 
+                                                                        <label for="formulaMedicaA">Fórmula Médica</label>
+                                                                        <div class="input-group margin-bottom-sm">
+                                                                            <span class="input-group-addon"><i class="fa fa-stethoscope"></i></span>
+                                                                            <input id="formulaMedicaA" name="formulaMedicaA" type="text" class="form-control" required=""/> 
+                                                                        </div>
                                                                     </div>
                                                                     <div class="form-group">  
                                                                         <input id="idCitaA" name="idCitaA" type="text" class="form-control" style="display: none;"/> 
@@ -279,7 +303,7 @@
                                                                 </div>
 
                                                                 <div class="modal-footer">
-                                                                    <h:commandButton class="btn btn-success" type="sumbit" action="#{controladorCitas.atenderCitaClinica()}" value="Atender Cita"></h:commandButton>
+                                                                    <h:commandButton id="botonAtenderCitaClinica" class="btn btn-success" type="sumbit" action="#{controladorCitas.atenderCitaClinica()}" value="Atender Cita"></h:commandButton>
                                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                                                 </div>
                                                             </h:form>
@@ -289,9 +313,9 @@
                                             </c:if>
 
                                             <c:if test="#{listaCitas.idServicio.tipo == 'Peluqueria'}">
-                                                <td><button type="button" class="btn btn-default"><i class="fa fa-calendar-check-o" onclick="atenderPeluqueria('#{listaCitas.vacunas}', '#{listaCitas.peso}', '#{listaCitas.antecedentes}', '#{listaCitas.idCita}', '#{listaCitas.estado}', '#{listaCitas.fechaAsignada.toLocaleString()}', '#{listaCitas.idServicio.codgoServicio}', '#{listaCitas.idMascota.codigoMascota}', '#{listaCitas.idVeterinario.dniPersonal}', '#{listaCitas.citaspeluqueria.idCita}', '#{listaCitas.citaspeluqueria.serviciosAplicados}')"></i></button></td>
+                                                <td><button type="button" class="btn btn-default"><i class="fa fa-calendar-check-o" onclick="atenderPeluqueria('#{listaCitas.vacunas}', '#{listaCitas.peso}', '#{listaCitas.antecedentes}', '#{listaCitas.idCita}', '#{listaCitas.estado}', '#{listaCitas.fechaAsignada.toLocaleString()}', '#{listaCitas.idServicio.codgoServicio}', '#{listaCitas.idMascota.codigoMascota}', '#{listaCitas.idVeterinario.dniPersonal}', '#{listaCitas.citaspeluqueria.idCita}', '#{controladorCitas.listarServiciosAplicados(listaCitas.idCita)}')"></i></button></td>
                                                 <td><button type="button" class="btn btn-success">
-                                                        <i class="fa fa-eye" onclick="mostrarPeluqueria('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idMascota.codigoPropietario.usuarios.nombres}', '#{listaCitas.idMascota.codigoPropietario.usuarios.apellidos}', '#{listaCitas.citaspeluqueria.serviciosAplicados}')" width="16px"></i>
+                                                        <i class="fa fa-eye" onclick="mostrarPeluqueria('#{listaCitas.antecedentes}', '#{listaCitas.peso}', '#{listaCitas.idMascota.codigoPropietario.usuarios.nombres}', '#{listaCitas.idMascota.codigoPropietario.usuarios.apellidos}','#{listaCitas.idMascota.codigoPropietario.usuarios.correo}', '#{controladorCitas.listarServiciosAplicados(listaCitas.idCita)}')" width="16px"></i>
                                                     </button></td>
 
                                                 <!--Ventana Modal Mostrar Cita Peluqueria-->
@@ -307,6 +331,7 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <strong>Nombre Propietario: </strong><i id="nombrePP"></i>&nbsp;<i id="apellidoPP"></i><br></br>
+                                                                <strong>Correo Propietario: </strong><i id="correoPP"></i><br></br>
                                                                 <strong>Antecedentes: </strong><i id="antecedentesP"></i><br></br>
                                                                 <strong>Peso: </strong><i id="pesoP"></i><br></br>
                                                                 <strong>Servicios Aplicados: </strong><i id="serviciosAplicados"></i><br></br>
@@ -327,7 +352,10 @@
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                                                 <h4 class="modal-title" id="myModalLabel">Atender Cita Peluquería</h4>
                                                             </div>
-                                                            <h:form id="formModificar">
+                                                            <h:form id="formAtenderCitaPeluqueria" onkeypress="if (event.keyCode == 13) {
+                                                                        document.getElementById('formAtenderCitaPeluqueria:botonAtenderCitaPeluqueria').click();
+                                                                        return false;
+                                                                    }">
 
                                                                 <div class="modal-body">
                                                                     <div class="form-group">
@@ -370,7 +398,7 @@
                                                                 </div>
 
                                                                 <div class="modal-footer">
-                                                                    <h:commandButton class="btn btn-success" type="sumbit" action="#{controladorCitas.atenderCitaPeluqueria()}" value="Atender Cita"></h:commandButton>
+                                                                    <h:commandButton id="botonAtenderCitaPeluqueria" class="btn btn-success" type="sumbit" action="#{controladorCitas.atenderCitaPeluqueria()}" value="Atender Cita"></h:commandButton>
                                                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                                                                 </div>
                                                             </h:form>

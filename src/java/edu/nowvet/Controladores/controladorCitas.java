@@ -167,11 +167,11 @@ public class controladorCitas implements Serializable {
         String sintomasF = (String) params.get("sintomas");
         misCitasClinicas.setSintomas(sintomasF);
         citasClinicasFacade.create(misCitasClinicas);
-//        Mailer.send(this.usuario.getCorreo(), "NowVet - Confirmación de Cita","<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Confirmación de Consulta Clínica."+"</h1><p style='font-size: 1.5em; color: #797979;'>NowVet le informa que el servicio de consulta clínica agendado para su mascota "+misMascotas.getNombre()+" ya se encuentra en estado disponible. A continuación se presentan los datos respectivos de la consulta clínica: </p></div>"
-//                + "<br/><p style='font-size: 1.5em; color: #797979;'>Servicio: "+misServicios.getTipo()
-//                + "<br/>Mascota: "+misMascotas.getNombre()
-//                + "<br/>Fecha Asignada: "+misCitas.getFechaAsignada().toLocaleString()
-//                + "<br/>Veterinario: "+miVeterinario.getUsuarios().getNombres()+" "+miVeterinario.getUsuarios().getApellidos()+"</p>");
+ Mailer.send(this.usuario.getCorreo(), "NowVet - Confirmación de Cita","<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Confirmación de Consulta Clínica."+"</h1><p style='font-size: 1.5em; color: #797979;'>NowVet le informa que el servicio de consulta clínica agendado para su mascota "+misMascotas.getNombre()+" ya se encuentra en estado disponible. A continuación se presentan los datos respectivos de la consulta clínica: </p></div>"
+                + "<br/><p style='font-size: 1.5em; color: #797979;'>Servicio: "+misServicios.getTipo()
+                + "<br/>Mascota: "+misMascotas.getNombre()
+                + "<br/>Fecha Asignada: "+misCitas.getFechaAsignada().toLocaleString()
+                + "<br/>Veterinario: "+miVeterinario.getUsuarios().getNombres()+" "+miVeterinario.getUsuarios().getApellidos()+"</p>");
         FacesContext context = FacesContext.getCurrentInstance();
              try {
             context.getExternalContext().redirect("/NowVet/faces/cliente/servicios/confirmacionCitaClinica.xhtml");
@@ -220,12 +220,12 @@ public class controladorCitas implements Serializable {
             String serviciosAplicados = (String) params.get("serviciosAplicados");
             misCitasPeluqueria.setServiciosAplicados(serviciosAplicados);
             citasPeluqueriaFacade.create(misCitasPeluqueria);
-//            Mailer.send(this.usuario.getCorreo(), "NowVet - Confirmación de Cita","<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Confirmación de Peluquería."+"</h1><p style='font-size: 1.5em; color: #797979;'>NowVet le informa que el servicio de peluquería agendado para su mascota "+misMascotas.getNombre()+" ya se encuentra en estado disponible. A continuación se presentan los datos respectivos de la consulta clínica: </p></div>"
-//                + "<br/><p style='font-size: 1.5em; color: #797979;'>Servicio: "+misServicios.getTipo()
-//                + "<br/>Mascota: "+misMascotas.getNombre()
-//                + "<br/>Fecha Asignada: "+misCitas.getFechaAsignada().toLocaleString()
-//                + "<br/>Veterinario: "+miVeterinario.getUsuarios().getNombres()+" "+miVeterinario.getUsuarios().getApellidos()
-//                + "<br/>Servicios Aplicados: "+misCitasPeluqueria.getServiciosAplicados()+"</p>");
+            Mailer.send(this.usuario.getCorreo(), "NowVet - Confirmación de Cita","<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.co.nf/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Confirmación de Peluquería."+"</h1><p style='font-size: 1.5em; color: #797979;'>NowVet le informa que el servicio de peluquería agendado para su mascota "+misMascotas.getNombre()+" ya se encuentra en estado disponible. A continuación se presentan los datos respectivos de la consulta clínica: </p></div>"
+                + "<br/><p style='font-size: 1.5em; color: #797979;'>Servicio: "+misServicios.getTipo()
+                + "<br/>Mascota: "+misMascotas.getNombre()
+                + "<br/>Fecha Asignada: "+misCitas.getFechaAsignada().toLocaleString()
+                + "<br/>Veterinario: "+miVeterinario.getUsuarios().getNombres()+" "+miVeterinario.getUsuarios().getApellidos()
+                + "<br/>Servicios Aplicados: "+misCitasPeluqueria.getServiciosAplicados()+"</p>");
             FacesContext context = FacesContext.getCurrentInstance();
              try {
             context.getExternalContext().redirect("/NowVet/faces/cliente/servicios/confirmacionCitaDePeluqueria.xhtml");
@@ -468,6 +468,46 @@ public class controladorCitas implements Serializable {
         List <Citas> listaCitasEjecutadas;
         listaCitasEjecutadas=this.citasFacade.consultarCitasEjecutadas();
         return listaCitasEjecutadas;
+    }
+    
+    public String listarMotivo(int idCita){
+        String motivo1=this.citasFacade.consultarMotivo(idCita);
+        return motivo1;
+    }
+    
+    public String listarSintomas(int idCita){
+        String sintomas1=this.citasFacade.consultarSintomas(idCita);
+        return sintomas1;
+    }
+    
+    public String listarServiciosAplicados(int idCita){
+        String serviciosA=this.citasFacade.consultarServiciosAplicados(idCita);
+        return serviciosA;
+    }
+    
+    public String listarFechaAsignada(int idCita) throws ParseException{
+        List <Citas> listaFechas=this.citasFacade.listarHistorialFecha(idCita);
+        Date fecha1 = null;
+        for (int i = 0; i < listaFechas.size(); i++) {
+            fecha1 = listaFechas.get(i).getFechaAsignada();
+            return fecha1.toLocaleString();
+        }
+        return fecha1.toLocaleString();
+    }
+    
+    public String listarVacunas(int idCita){
+        String vacunas1=this.citasFacade.consultarVacunas(idCita);
+        return vacunas1;
+    }
+    
+    public String listarPeso(int idCita){
+        String peso1=this.citasFacade.consultarPeso(idCita);
+        return peso1;
+    }
+    
+    public String listarAntecedentes(int idCita){
+        String antecedentes1=this.citasFacade.consultarAntecedentes(idCita);
+        return antecedentes1;
     }
     
      public void pdfHis (Mascotas mascota) throws ClassNotFoundException, SQLException, JRException, IOException {
