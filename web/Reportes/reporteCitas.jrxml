@@ -83,7 +83,7 @@ FROM
 			</frame>
 			<image>
 				<reportElement x="711" y="0" width="74" height="65" uuid="99004a89-07c9-4371-84db-b8de365450bb"/>
-				<imageExpression><![CDATA["C:\\Users\\JoséLeonardo\\Documents\\Proyecto Nowvet 2016\\NowVet\\web\\imagenes\\logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["logo.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

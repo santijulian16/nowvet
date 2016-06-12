@@ -61,8 +61,6 @@ public class Personalveterinario implements Serializable {
     @JoinColumn(name = "dniPersonal", referencedColumnName = "cedula", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Usuarios usuarios;
-    @OneToMany(mappedBy = "dniPersonalVeterinario")
-    private Collection<Turnos> turnosCollection;
 
     public Personalveterinario() {
     }
@@ -118,15 +116,6 @@ public class Personalveterinario implements Serializable {
 
     public void setUsuarios(Usuarios usuarios) {
         this.usuarios = usuarios;
-    }
-
-    @XmlTransient
-    public Collection<Turnos> getTurnosCollection() {
-        return turnosCollection;
-    }
-
-    public void setTurnosCollection(Collection<Turnos> turnosCollection) {
-        this.turnosCollection = turnosCollection;
     }
 
     @Override

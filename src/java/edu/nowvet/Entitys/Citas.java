@@ -1,4 +1,4 @@
- /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -77,9 +76,9 @@ public class Citas implements Serializable {
     @JoinColumn(name = "idMascota", referencedColumnName = "codigoMascota")
     @ManyToOne(optional = false)
     private Mascotas idMascota;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "citas", fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "citas")
     private Citasclinicas citasclinicas;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "citas", fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "citas")
     private Citaspeluqueria citaspeluqueria;
 
     public Citas() {

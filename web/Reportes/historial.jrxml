@@ -64,6 +64,10 @@ FROM
 					</textElement>
 					<text><![CDATA[Historial Clinico]]></text>
 				</staticText>
+				<image>
+					<reportElement x="657" y="0" width="163" height="94" uuid="3160e0a5-d093-4fa4-9390-23b6bd6ad4ea"/>
+					<imageExpression><![CDATA["logo.png"]]></imageExpression>
+				</image>
 			</frame>
 		</band>
 	</title>

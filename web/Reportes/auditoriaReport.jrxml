@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="149c4bb5-d900-47fa-9971-413eceed0304">
 	<property name="ireport.zoom" value="1.6500000000000001"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="589"/>
 	<property name="ireport.y" value="20"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
@@ -36,7 +36,7 @@
 				</staticText>
 				<image>
 					<reportElement x="705" y="0" width="117" height="75" uuid="5ff46366-afe6-4a7b-9b95-3cd8c537ba9a"/>
-					<imageExpression><![CDATA["C:\\Users\\Julian\\Documents\\NetBeansProjects\\NowVet\\web\\imagenes\\logo.png"]]></imageExpression>
+					<imageExpression><![CDATA["logo.png"]]></imageExpression>
 				</image>
 			</frame>
 		</band>

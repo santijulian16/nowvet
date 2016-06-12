@@ -10,9 +10,6 @@ import edu.nowvet.Entitys.Propietarios;
 import edu.nowvet.Entitys.Servicios;
 import edu.nowvet.Entitys.Usuarios;
 import edu.nowvet.Facade.ServiciosFacade;
-import edu.nowvet.Facade.UsuariosFacade;
-
-
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;

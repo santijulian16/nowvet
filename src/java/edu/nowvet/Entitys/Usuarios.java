@@ -21,7 +21,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -124,7 +123,7 @@ public class Usuarios implements Serializable {
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = DigestUtils.md5Hex(contrasena);
+        this.contrasena = contrasena;
     }
 
     public String getEstado() {
