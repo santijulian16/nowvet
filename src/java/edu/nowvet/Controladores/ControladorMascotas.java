@@ -8,6 +8,7 @@ package edu.nowvet.Controladores;
 import edu.nowvet.Entitys.Citasclinicas;
 import edu.nowvet.Entitys.Mascotas;
 import edu.nowvet.Entitys.Propietarios;
+import edu.nowvet.Entitys.Usuarios;
 import edu.nowvet.Facade.CitasclinicasFacade;
 import edu.nowvet.Facade.MascotasFacade;
 import java.io.IOException;
@@ -117,6 +118,37 @@ private Propietarios prop;
     public String registrarMascota(Propietarios prop2){
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
+        Map params = externalContext.getRequestParameterMap();
+        String especie = ((String) params.get("especie"));
+        String raza = ((String) params.get("raza"));
+        String razaG = ((String) params.get("raza2"));
+        if(especie.equals("Perro")){
+            this.mascotaReg.setRaza(raza);
+        }
+        else{
+            this.mascotaReg.setRaza(razaG);
+        }
+        this.mascotaReg.setEspecie(especie);
+        this.mascotaReg.setEstado("Activa");
+        this.mascotaReg.setCodigoPropietario(prop2);
+        this.mf.create(this.mascotaReg);
+        this.mascotaReg=new Mascotas();
+        this.estado="3";
+        String retorno="";
+        if (rol.equals("Administrador-Veterinario")) {
+            retorno="perfil";
+        }else if(rol.equals("Cliente")){
+            retorno="miperfil";
+        }
+        return retorno;
+    }
+    //registrar Mascota lado cliente
+    public String registrarMascota(){
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ExternalContext externalContext = facesContext.getExternalContext();
+        HttpServletRequest miSesion = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        Usuarios usuTemp= (Usuarios) miSesion.getSession().getAttribute("usuario");
+        Propietarios prop2=usuTemp.getPropietarios();
         Map params = externalContext.getRequestParameterMap();
         String especie = ((String) params.get("especie"));
         String raza = ((String) params.get("raza"));

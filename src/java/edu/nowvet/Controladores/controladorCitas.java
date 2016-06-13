@@ -167,7 +167,7 @@ public class controladorCitas implements Serializable {
         String sintomasF = (String) params.get("sintomas");
         misCitasClinicas.setSintomas(sintomasF);
         citasClinicasFacade.create(misCitasClinicas);
- Mailer.send(this.usuario.getCorreo(), "NowVet - Confirmación de Cita","<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Confirmación de Consulta Clínica."+"</h1><p style='font-size: 1.5em; color: #797979;'>NowVet le informa que el servicio de consulta clínica agendado para su mascota "+misMascotas.getNombre()+" ya se encuentra en estado disponible. A continuación se presentan los datos respectivos de la consulta clínica: </p></div>"
+ Mailer.send(this.usuario.getCorreo(), "NowVet - Confirmación de Cita","<div style='display: block;'><img width='80px' height='70px' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Confirmación de Consulta Clínica."+"</h1><p style='font-size: 1.5em; color: #797979;'>NowVet le informa que el servicio de consulta clínica agendado para su mascota "+misMascotas.getNombre()+" ya se encuentra en estado disponible. A continuación se presentan los datos respectivos de la consulta clínica: </p></div>"
                 + "<br/><p style='font-size: 1.5em; color: #797979;'>Servicio: "+misServicios.getTipo()
                 + "<br/>Mascota: "+misMascotas.getNombre()
                 + "<br/>Fecha Asignada: "+misCitas.getFechaAsignada().toLocaleString()
@@ -220,7 +220,7 @@ public class controladorCitas implements Serializable {
             String serviciosAplicados = (String) params.get("serviciosAplicados");
             misCitasPeluqueria.setServiciosAplicados(serviciosAplicados);
             citasPeluqueriaFacade.create(misCitasPeluqueria);
-            Mailer.send(this.usuario.getCorreo(), "NowVet - Confirmación de Cita","<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Confirmación de Peluquería."+"</h1><p style='font-size: 1.5em; color: #797979;'>NowVet le informa que el servicio de peluquería agendado para su mascota "+misMascotas.getNombre()+" ya se encuentra en estado disponible. A continuación se presentan los datos respectivos de la consulta clínica: </p></div>"
+            Mailer.send(this.usuario.getCorreo(), "NowVet - Confirmación de Cita","<div style='display: block;'><img width='80px' height='70px' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Confirmación de Peluquería."+"</h1><p style='font-size: 1.5em; color: #797979;'>NowVet le informa que el servicio de peluquería agendado para su mascota "+misMascotas.getNombre()+" ya se encuentra en estado disponible. A continuación se presentan los datos respectivos de la consulta clínica: </p></div>"
                 + "<br/><p style='font-size: 1.5em; color: #797979;'>Servicio: "+misServicios.getTipo()
                 + "<br/>Mascota: "+misMascotas.getNombre()
                 + "<br/>Fecha Asignada: "+misCitas.getFechaAsignada().toLocaleString()

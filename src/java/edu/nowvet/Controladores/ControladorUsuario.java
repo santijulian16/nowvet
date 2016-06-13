@@ -371,7 +371,7 @@ public class ControladorUsuario implements Serializable {
             this.prop.setDniPropietario(this.usuTemp.getCedula());
             this.prop.setUsuarios(this.usuTemp);
             this.prf.create(prop);
-            Mailer.send(this.usuTemp.getCorreo(), "Bienvenido a NowVet " + this.usuTemp.getNombres(), "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Bienvenido "+this.usuTemp.getNombres()+" "+this.usuTemp.getApellidos()+"</h1><p style='font-size: 1.5em; color: #797979;'>Ahoras es mas facil agendar una cita a tus mascotas desde  NowVet, sin necesidad de ir hasta nuestra sede.</p></div>");
+            Mailer.send(this.usuTemp.getCorreo(), "Bienvenido a NowVet " + this.usuTemp.getNombres(), "<div style='display: block;'><img width='80px' height='70px' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Bienvenido "+this.usuTemp.getNombres()+" "+this.usuTemp.getApellidos()+"</h1><p style='font-size: 1.5em; color: #797979;'>Ahoras es mas facil agendar una cita a tus mascotas desde  NowVet, sin necesidad de ir hasta nuestra sede.</p></div>");
             return "registroUsuarioMensaje.xhtml";
         } else {
             this.estado = "9";
@@ -401,7 +401,7 @@ public class ControladorUsuario implements Serializable {
             this.prop.setDniPropietario(this.usuTemp.getCedula());
             this.prop.setUsuarios(this.usuTemp);
             this.prf.create(prop);
-            Mailer.send(this.usuTemp.getCorreo(), "Bienvenido a NowVet " + this.usuTemp.getNombres(), "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Bienvenido "+this.usuTemp.getNombres()+" "+this.usuTemp.getApellidos()+"</h1><p style='font-size: 1.5em; color: #797979;'>Ahoras es mas facil agendar una cita a tus mascotas desde  NowVet, sin necesidad de ir hasta nuestra sede.</p></div>");
+            Mailer.send(this.usuTemp.getCorreo(), "Bienvenido a NowVet " + this.usuTemp.getNombres(), "<div style='display: block;'><img width='80px' height='70px' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Bienvenido "+this.usuTemp.getNombres()+" "+this.usuTemp.getApellidos()+"</h1><p style='font-size: 1.5em; color: #797979;'>Ahoras es mas facil agendar una cita a tus mascotas desde  NowVet, sin necesidad de ir hasta nuestra sede.</p></div>");
 
         }
     }
@@ -425,7 +425,7 @@ public class ControladorUsuario implements Serializable {
             int nuevaClave = (int) (Math.random() * (10000000 - 99999999 + 1) + 99999999);
             recuperado.setContrasena("" + nuevaClave);
             this.usuFacade.edit(recuperado);
-            Mailer.send(recuperado.getCorreo(), "Recuperacion De Contraseña", "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Hola " + recuperado.getNombres() + " " + recuperado.getApellidos() + "</h1><p style='font-size: 1.5em; color: #797979;'>Recuperacion de contraseña correcta, por seguridad le recomendamos cambiar su contraseña lo mas pronto posible.<br /><br /><strong>Correo: </strong>" + recuperado.getCorreo() + "<br /> <strong>Nueva Contraseña: </strong>" + nuevaClave + "</p></div>");
+            Mailer.send(recuperado.getCorreo(), "Recuperacion De Contraseña", "<div style='display: block;'><img width='80px' height='70px' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>Hola " + recuperado.getNombres() + " " + recuperado.getApellidos() + "</h1><p style='font-size: 1.5em; color: #797979;'>Recuperacion de contraseña correcta, por seguridad le recomendamos cambiar su contraseña lo mas pronto posible.<br /><br /><strong>Correo: </strong>" + recuperado.getCorreo() + "<br /> <strong>Nueva Contraseña: </strong>" + nuevaClave + "</p></div>");
             this.estado = "11";
         } else {
             this.estado = "12";
@@ -460,7 +460,7 @@ public class ControladorUsuario implements Serializable {
         String asunto = (String) params.get("asunto");
         String encabezado = (String) params.get("encabezado");
         String msj = (String) params.get("texto");
-        Mailer.send(mail, asunto, "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>" + encabezado + "</h1><p style='font-size: 1.5em; color: #797979;'>" + msj + "<br /></p></div>");
+        Mailer.send(mail, asunto, "<div style='display: block;'><img width='80px' height='70px' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><h1 style='color: #2aac7d;'>" + encabezado + "</h1><p style='font-size: 1.5em; color: #797979;'>" + msj + "<br /></p></div>");
         this.estado = "13";
     }
 
@@ -472,7 +472,7 @@ public class ControladorUsuario implements Serializable {
         String email = (String) params.get("correo");
         String asunto = (String) params.get("asunto");
         String mensaje = (String) params.get("mensaje");
-        Mailer.send("soporte@nowvet.net", asunto, "<div style='display: block;'><img style='widht: 70px; height: 70px;' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><p style='font-size: 1.5em; color: #797979;'>Nombre Contacto: " + nombre + "<br/>Correo Contacto: " + email + "<br/>Mensaje: " + mensaje + "<br/></p></div>");
+        Mailer.send("soporte@nowvet.net", asunto, "<div style='display: block;'><img width='80px' height='70px' src='http://nowvet.net/NowVet/imagenes/logo.png' alt='Logo'></div><div style='font-family: arial;'><p style='font-size: 1.5em; color: #797979;'>Nombre Contacto: " + nombre + "<br/>Correo Contacto: " + email + "<br/>Mensaje: " + mensaje + "<br/></p></div>");
         this.estado = "14";
     }
 

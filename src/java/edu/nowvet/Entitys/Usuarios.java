@@ -6,6 +6,7 @@
 package edu.nowvet.Entitys;
 
 import java.io.Serializable;
+import org.apache.commons.codec.digest.DigestUtils;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -123,7 +124,7 @@ public class Usuarios implements Serializable {
     }
 
     public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+        this.contrasena = DigestUtils.md5Hex(contrasena);
     }
 
     public String getEstado() {
