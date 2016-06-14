@@ -230,7 +230,7 @@
                                         <td>#{listaCitas.idMascota.nombre}</td>
                                         <td>#{listaCitas.idServicio.tipo}</td>
                                         <td>#{listaCitas.estado}</td>
-                                        <td><button type="button" class="btn btn-default"><i class="fa fa-pencil" onclick="modificarCita('#{listaCitas.idCita}', '#{listaCitas.estado}', '#{listaCitas.idServicio.codgoServicio}', '#{listaCitas.idMascota.codigoMascota}', '#{listaCitas.idVeterinario.dniPersonal}', '#{listaCitas.vacunas}', '#{listaCitas.peso}', '#{listaCitas.antecedentes}', '#{listaCitas.fechaAsignada.toLocaleString()}')"></i></button></td>
+                                        <td><button type="button" class="btn btn-default"><i class="fa fa-pencil" onclick="modificarCita('#{listaCitas.idCita}', '#{listaCitas.estado}', '#{listaCitas.idServicio.codgoServicio}', '#{listaCitas.idMascota.codigoMascota}', '#{listaCitas.idVeterinario.dniPersonal}', '#{listaCitas.vacunas}', '#{listaCitas.peso}', '#{listaCitas.antecedentes}', '#{listaCitas.fechaAsignada}')"></i></button></td>
 
                                         <!--Ventana Modal Modificar Cita-->
                                         <div class="modal fade" id="modalmodificarCita" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -321,7 +321,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <td><button type="button" class="btn btn-danger"><i class="fa fa-trash" onclick="cancelarCita('#{listaCitas.idCita}', '#{listaCitas.fechaAsignada.toLocaleString()}')"></i></button></td>
+                                        <td><button type="button" class="btn btn-danger"><i class="fa fa-trash" onclick="cancelarCita('#{listaCitas.idCita}', '#{listaCitas.fechaAsignada}')"></i></button></td>
 
                                         <!--Venta Modal Cancelar Cita-->
 

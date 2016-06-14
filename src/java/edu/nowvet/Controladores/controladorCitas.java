@@ -37,6 +37,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -128,10 +129,7 @@ public class controladorCitas implements Serializable {
     public void agendarCitaClinica() throws ParseException{
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
-        Map params = externalContext.getRequestParameterMap();        
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-        String fecha = ((String) params.get("fechaVerdadera"));
-        Date fechaA = formato.parse(fecha);
+        Map params = externalContext.getRequestParameterMap(); 
         HttpServletRequest miSesion = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
         .getRequest();
         this.usuario = (Usuarios) miSesion.getSession().getAttribute("usuario");
@@ -155,7 +153,7 @@ public class controladorCitas implements Serializable {
         Citas misCitas = new Citas();
         misCitas.setEstado("Creada");
 
-        misCitas.setFechaAsignada(fechaA);
+        misCitas.setFechaAsignada(this.fechaVerdadera);
         misCitas.setIdServicio(misServicios);
         misCitas.setIdMascota(misMascotas);
         misCitas.setIdVeterinario(miVeterinario);
@@ -184,9 +182,6 @@ public class controladorCitas implements Serializable {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             ExternalContext externalContext = facesContext.getExternalContext();
             Map params = externalContext.getRequestParameterMap();
-            SimpleDateFormat formato = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-            String fecha = ((String) params.get("fechaVerdadera"));
-            Date fechaA = formato.parse(fecha);
             
             HttpServletRequest miSesion = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
                     .getRequest();
@@ -210,7 +205,7 @@ public class controladorCitas implements Serializable {
             serviciosFacade.create(misServicios);
             Citas misCitas = new Citas();
             misCitas.setEstado("Creada");
-            misCitas.setFechaAsignada(fechaA);
+            misCitas.setFechaAsignada(this.fechaVerdadera);
             misCitas.setIdServicio(misServicios);
             misCitas.setIdMascota(misMascotas);
             misCitas.setIdVeterinario(miVeterinario);
@@ -250,10 +245,10 @@ public class controladorCitas implements Serializable {
         listaCargaVeterinarios=this.usuariosFacade.buscarVeterinario(cambiarFechaTime);
         this.campoOculto = "1";
         if(!citasFacade.verificarDisponibilidad(fechaA).isEmpty()){
-            this.estados="3";
+            this.estados="8";
         }
         else{
-            this.estados="4";
+            this.estados="9";
             fechaVerdadera = fechaA;
         }
     }
@@ -274,10 +269,10 @@ public class controladorCitas implements Serializable {
         listaCargaVeterinarios=this.usuariosFacade.buscarVeterinario(cambiarFechaTime);
         this.campoOculto = "1";
         if(!citasFacade.verificarDisponibilidad(fechaA).isEmpty()){
-            this.estadosP="3";
+            this.estadosP="10";
         }
         else{
-            this.estadosP="4";
+            this.estadosP="11";
             fechaVerdadera = fechaA;
         }
     }
@@ -286,106 +281,65 @@ public class controladorCitas implements Serializable {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
-        Citas misCitasA = new Citas();
         int idCitaM = Integer.parseInt((String) params.get("idCitaA"));
-        
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-        String fecha = ((String) params.get("fechaAsignadaA"));
-        Date fechaAsignadaAC = new Date();
-        fechaAsignadaAC=formato.parse(fecha);
-
-        int idServicioT=Integer.parseInt((String) params.get("idServicioA"));
-        Servicios idServicioM = this.serviciosFacade.find(idServicioT);
-        
-        int idMascotaT=Integer.parseInt((String) params.get("idMascotaA"));
-        Mascotas idMascotaM = this.mascotasFacade.find(idMascotaT);
-        
-        int idVeterinarioT=Integer.parseInt((String) params.get("idVeterinarioA"));
-        Personalveterinario idVeterinarioM = this.personalveterinarioFacade.find(idVeterinarioT);
+        Citas misCitasA = this.citasFacade.find(idCitaM);
         String vacunasM = ((String) params.get("vacunasA"));
         String pesoM = ((String) params.get("pesoA"));
         String antecedentesM = ((String) params.get("antecedentesA"));
-        misCitasA.setIdCita(idCitaM);
         misCitasA.setEstado("Ejecutada");
-        misCitasA.setFechaAsignada(fechaAsignadaAC);
-        misCitasA.setIdServicio(idServicioM);
-        misCitasA.setIdMascota(idMascotaM);
-        misCitasA.setIdVeterinario(idVeterinarioM);
         misCitasA.setVacunas(vacunasM);
         misCitasA.setPeso(pesoM);
         misCitasA.setAntecedentes(antecedentesM);
-        citasFacade.edit(misCitasA);
+        //cita clinica
         
-        Citasclinicas misCitasClinicasA = new Citasclinicas();
-        int idCitaAM = Integer.parseInt((String) params.get("idCitaA"));
         String diagnosticoM = ((String) params.get("diagnosticoA"));
         String motivoM = ((String) params.get("motivoA"));
         String alimentoM = ((String) params.get("alimentoA"));
         String formulaMedicaM = ((String) params.get("formulaMedicaA"));
         String sintomasM = ((String) params.get("sintomasA"));
-        misCitasClinicasA.setIdCita(idCitaAM);
-        misCitasClinicasA.setDiagnostico(diagnosticoM);
-        misCitasClinicasA.setMotivo(motivoM);
-        misCitasClinicasA.setAlimento(alimentoM);
-        misCitasClinicasA.setFormulaMedica(formulaMedicaM);
-        misCitasClinicasA.setSintomas(sintomasM);
-        citasClinicasFacade.edit(misCitasClinicasA);
+        Citasclinicas citaclinica=new Citasclinicas();
+        citaclinica = misCitasA.getCitasclinicas();
+        citaclinica.setDiagnostico(diagnosticoM);
+        citaclinica.setMotivo(motivoM);
+        citaclinica.setAlimento(alimentoM);
+        citaclinica.setFormulaMedica(formulaMedicaM);
+        citaclinica.setSintomas(sintomasM);
+        misCitasA.setCitasclinicas(citaclinica);
+        citasFacade.edit(misCitasA);
     }
     
     public void atenderCitaPeluqueria() throws ParseException{
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
-        Citas misCitasA = new Citas();
         int idCitaM = Integer.parseInt((String) params.get("idCitaB"));
+        Citas misCitasA = this.citasFacade.find(idCitaM);
         
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-        String fecha = ((String) params.get("fechaAsignadaB"));
-        Date fechaAsignadaAP = new Date();
-        fechaAsignadaAP=formato.parse(fecha);
-
-        int idServicioT=Integer.parseInt((String) params.get("idServicioB"));
-        Servicios idServicioM = this.serviciosFacade.find(idServicioT);
-        
-        int idMascotaT=Integer.parseInt((String) params.get("idMascotaB"));
-        Mascotas idMascotaM = this.mascotasFacade.find(idMascotaT);
-        
-        int idVeterinarioT=Integer.parseInt((String) params.get("idVeterinarioB"));
-        Personalveterinario idVeterinarioM = this.personalveterinarioFacade.find(idVeterinarioT);
         String vacunasM = ((String) params.get("vacunasB"));
         String pesoM = ((String) params.get("pesoB"));
         String antecedentesM = ((String) params.get("antecedentesB"));
-        misCitasA.setIdCita(idCitaM);
         misCitasA.setEstado("Ejecutada");
-        misCitasA.setFechaAsignada(fechaAsignadaAP);
-        misCitasA.setIdServicio(idServicioM);
-        misCitasA.setIdMascota(idMascotaM);
-        misCitasA.setIdVeterinario(idVeterinarioM);
         misCitasA.setVacunas(vacunasM);
         misCitasA.setPeso(pesoM);
         misCitasA.setAntecedentes(antecedentesM);
+        String serviciosAplicadosB = (String) params.get("serviciosAplicadosB");
+        Citaspeluqueria citapelu=new Citaspeluqueria();
+        citapelu=misCitasA.getCitaspeluqueria();
+        citapelu.setServiciosAplicados(serviciosAplicadosB);
+        misCitasA.setCitaspeluqueria(citaspeluqueria);
         citasFacade.edit(misCitasA);
-        
-        Citaspeluqueria misCitasPeluqueriaB = new Citaspeluqueria();
-        int idCitaAB = Integer.parseInt((String) params.get("idCitaB"));
-        String serviciosAplicadosB = ((String) params.get("serviciosAplicadosB"));
-        misCitasPeluqueriaB.setIdCita(idCitaAB);
-        misCitasPeluqueriaB.setServiciosAplicados(serviciosAplicadosB);
-        citasPeluqueriaFacade.edit(misCitasPeluqueriaB);
     }
     
     public void modificarCita() throws ParseException {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
-        
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-        String fecha = ((String) params.get("fechaCitaV"));
-        Date fechaAsignadaM = formato.parse(fecha);
+        int idCita2 = Integer.parseInt((String) params.get("idCitaA"));
+        Citas misCitasA = this.citasFacade.find(idCita2);
         Date fechaActual = new Date();
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
-        cal1.setTime(fechaAsignadaM);
+        cal1.setTime(misCitasA.getFechaAsignada());
         cal2.setTime(fechaActual);
         
         long milis1 = cal1.getTimeInMillis();
@@ -398,30 +352,7 @@ public class controladorCitas implements Serializable {
         fecha2 += ":00";
         Date fechaAsignadaM2 = new Date();
         fechaAsignadaM2=formato2.parse(fecha2);
-        Citas misCitasA = new Citas();
-        int idCitaM = Integer.parseInt((String) params.get("idCitaA"));
-
-        int idServicioT=Integer.parseInt((String) params.get("idServicioA"));
-        Servicios idServicioM = this.serviciosFacade.find(idServicioT);
-        
-        int idMascotaT=Integer.parseInt((String) params.get("idMascotaA"));
-        Mascotas idMascotaM = this.mascotasFacade.find(idMascotaT);
-        
-        int idVeterinarioT=Integer.parseInt((String) params.get("idVeterinarioA"));
-        Personalveterinario idVeterinarioM = this.personalveterinarioFacade.find(idVeterinarioT);
-        String estadoM=((String) params.get("estadoA"));
-        String vacunasM = ((String) params.get("vacunasA"));
-        String pesoM = ((String) params.get("pesoA"));
-        String antecedentesM = ((String) params.get("antecedentesA"));
-        misCitasA.setIdCita(idCitaM);
-        misCitasA.setEstado(estadoM);
         misCitasA.setFechaAsignada(fechaAsignadaM2);
-        misCitasA.setIdServicio(idServicioM);
-        misCitasA.setIdMascota(idMascotaM);
-        misCitasA.setIdVeterinario(idVeterinarioM);
-        misCitasA.setVacunas(vacunasM);
-        misCitasA.setPeso(pesoM);
-        misCitasA.setAntecedentes(antecedentesM);
         citasFacade.edit(misCitasA);
         this.estados = "2";
         }
@@ -431,20 +362,17 @@ public class controladorCitas implements Serializable {
     }
     
     public void cancelarCita(Servicios idServicio) throws ParseException {
+        this.estados="0";
         FacesContext facesContext = FacesContext.getCurrentInstance();
         ExternalContext externalContext = facesContext.getExternalContext();
         Map params = externalContext.getRequestParameterMap();
-        
-        SimpleDateFormat formato = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-        String fecha = ((String) params.get("fechaCitaC"));
-        Date fechaAsignadaC = new Date();
-        fechaAsignadaC=formato.parse(fecha);
+        int idCita2=Integer.parseInt((String) params.get("idCita"));
+        Citas cita=this.citasFacade.find(idCita2);
         Date fechaActual = new Date();
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
-        cal1.setTime(fechaAsignadaC);
+        cal1.setTime(cita.getFechaAsignada());
         cal2.setTime(fechaActual);
-        
         long milis1 = cal1.getTimeInMillis();
         long milis2 = cal2.getTimeInMillis();
         long diff =  milis1 - milis2;

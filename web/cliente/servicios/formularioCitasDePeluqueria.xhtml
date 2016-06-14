@@ -161,13 +161,13 @@
                                     });
                                     $('#datetimepicker').datetimepicker({value: '', step: 30});
                                 </script>
-            <c:if test="#{controladorCitas.estadosP == '3'}">
+            <c:if test="#{controladorCitas.estadosP == '10'}">
                             <div class="alert alert-danger">
                                 <button type="button" class="close" data-dismiss="alert">&times;</button>
                                 <strong>El espacio no esta disponible!! </strong> Escoga otra hora o fecha.  
                             </div>
                             </c:if>
-            <c:if test="#{controladorCitas.estadosP == '4'}">
+            <c:if test="#{controladorCitas.estadosP == '11'}">
                                 <script>
                                 document.getElementById('fechaD').style.display = "none";
                                 </script>
